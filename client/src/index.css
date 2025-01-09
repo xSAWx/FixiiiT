@@ -1,0 +1,24 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: "Urbanist", serif;
+}
+
+.max-w-8xl{
+  max-width: 1780px;
+}
+
+.rotating {
+  animation: rotation 10s linear infinite; 
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
