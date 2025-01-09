@@ -1,0 +1,37 @@
+import React from "react";
+import { BsChevronDown } from "react-icons/bs";
+
+function Select({ title = "", options, err, name, set }) {
+  return (
+    <article className=" text-black/70 font-bold">
+      {title && (
+        <h1 className="font-semibold text-white tracking-widest text-base mb-2.5 ml-1">
+          {title}
+        </h1>
+      )}
+      <aside className="relative">
+        <select
+          onChange={(e) => set((old) => ({ ...old, [name]: e.target.value}))}
+          className="outline-none relative peer rounded-md py-4 w-full px-4 border focus:border-tertiary"
+          name=""
+          id=""
+        >
+          {options?.map((o, i) => (
+            <option value={o} className="rounded-md mt-4 translate-y-2">
+              {o}
+            </option>
+          ))}
+        </select>
+        <BsChevronDown className="absolute duration-300 peer-focus-within:rotate-180 z-10 text-xl right-4 top-1/2 -translate-y-1/2" />
+      </aside>
+      <h1
+        className={`text-sm tracking-wider text-red-600 m-1 mt-1.5 duration-200 opacity-0 
+            ${err ? "opacity-100 my-3" : "-my-2.5"}`}
+      >
+        {err}
+      </h1>
+    </article>
+  );
+}
+
+export default Select;

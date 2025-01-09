@@ -1,7 +1,5 @@
 import React from "react";
 import {
-  MdDoneAll,
-  MdFacebook,
   MdLocationOn,
   MdPhoneInTalk,
   MdTimer,
@@ -19,7 +17,6 @@ function Header() {
   return (
     <header className="w-full bg-gradient-to-r font-medium text-white  min-h-24 dark:min-h-32  from-[#FC962B] to-[#EE572A]">
       <nav className="max-w-[1820px] h-24 mx-auto px-4 pt-3 pb-6 flex md:flex-row flex-col   justify-between items-center">
-
         {/* LEFT AREA  */}
         <aside className="flex gap-10">
           <div className="lg:flex hidden group cursor-pointer items-center gap-2">
@@ -59,9 +56,9 @@ function Header() {
             <FaXTwitter className="translate-x-px" />
           </span>
 
-          <span className="h-9 cursor-pointer w-9 hover:text-white hover:bg-tertiary rounded-full duration-300 text-xl text-tertiary grid place-content-center bg-white">
+          <a target="_blank" href="https://www.instagram.com/fix_iiit/" className="h-9 cursor-pointer w-9 hover:text-white hover:bg-tertiary rounded-full duration-300 text-xl text-tertiary grid place-content-center bg-white">
             <FaInstagram />
-          </span>
+          </a>
           <span className="h-9 cursor-pointer w-9 hover:text-white hover:bg-tertiary rounded-full duration-300 text-xl text-tertiary grid place-content-center bg-white">
             <FaLinkedin />
           </span>

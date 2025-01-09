@@ -24,6 +24,7 @@ export default {
         secondary: "#021B32",
         tertiary: "#ED562A",
         qua: "#001B33",
+        fif: "#0D0239"
       },
     },
   },

@@ -6,12 +6,12 @@
   font-family: "Urbanist", serif;
 }
 
-.max-w-8xl{
+.max-w-8xl {
   max-width: 1780px;
 }
 
 .rotating {
-  animation: rotation 10s linear infinite; 
+  animation: rotation 10s linear infinite;
 }
 
 @keyframes rotation {
@@ -21,4 +21,55 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+select {
+  -moz-appearance: none; /* Firefox */
+  -webkit-appearance: none; /* Safari and Chrome */
+  appearance: none;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: black;
+  box-shadow: none;
+}
+
+.button::before {
+  content: "";
+  z-index: -1;
+  position: absolute;
+  inset: 0;
+  background-color: #0d0239;
+  transform-origin: center right;
+  transform: scaleX(0);
+  transition: transform 0.4s ease-out;
+}
+
+.button:hover {
+  cursor: pointer;
+}
+
+.button:hover::before {
+  transform-origin: center left;
+  transform: scaleX(1);
+}
+
+.slide::before {
+  content: "";
+  z-index: -1;
+  position: absolute;
+  inset: 0;
+  background-color: #0000008a;
+  transform-origin: center right;
+  transform: scaleX(0);
+  transition: transform 0.4s ease-out;
+}
+
+.slide:hover::before {
+  transform-origin: center left;
+  transform: scaleX(1);
 }
