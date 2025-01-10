@@ -2,14 +2,20 @@ import shape from "../../assets/shape-17.webp";
 import bg1 from "../../assets/about-us-2-1.webp";
 import bg2 from "../../assets/about-us-3-1.webp";
 import shape2 from "../../assets/shape-19.webp";
+
 import shape3 from "../../assets/about.png";
 import { GiAutoRepair } from "react-icons/gi";
 import { MdPublishedWithChanges } from "react-icons/md";
 import Button from "../../Components/common/Button";
+import { motion } from "framer-motion";
+import { fadeIn } from "../../Utils/motion";
 
 export const SecondSection = () => (
   <article className="grid justify-center max-w-[1400px] gap-12 w-full  lg:px-12 px-6 mx-auto md:grid-cols-2 mt-10">
-    <aside className="relative self-center lg:h-[650px]  lg:max-h-dvh overflow-hidden">
+    <motion.aside
+      {...fadeIn("right", "", 0.5, 0.7)}
+      className="relative self-center lg:h-[650px]  lg:max-h-dvh overflow-hidden"
+    >
       <img
         src={shape2}
         className="lg:absolute lg:block hidden  lg:w-3/4  right-0 top-0   "
@@ -29,56 +35,60 @@ export const SecondSection = () => (
           <h2 className="text-sm">Years of Experience</h2>
         </div>
       </div>
-    </aside>
+    </motion.aside>
 
-    <aside className="">
-      <div className="flex gap-2 mb-4 items-center text-lg font-bold tracking-wide text-tertiary">
-        <img src={shape} className="w-12 h-12 object-cover" />
-        <p className="text-center">ABOUT US</p>{" "}
-        <img src={shape} className="w-12 h-12 object-cover" />
-      </div>
-
-      <h1 className="text-qua lg:text-[40px] mb-4 text-[27px] font-extrabold leading-snug">
-        Empowering Your Devices: Crafting Solutions
-      </h1>
-
-      <h2 className="text-black/60 text-[17px] font-semibold tracking-wide">
-        Welcome to Fixo, where technology meets expertise. With a passion for
-        problem-solving and a dedication to exceptional service
-      </h2>
-
-      <div className="grid gap-2 grid-cols-2 gap-y-6 mt-6">
-        <Skill
-          color="text-[#ED562A] bg-[#ED562A]"
-          text="Expert Technicians"
-          icon={<GiAutoRepair />}
-        />
-        <Skill
-          color="text-[#0A3E92] bg-[#0A3E92]"
-          text="Quality Repairs"
-          icon={<MdPublishedWithChanges />}
-        />
-        <Skill
-          color="text-[#0A3E92] bg-[#0A3E92]"
-          text="Expert Technicians"
-          icon={<MdPublishedWithChanges />}
-        />
-        <Skill
-          color="text-[#FC8D21] bg-[#FC8D21]"
-          text="Expert Technicians"
-          icon={<GiAutoRepair />}
-        />
-      </div>
-
-      <p className="my-4 font-semibold tracking-wide text-black/50">
-        Our mission is to provide reliable, efficient, and affordable repair
-        services, ensuring that your devices are restored to optimal
-        functionality. We understand the vital role technology plays in your
-        daily life, and we are committed to keeping you connected.
-      </p>
-      <Button className="w-52 mt-4">MORE ABOUT US</Button>
-    </aside>
+    <About />
   </article>
+);
+
+export const About = () => (
+  <motion.aside {...fadeIn("left", "", 0.5, 0.7)} className="">
+    <div className="flex gap-2 mb-4 items-center text-lg font-bold tracking-wide text-tertiary">
+      <img src={shape} className="w-12 h-12 object-cover" />
+      <p className="text-center">ABOUT US</p>{" "}
+      <img src={shape} className="w-12 h-12 object-cover" />
+    </div>
+
+    <h1 className="text-qua lg:text-[40px] mb-4 text-[27px] font-extrabold leading-snug">
+      Empowering Your Devices: Crafting Solutions
+    </h1>
+
+    <h2 className="text-black/60 text-[17px] font-semibold tracking-wide">
+      Welcome to Fixo, where technology meets expertise. With a passion for
+      problem-solving and a dedication to exceptional service
+    </h2>
+
+    <div className="grid gap-2 grid-cols-2 gap-y-6 mt-6">
+      <Skill
+        color="text-[#ED562A] bg-[#ED562A]"
+        text="Expert Technicians"
+        icon={<GiAutoRepair />}
+      />
+      <Skill
+        color="text-[#0A3E92] bg-[#0A3E92]"
+        text="Quality Repairs"
+        icon={<MdPublishedWithChanges />}
+      />
+      <Skill
+        color="text-[#0A3E92] bg-[#0A3E92]"
+        text="Expert Technicians"
+        icon={<MdPublishedWithChanges />}
+      />
+      <Skill
+        color="text-[#FC8D21] bg-[#FC8D21]"
+        text="Expert Technicians"
+        icon={<GiAutoRepair />}
+      />
+    </div>
+
+    <p className="my-4 font-semibold tracking-wide text-black/50">
+      Our mission is to provide reliable, efficient, and affordable repair
+      services, ensuring that your devices are restored to optimal
+      functionality. We understand the vital role technology plays in your daily
+      life, and we are committed to keeping you connected.
+    </p>
+    <Button className="w-52 mt-4">MORE ABOUT US</Button>
+  </motion.aside>
 );
 
 const Skill = ({ color = "", text = "", icon }) => {
@@ -96,5 +106,3 @@ const Skill = ({ color = "", text = "", icon }) => {
     </article>
   );
 };
-
-

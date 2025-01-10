@@ -4,9 +4,11 @@ import bg3 from "../../assets/why-choose-2.webp";
 import shape4 from "../../assets/shape-6.png";
 import { useRef } from "react";
 import useCounterUp from "../../Utils/useCounterUp";
+import { motion } from "framer-motion";
+import { fadeIn, textVariant } from "../../Utils/motion";
 
 export const ThirdSection = () => (
-  <section className="max-w-[1900px] mx-auto grid md:grid-cols-[3fr_2fr] px-4 mt-16">
+  <motion.section {...fadeIn("up","",0.5,1)} className="max-w-[1900px] mx-auto grid md:grid-cols-[3fr_2fr] px-4 mt-16">
     <aside className="relative px-4">
       {/* ROTATING  */}
       <img
@@ -87,10 +89,10 @@ export const ThirdSection = () => (
         alt=""
       />
     </div>
-  </section>
+  </motion.section>
 );
 
-const Info = ({ title = "", text = "" }) => (
+export const Info = ({ title = "", text = "" }) => (
   <article className="flex gap-3">
     <span className="grid place-content-center bg-tertiary text-tertiary rounded-full p-2 h-12 w-12 bg-opacity-20 text-4xl">
       <MdCheck />
@@ -104,7 +106,7 @@ const Info = ({ title = "", text = "" }) => (
   </article>
 );
 
-const Experience = ({ color, final, symbol, text, delay = 1 }) => {
+export const Experience = ({ color, final, symbol, text, delay = 1 }) => {
   const counterRef = useRef();
   const counter = useCounterUp({ counterRef, targetCount: final, delay });
 

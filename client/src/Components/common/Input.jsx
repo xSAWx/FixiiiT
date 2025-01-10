@@ -6,6 +6,7 @@ function Input({
   onChange,
   className,
   classPrefix = "",
+  classs ="",
   title,
   placeholder = "",
   type = "text",
@@ -30,9 +31,9 @@ function Input({
       )}
       <aside
         className={`rounded-md w-full relative overflow-hidden border-secondary duration-500 bg-white  border items-center px-2 flex 
-          ${focus && "border-tertiary "}
+          ${focus && "!border-tertiary "}
           ${err && "!border-red-600 !bg-red-600 "}
-          
+          ${classs}
           `}
       >
         <input

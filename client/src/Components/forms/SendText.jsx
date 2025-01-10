@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Input from "../common/Input";
 import { BsChevronDown } from "react-icons/bs";
 import Select from "../common/Select";
 import TextArea from "../common/TextArea";
 import Checkbox from "../common/Checkbox";
 import Button from "../common/Button";
+import { Link } from "react-router-dom";
 
 function SendText() {
   const [credentials, setcredentials] = useState({
@@ -21,7 +22,17 @@ function SendText() {
     TOS: false,
   });
 
-  console.log(credentials);
+  const [tosM, settosM] = useState(false);
+  const [PpM, setPpM] = useState(false);
+
+  useEffect(() => {
+    setcredentials({
+      ...credentials,
+      brand: brandList(credentials.deviceType)[0],
+    });
+  }, [credentials.deviceType]);
+
+ 
 
   return (
     <form className="grid gap-6">
@@ -62,6 +73,27 @@ function SendText() {
           name="deviceType"
           set={setcredentials}
           options={["Mobile", "Console", "PC", "Tablet", "Laptop"]}
+        />
+        <Select
+          title="Brand"
+          set={setcredentials}
+          name="brand"
+          options={brandList(credentials.deviceType)}
+        />
+      </aside>
+
+      <aside className="grid md:grid-cols-2 gap-x-4 gap-y-6 mb-4">
+        <Select
+          title="Problem Type"
+          name="problemType"
+          set={setcredentials}
+          options={[
+            "DEAD",
+            "Battery Issue",
+            "Software Issue",
+            "Screen Change",
+            "OTHER",
+          ]}
         />
         <Select
           title="Warranty Status"
@@ -110,10 +142,14 @@ function SendText() {
         text={
           <h1 className="text-white text-sm">
             I agree to the{" "}
-            <span className="text-gray-700 hover:text-tertiary">
+            <Link to="/terms-conditions" className="text-gray-700 hover:text-tertiary">
               terms and conditions
-            </span>{" "}
-            and <span className="text-gray-700 hover:text-tertiary">privacy policy</span>.
+            </Link>{" "}
+            and{" "}
+            <Link to="/privacy-policy" className="text-gray-700 hover:text-tertiary">
+              privacy policy
+            </Link>
+            .
           </h1>
         }
       />
@@ -122,5 +158,20 @@ function SendText() {
     </form>
   );
 }
+
+const brandList = (device) => {
+  switch (device) {
+    case "Mobile":
+      return ["Apple", "Samsung", "Huawei"];
+    case "Tablet":
+      return ["Apple", "Samsung", "Huawei"];
+    case "Laptop":
+      return ["Dell", "HP", "Microsoft"];
+    case "PC":
+      return ["PC"];
+    case "Console":
+      return ["PS5", "PS4", "XBOX360", "XBOXONE", "XBOX-SERIESX/S"];
+  }
+};
 
 export default SendText;

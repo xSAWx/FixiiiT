@@ -6,109 +6,56 @@ import { Link, useLocation } from "react-router-dom";
 import Dropdown from "../common/Dropdown";
 import { LuShoppingBag } from "react-icons/lu";
 import Portal from "./Portal";
-import { set } from "mongoose";
 import Accordion from "../common/Accordion";
+import { useShowNav } from "../../Utils/utils";
+import Button from "../common/Button";
 
 function Navbar() {
   const { pathname: p } = useLocation();
   const [open, setopen] = useState(false);
   return (
-    <nav className="mx-auto absolute left-1/2 -translate-x-1/2 z-40   flex w-[calc(100%-80px)] max-w-[1760px] md:-translate-y-[30%] bg-white shadow-xl -translate-y-3.5 rounded-lg  h-[72px] md:h-20  ">
-      <aside className="flex w-full px-8 items-center">
-        <img src={logo} className="mr-12" />
-        <ul className="lg:flex hidden group-[]: gap-5 2xl:text-[16px] text-sm tracking-wide  font-semibold text-qua ">
-          <Li to={"/"}>HOME</Li>
+    <>
+      <nav className="mx-auto absolute left-1/2 -translate-x-1/2 z-40  text-qua flex w-[calc(100%-80px)] max-w-[1760px] md:-translate-y-[30%] bg-white shadow-xl -translate-y-2.5 rounded-lg  h-[72px] md:h-20  ">
+        <aside className="flex w-full h-full px-8 items-center">
+          <img src={logo} className="mr-12" />
+          <Navs />
+        </aside>
 
-          {/* OWNER  SERVICE  */}
-          <Dropdown
-            chevron="-translate-y-0.5"
-            direction={{ x: "left", y: "bottom" }}
-            className={""}
-            component={
-              <li className="flex gap-1 items-center text-current hover:text-tertiary">
-                OWNER-SERVICE
-              </li>
-            }
+        <aside className="flex gap-5 items-center mr-6 text-[26px] text-qua">
+          <Link
+            to="/cart"
+            className={`relative cursor-pointer group  ${
+              p === "/cart" && "text-tertiary"
+            }`}
           >
-            <aside className="w-60  bg-white  shadow-xl shadow-black/30 rounded-md translate-y-6 p-4 grid gap-2">
-              <Li to="/shop">I Need Repair</Li>
-              <Li to="/cart">Cart</Li>
-              <Li to="/myaccount">My Account</Li>
-            </aside>
-          </Dropdown>
+            <LuShoppingBag />
+            <div className="absolute right-0 top-0 h-4 w-4 grid duration-200 group-hover:bg-tertiary place-content-center rounded-full translate-x-1.5 -translate-y-1 bg-black text-[9px] text-white">
+              0
+            </div>
+          </Link>
 
-          {/* PAGES  */}
-          <Dropdown
-            chevron="-translate-y-0.5"
-            direction={{ x: "left", y: "bottom" }}
-            component={
-              <li className="flex gap-1 items-center hover:text-tertiary">
-                PAGES
-              </li>
-            }
-          >
-            <aside className="w-60  bg-white  shadow-xl shadow-black/30 rounded-md translate-y-6 p-4 grid gap-2">
-              <Li to="/faq">FAQ</Li>
-              <Li to="/privacy-policy">Privacy Policy</Li>
-              <Li to="/terms-conditions">Terms & Conditions</Li>
-            </aside>
-          </Dropdown>
+          <MdMenu
+            onClick={() => setopen(true)}
+            className="cursor-pointer text-3xl hover:scale-105 duration-200 lg:hidden block "
+          />
+        </aside>
 
-          {/* COMPANY  */}
-          <Dropdown
-            chevron="-translate-y-0.5"
-            direction={{ x: "left", y: "bottom" }}
-            component={
-              <li className="flex gap-1 items-center hover:text-tertiary">
-                COMPANY
-              </li>
-            }
-          >
-            <aside className="w-60  bg-white  shadow-xl shadow-black/30 rounded-md translate-y-6 p-4 grid gap-2">
-              <Li to="/about-us">About Us</Li>
-              <Li to="/our-team">Our Team</Li>
-            </aside>
-          </Dropdown>
-
-          <Li to="/mailin">MAIL-IN</Li>
-          <Li to="/blog">BLOG</Li>
-          <Li to="/contact">CONTACT</Li>
-        </ul>
-      </aside>
-
-      <aside className="flex gap-5 items-center mr-6 text-[26px] text-qua">
-        <Link
-          to="/cart"
-          className={`relative cursor-pointer group  ${
-            p === "/cart" && "text-tertiary"
-          }`}
-        >
-          <LuShoppingBag />
-          <div className="absolute right-0 top-0 h-4 w-4 grid duration-200 group-hover:bg-tertiary place-content-center rounded-full translate-x-1.5 -translate-y-1 bg-black text-[9px] text-white">
-            0
-          </div>
-        </Link>
-
-        <MdMenu
-          onClick={() => setopen(true)}
-          className="cursor-pointer text-3xl hover:scale-105 duration-200 md:hidden block "
-        />
-      </aside>
-
-      <aside className="xl:flex hidden   h-full px-6 gap-2 items-center text-tertiary bg-secondary rounded-r-lg">
-        <span className="h-9 cursor-pointer w-9 hover:text-tertiary hover:bg-white rounded-full duration-300 text-xl text-white grid place-content-center bg-tertiary">
-          <MdPhoneInTalk className="translate-x-px" />
-        </span>
-        <h1 className="text-xl font-bold tracking-wide">0673142128</h1>
-      </aside>
-      <SideNav open={open} setopen={setopen} />
-    </nav>
+        <aside className="xl:flex hidden   h-full px-6 gap-2 items-center text-tertiary bg-secondary rounded-r-lg">
+          <span className="h-9 cursor-pointer w-9 hover:text-tertiary hover:bg-white rounded-full duration-300 text-xl text-white grid place-content-center bg-tertiary">
+            <MdPhoneInTalk className="translate-x-px" />
+          </span>
+          <h1 className="text-xl font-bold tracking-wide">0673142128</h1>
+        </aside>
+        <SideNav open={open} setopen={setopen} />
+      </nav>
+      <SecondNav open={open} setopen={setopen} p={p} />
+    </>
   );
 }
 
 const Li = ({ to, children }) => {
   const { pathname } = useLocation();
-  console.log({ pathname });
+
 
   return (
     <Link
@@ -137,7 +84,7 @@ const SideNav = ({ open, setopen }) => {
       >
         <nav
           onClick={(e) => e.stopPropagation()}
-          className={`absolute justify-self-end duration-500 h-dvh w-screen py-2 max-w-[420px] bg-white
+          className={`absolute justify-self-end duration-500 h-dvh w-screen py-2 max-w-[430px] bg-white
             ${!open && "translate-x-full"}`}
         >
           {/* HEADER  */}
@@ -186,6 +133,101 @@ const SideNav = ({ open, setopen }) => {
         </nav>
       </section>
     </Portal>
+  );
+};
+
+const Navs = () => (
+  <ul className="lg:flex hidden group-[]: gap-5 2xl:text-[16px] text-sm tracking-wide  font-semibold  ">
+    <Li to={"/"}>HOME</Li>
+
+    {/* OWNER  SERVICE  */}
+    <Dropdown
+      chevron="-translate-y-0.5"
+      direction={{ x: "left", y: "bottom" }}
+      className={""}
+      component={
+        <li className="flex gap-1 items-center text-current hover:text-tertiary">
+          OWNER-SERVICE
+        </li>
+      }
+    >
+      <aside className="w-60  bg-white  shadow-xl shadow-black/30 rounded-md translate-y-6 p-4 grid gap-2">
+        <Li to="/shop">I Need Repair</Li>
+        <Li to="/cart">Cart</Li>
+        <Li to="/myaccount">My Account</Li>
+      </aside>
+    </Dropdown>
+
+    {/* PAGES  */}
+    <Dropdown
+      chevron="-translate-y-0.5"
+      direction={{ x: "left", y: "bottom" }}
+      component={
+        <li className="flex gap-1 items-center hover:text-tertiary">PAGES</li>
+      }
+    >
+      <aside className="w-60  bg-white  shadow-xl shadow-black/30 rounded-md translate-y-6 p-4 grid gap-2">
+        <Li to="/faq">FAQ</Li>
+        <Li to="/privacy-policy">Privacy Policy</Li>
+        <Li to="/terms-conditions">Terms & Conditions</Li>
+      </aside>
+    </Dropdown>
+
+    {/* COMPANY  */}
+    <Dropdown
+      chevron="-translate-y-0.5"
+      direction={{ x: "left", y: "bottom" }}
+      component={
+        <li className="flex gap-1 items-center hover:text-tertiary">COMPANY</li>
+      }
+    >
+      <aside className="w-60  bg-white  shadow-xl shadow-black/30 rounded-md translate-y-6 p-4 grid gap-2">
+        <Li to="/about-us">About Us</Li>
+        <Li to="/our-team">Our Team</Li>
+      </aside>
+    </Dropdown>
+
+    <Li to="/mailin">MAIL-IN</Li>
+    <Li to="/blog">BLOG</Li>
+    <Li to="/contact">CONTACT</Li>
+  </ul>
+);
+
+const SecondNav = ({ setopen, open, p }) => {
+  const show = useShowNav();
+  return (
+    <nav
+      className={`w-[90%] max-w-8xl rounded-xl left-1/2 -translate-x-1/2  fixed top-0  opacity-0 z-50 bg-secondary -translate-y-full duration-300 ${
+        show && "translate-y-3 opacity-100"
+      }`}
+    >
+      <section className="max-w-8xl h-20 text-white flex justify-between items-center mx-auto sm:px-16 px-8 ">
+        <Navs />
+        <img src={logoW} className="lg:hidden block" />
+        <aside className="flex gap-6">
+          <div className="flex gap-5 items-center  text-[26px] text-white">
+            <Link
+              to="/cart"
+              className={`relative cursor-pointer group  ${
+                p === "/cart" && "text-tertiary"
+              }`}
+            >
+              <LuShoppingBag />
+              <div className="absolute right-0 top-0 h-4 w-4 grid duration-200 group-hover:bg-tertiary place-content-center rounded-full translate-x-1.5 -translate-y-1 bg-white text-[9px] text-black font-bold">
+                0
+              </div>
+            </Link>
+            <Button className="2xl:text-base sm:flex hidden text-xs px-6">
+              GET A REPAIR NOW
+            </Button>
+            <MdMenu
+              onClick={() => setopen(true)}
+              className="cursor-pointer text-3xl hover:scale-105 duration-200 lg:hidden block "
+            />
+          </div>
+        </aside>
+      </section>
+    </nav>
   );
 };
 

@@ -9,11 +9,13 @@ import bg6 from "../../assets/gallery-5.webp";
 import bg7 from "../../assets/gallery-6.webp";
 import { BsEye } from "react-icons/bs";
 import Modal from "../../Components/common/Modal";
+import { motion } from "framer-motion";
+import { fadeIn, textVariant } from "../../Utils/motion";
 
 function FifthSection() {
   return (
-    <section className="grid mx-auto mt-32">
-      <div className="flex mx-auto gap-2 mb-4 items-center text-lg font-bold tracking-wide text-tertiary">
+    <motion.section {...fadeIn()} className="grid mx-auto mt-32">
+      <div  className="flex mx-auto gap-2 mb-4 items-center text-lg font-bold tracking-wide text-tertiary">
         <img src={shape} className="w-9 h-9 object-cover" />
         <p className="text-center text-sm">OUR GALLERY</p>{" "}
         <img src={shape} className="w-9 h-9 object-cover" />
@@ -24,31 +26,31 @@ function FifthSection() {
 
       <article className="max-w-[1600px] 2xl:w-[70%] w-11/12  mb-20 mx-auto">
         <aside className="grid  overflow-hidden  md:grid-cols-2 gap-6 ">
-          <ImageCard img={bg1} />
+          <ImageCard img={bg1} delay={.3}/>
 
           <nav className="grid grid-cols-2 gap-6">
-            <ImageCard img={bg3} />
-            <ImageCard img={bg4} />
+            <ImageCard img={bg3} delay={.5}/>
+            <ImageCard img={bg4} delay={.7}/>
           </nav>
         </aside>
         <aside className="grid md:grid-cols-2  gap-6 mt-6">
           <nav className="grid grid-cols-2 gap-6">
-            <ImageCard img={bg2} />
-            <ImageCard img={bg5} />
+            <ImageCard img={bg2} delay={.9}/>
+            <ImageCard img={bg5} delay={1.1}/>
           </nav>
 
           <ImageCard img={bg6} />
         </aside>
       </article>
-    </section>
+    </motion.section>
   );
 }
 
-const ImageCard = ({ img }) => {
+const ImageCard = ({ img,delay }) => {
   const [open, setopen] = useState(false);
   return (
     <>
-      <aside onClick={()=>{setopen(true)}} className="w-full 2xl:h-80 lg:h-72 h-56 bg-red-200 slide group relative z-10 before:z-20  cursor-pointer rounded-2xl overflow-hidden">
+      <motion.aside {...fadeIn("","",delay,.7)} onClick={()=>{setopen(true)}} className="w-full 2xl:h-80 lg:h-72 h-56 bg-red-200 slide group relative z-10 before:z-20  cursor-pointer rounded-2xl overflow-hidden">
         <img
           src={img}
           className=" w-full h-full object-cover object-top button"
@@ -56,7 +58,7 @@ const ImageCard = ({ img }) => {
         <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 p-2.5 rounded-md bg-tertiary opacity-0 group-hover:opacity-100 duration-300 text-xl z-30 text-white ">
           <BsEye />
         </div>
-      </aside>
+      </motion.aside>
       <Modal closabel={false} open={open} onClose={setopen} >
       <img src={img} className="max-h-[80dvh] rounded-xl" />
       </Modal>

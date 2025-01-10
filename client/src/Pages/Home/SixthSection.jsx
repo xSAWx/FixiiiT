@@ -7,6 +7,8 @@ import shape from "../../assets/title-shape-2.png";
 import Button from "../../Components/common/Button";
 import { FaShippingFast } from "react-icons/fa";
 import { BsBoxSeam } from "react-icons/bs";
+import { motion } from "framer-motion";
+import { fadeIn, zoomIn } from "../../Utils/motion";
 
 function SixthSection() {
   return (
@@ -24,14 +26,14 @@ function SixthSection() {
         src={shape2}
         className="lg:block  hidden absolute top-[15%] rotating -translate-y-1/2 left-[40%] w-36"
       />
-      <img
+      <motion.img
         src={bg2}
         className="lg:block  hidden absolute -bottom-20  -translate-y-1/2 right-[5%] w-[26vw] max-w-[500px] "
       />
 
       <article className="w-full h-full py-24 px-[10vw] grid lg:grid-cols-[2fr_3fr] gap-8">
         {/* HEADER  */}
-        <aside className="grid items-center">
+        <motion.aside {...fadeIn("right","",0.3,.7)} className="grid items-center">
           <nav>
             <div className="flex lg:justify-start justify-center  gap-2  items-center  font-bold tracking-wide text-white">
               <img src={shape} className="w-10 h-10 object-cover" />
@@ -49,7 +51,7 @@ function SixthSection() {
               </Button>
             </div>
           </nav>
-        </aside>
+        </motion.aside>
 
         {/* BODY  */}
 
@@ -61,6 +63,7 @@ function SixthSection() {
             className="lg:translate-x-72"
           />
           <Feature
+            delay={0.6}
             icon={<BsBoxSeam />}
             text="We use Ower experience and the latest diagnostic tools to carry out precise and efficient diagnoses"
             title="Professional Diagnostics
@@ -68,6 +71,7 @@ function SixthSection() {
             className="lg:translate-x-36 "
           />
           <Feature
+            delay={0.9}
             icon={<BsBoxSeam />}
             text="Diagnosis processing time after receipt of the unit : between 1 and 5 working days. You will also receive the shortest possible time for simple repairs"
             title="Professional Diagnostics
@@ -76,25 +80,33 @@ function SixthSection() {
           />
         </aside>
       </article>
-
-
     </section>
   );
 }
 
-const Feature = ({ className = "", icon, title = "", text = "" }) => (
-  <article className={`flex text-white  gap-4 ${className}`}>
-    <div
-      className={`rounded-lg flex-shrink-0 text-3xl text-tertiary  bg-white grid place-content-center w-[70px] h-[70px]`}
-    >
-      {icon}
-    </div>
+const Feature = ({
+  className = "",
+  icon,
+  title = "",
+  text = "",
+  delay = 0.3,
+}) => (
+  <motion.article className={`text-white   ${className}`}>
+    <motion.div {...fadeIn("left", "", delay, 0.7)} className="flex gap-4">
+      <div
+        className={`rounded-lg flex-shrink-0 text-3xl text-tertiary  bg-white grid place-content-center w-[70px] h-[70px]`}
+      >
+        {icon}
+      </div>
 
-    <div>
-      <h1 className="font-bold tracking-wide lg:text-2xl text-xl line-clamp-1 mb-1.5 w-72">{title}</h1>
-      <p className="w-[55%] ">{text}</p>
-    </div>
-  </article>
+      <div>
+        <h1 className="font-bold tracking-wide lg:text-2xl text-xl line-clamp-1 mb-1.5 w-72">
+          {title}
+        </h1>
+        <p className="w-[55%] ">{text}</p>
+      </div>
+    </motion.div>
+  </motion.article>
 );
 
 export default SixthSection;

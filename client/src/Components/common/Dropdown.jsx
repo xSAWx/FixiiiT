@@ -37,7 +37,7 @@ function Dropdown({
         {chevron && <FaChevronDown className={`text-sm text-current duration-200 ${show && "rotate-180"} ${chevron}`}/>}
       </div>
       <div
-        className={`absolute duration-200 
+        className={`absolute duration-200 text-qua
         ${Direction(direction.x, direction.y)} 
         ${className}
         ${show ? "opacity-100" : "pointer-events-none opacity-0"}
