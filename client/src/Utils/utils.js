@@ -72,6 +72,8 @@ export const useScreenWidth = () => {
   const [width, setwidth] = useState();
 
   useEffect(() => {
+    setwidth(window.innerWidth)
+    
     const handleResize = () => {
       setwidth(window.innerWidth);
     };
@@ -81,8 +83,11 @@ export const useScreenWidth = () => {
     return () => {
       window.removeEventListener("resize", handleResize);
     };
+
   }, []);
-  return { width };
+
+
+  return  width ;
 };
 
 export const useShowNav = () => {
