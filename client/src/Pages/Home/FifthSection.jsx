@@ -10,7 +10,7 @@ import bg7 from "../../assets/gallery-6.webp";
 import { BsEye } from "react-icons/bs";
 import Modal from "../../Components/common/Modal";
 import { motion } from "framer-motion";
-import { fadeIn, textVariant } from "../../Utils/motion";
+import { fadeIn } from "../../Utils/motion";
 
 function FifthSection() {
   return (

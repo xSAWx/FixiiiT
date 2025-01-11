@@ -9,6 +9,7 @@ import { FaShippingFast } from "react-icons/fa";
 import { BsBoxSeam } from "react-icons/bs";
 import { motion } from "framer-motion";
 import { fadeIn, zoomIn } from "../../Utils/motion";
+import { GiAutoRepair } from "react-icons/gi";
 
 function SixthSection() {
   return (
@@ -72,7 +73,7 @@ function SixthSection() {
           />
           <Feature
             delay={0.9}
-            icon={<BsBoxSeam />}
+            icon={<GiAutoRepair />}
             text="Diagnosis processing time after receipt of the unit : between 1 and 5 working days. You will also receive the shortest possible time for simple repairs"
             title="Professional Diagnostics
 "
@@ -94,7 +95,7 @@ const Feature = ({
   <motion.article className={`text-white   ${className}`}>
     <motion.div {...fadeIn("left", "", delay, 0.7)} className="flex gap-4">
       <div
-        className={`rounded-lg flex-shrink-0 text-3xl text-tertiary  bg-white grid place-content-center w-[70px] h-[70px]`}
+        className={`rounded-lg flex-shrink-0 text-4xl text-tertiary  bg-white grid place-content-center w-[70px] h-[70px]`}
       >
         {icon}
       </div>

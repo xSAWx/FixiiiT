@@ -1,9 +1,5 @@
-import React from "react";
-import {
-  MdLocationOn,
-  MdPhoneInTalk,
-  MdTimer,
-} from "react-icons/md";
+import React, { useEffect } from "react";
+import { MdLocationOn, MdPhoneInTalk, MdTimer } from "react-icons/md";
 import {
   FaFacebookF,
   FaInstagram,
@@ -11,9 +7,16 @@ import {
   FaXTwitter,
 } from "react-icons/fa6";
 import useInHome from "../../Utils/useInHome";
+import { useSetTitle } from "../../Utils/utils";
+import { useLocation } from "react-router-dom";
 
 function Header() {
   useInHome();
+  useSetTitle();
+  const {pathname} = useLocation()
+  useEffect(() => {
+    window.scrollTo(0, 0); // Scroll to the top of the page
+  }, [pathname]); 
   return (
     <header className="w-full bg-gradient-to-r font-medium text-white  min-h-24 dark:min-h-32  from-[#FC962B] to-[#EE572A]">
       <nav className="max-w-[1820px] h-24 mx-auto px-4 pt-3 pb-6 flex md:flex-row flex-col   justify-between items-center">
@@ -56,7 +59,11 @@ function Header() {
             <FaXTwitter className="translate-x-px" />
           </span>
 
-          <a target="_blank" href="https://www.instagram.com/fix_iiit/" className="h-9 cursor-pointer w-9 hover:text-white hover:bg-tertiary rounded-full duration-300 text-xl text-tertiary grid place-content-center bg-white">
+          <a
+            target="_blank"
+            href="https://www.instagram.com/fix_iiit/"
+            className="h-9 cursor-pointer w-9 hover:text-white hover:bg-tertiary rounded-full duration-300 text-xl text-tertiary grid place-content-center bg-white"
+          >
             <FaInstagram />
           </a>
           <span className="h-9 cursor-pointer w-9 hover:text-white hover:bg-tertiary rounded-full duration-300 text-xl text-tertiary grid place-content-center bg-white">

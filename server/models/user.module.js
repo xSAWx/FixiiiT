@@ -5,19 +5,7 @@ const userSchema = mongoose.Schema(
     password: { type: String, minlength: 6 },
     isAdmin: { type: Boolean, required: true, default: false },
     isVerified: { type: Boolean, required: true, default: false },
-    email: {
-      type: String,
-      required: true,
-      unique: true,
-      validate: {
-        validator: function (v) {
-          // Add your email validation logic here
-          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-          return emailRegex.test(v);
-        },
-        message: "Invalid email address",
-      },
-    },
+    email: { type: String, required: true, unique: true },
     username: { type: String, required: true, minlength: 3 },
     fullName: { type: String },
     phoneNumber: { type: String },

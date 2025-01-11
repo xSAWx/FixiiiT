@@ -73,3 +73,15 @@ input:-webkit-autofill:active {
   transform-origin: center left;
   transform: scaleX(1);
 }
+
+.title {
+  @apply text-5xl text-fif font-bold tracking-wide;
+}
+
+.Button {
+  @apply px-4 py-1.5 border rounded-sm font-bold tracking-wide text-lg border-tertiary bg-tertiary text-white  hover:bg-white hover:text-tertiary duration-200 focus-within:translate-y-0.5 cursor-pointer disabled:cursor-not-allowed disabled:hover:bg-tertiary disabled:hover:text-white disabled:opacity-60;
+}
+
+.loader {
+  @apply animate-spin border-[4px] border-white/20  border-t-white/90  rounded-full;
+}

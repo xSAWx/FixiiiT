@@ -35,7 +35,7 @@ function SendText() {
  
 
   return (
-    <form className="grid gap-6">
+    <form className="grid gap-6 ">
       <Input
         name="fullName"
         placeholder="Your Full Name"
@@ -114,7 +114,7 @@ function SendText() {
         <h1 className="font-semibold text-white tracking-widest text-[15px] mb-2.5 ml-1">
           Attach Files
         </h1>
-        <div className="relative w-full h-12 bg-white group-hover:bg-gray-200 rounded-md">
+        <div className="relative w-full h-14 bg-white group-hover:bg-gray-200 border group-hover:border-tertiary border-black/40 rounded-md">
           <input
             onChange={(e) =>
               setcredentials(() => ({
@@ -134,13 +134,13 @@ function SendText() {
       </aside>
 
       <Checkbox
-        className="text-white ml-1  "
+        className=" ml-1  "
         onChange={() =>
           setcredentials({ ...credentials, TOS: !credentials.TOS })
         }
         check={credentials.TOS}
         text={
-          <h1 className="text-white text-sm">
+          <h1 className=" text-sm">
             I agree to the{" "}
             <Link to="/terms-conditions" className="text-gray-700 hover:text-tertiary">
               terms and conditions

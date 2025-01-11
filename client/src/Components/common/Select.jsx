@@ -1,24 +1,27 @@
 import React from "react";
 import { BsChevronDown } from "react-icons/bs";
 
-function Select({ title = "", options, err, name, set }) {
+function Select({ title = "", options, err, name, set, number = false }) {
   return (
-    <article className=" text-black/70 font-bold">
+    <article className=" font-bold">
       {title && (
-        <h1 className="font-semibold text-white tracking-widest text-base mb-2.5 ml-1">
+        <h1 className="font-semibold text-current tracking-widest text-base mb-2.5 ml-1">
           {title}
         </h1>
       )}
       <aside className="relative">
         <select
-          onChange={(e) => set((old) => ({ ...old, [name]: e.target.value}))}
-          className="outline-none relative peer rounded-md py-4 w-full px-4 border focus:border-tertiary"
+          onChange={(e) => set((old) => ({ ...old, [name]: e.target.value }))}
+          className="outline-none text-black/70 relative peer rounded-md py-4 w-full px-4 border border-black/30 focus:border-tertiary"
           name=""
           id=""
         >
           {options?.map((o, i) => (
-            <option value={o} className="rounded-md mt-4 translate-y-2">
-              {o}
+            <option
+              value={o}
+              className="rounded-md text-black/70 mt-4 translate-y-2"
+            >
+              {number && `${i + 1}-`} {" "} {o}
             </option>
           ))}
         </select>

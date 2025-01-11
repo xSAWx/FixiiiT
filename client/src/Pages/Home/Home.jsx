@@ -17,7 +17,7 @@ function Home() {
   const { scrollToTop, showButton } = useScrollTop();
   return (
     <nav className="w-full pb-24 max-w-[100vw]">
-      <BreadCrumbs navs={["Home"]} routes={["/"]} title="Home Three" />
+      <BreadCrumbs navs={["Home"]} routes={["/"]} title="HOME" />
       <section className="max-w-8xl w-full mx-auto">
         <FirstSection />
         <SecondSection />

@@ -15,7 +15,7 @@ export const FourthSection = () => (
     />
 
     <motion.div {...fadeIn("down", "", 0.5, 1)}>
-      <motion.article className="p-8 md:px-12 mx-auto translate-y-16 lg:translate-x-1/3 right-[15%]  rounded-3xl bg-secondary  max-w-full w-11/12  2xl:w-[36%] lg:w-[45%]">
+      <motion.article className="p-8 md:px-12 mx-auto translate-y-16 text-white lg:translate-x-1/3 right-[15%]  rounded-3xl bg-secondary  max-w-full w-11/12  2xl:w-[36%] lg:w-[45%]">
         <div className="flex  gap-2 mb-4 items-center text-base font-bold tracking-wide text-tertiary">
           <img src={shape} className="w-9 h-9 object-cover" />
           <p className="text-center">TEXTE AN EXPERT </p>{" "}

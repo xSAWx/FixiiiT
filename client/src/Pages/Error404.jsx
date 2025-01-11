@@ -11,7 +11,7 @@ function Error404() {
       <BreadCrumbs
         navs={["Home", "No Page Found"]}
         routes={["/", "/"]}
-        title="Home Three"
+        title="NOT FOUND"
       />
       <div className="py-20 grid place-content-center text-center font-bold tracking-wider">
         <h1 className="lg:text-[300px] text-[90px]  text-qua font-sans">

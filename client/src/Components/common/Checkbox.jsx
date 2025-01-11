@@ -19,13 +19,13 @@ export default function Checkbox({
       }`}
     >
       <div
-        className={`w-5 h-5 border rounded-[5px] text-[12px] grid place-content-center  duration-300 ${className}
-            ${check && "bg-tertiary border-tertiary"}
-            ${disabled && "!bg-gray-600 border-gray-800"}
+        className={`w-5 h-5 border border-gray-600 rounded-[5px] text-[12px] grid place-content-center  duration-300 ${className}
+            ${check && "bg-tertiary !border-tertiary"}
+            ${disabled && "!bg-gray-700 border-gray-800"}
             `}
       >
         {" "}
-        <FaCheck className={`duration-300 ${!check && "scale-0 opacity-0"}`} />
+        <FaCheck className={`duration-300 text-white ${!check && "scale-0 opacity-0"}`} />
       </div>
       {text}
     </article>

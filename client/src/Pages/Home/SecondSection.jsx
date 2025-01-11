@@ -9,6 +9,8 @@ import { MdPublishedWithChanges } from "react-icons/md";
 import Button from "../../Components/common/Button";
 import { motion } from "framer-motion";
 import { fadeIn } from "../../Utils/motion";
+import { BiTimer } from "react-icons/bi";
+import { FaRegGrinStars } from "react-icons/fa";
 
 export const SecondSection = () => (
   <article className="grid justify-center max-w-[1400px] gap-12 w-full  lg:px-12 px-6 mx-auto md:grid-cols-2 mt-10">
@@ -71,13 +73,13 @@ export const About = () => (
       />
       <Skill
         color="text-[#0A3E92] bg-[#0A3E92]"
-        text="Expert Technicians"
-        icon={<MdPublishedWithChanges />}
+        text="Quick Turnaround"
+        icon={<BiTimer />}
       />
       <Skill
         color="text-[#FC8D21] bg-[#FC8D21]"
-        text="Expert Technicians"
-        icon={<GiAutoRepair />}
+        text="Happy Client"
+        icon={<FaRegGrinStars />}
       />
     </div>
 

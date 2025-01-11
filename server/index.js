@@ -3,7 +3,7 @@ import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import path from "path";
-
+import userRoutes from "./routes/user.routes.js"
 
 const app = express();
 const __dirname = path.resolve();
@@ -20,7 +20,7 @@ app.use(cookieParser());
   }
 })();
 
-// app.use("/api/auth", userRoutes);
+app.use("/api/auth", userRoutes);
 
 
 

@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { useLocation } from "react-router-dom";
 
 export const focusing = (setfocus) => ({
   onFocus: () => {
@@ -72,8 +73,8 @@ export const useScreenWidth = () => {
   const [width, setwidth] = useState();
 
   useEffect(() => {
-    setwidth(window.innerWidth)
-    
+    setwidth(window.innerWidth);
+
     const handleResize = () => {
       setwidth(window.innerWidth);
     };
@@ -83,11 +84,9 @@ export const useScreenWidth = () => {
     return () => {
       window.removeEventListener("resize", handleResize);
     };
-
   }, []);
 
-
-  return  width ;
+  return width;
 };
 
 export const useShowNav = () => {
@@ -120,8 +119,6 @@ export const useShowNav = () => {
     };
   }, [lastScrollY]);
 
-  
-
   return show;
 };
 
@@ -133,15 +130,30 @@ export const useScrollTop = () => {
   };
 
   useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []); 
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
-      behavior: 'smooth',
+      behavior: "smooth",
     });
   };
-  return {scrollToTop,showButton}
+  return { scrollToTop, showButton };
+};
+
+export const useSetTitle = () => {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    if (pathname === "/") document.title = "Home";
+    else
+      document.title = capitalizeFirstLetter(
+        pathname.split("/")[pathname.split("/").length - 1]
+      );
+  }, [pathname]);
+};
+
+function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
 }

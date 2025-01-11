@@ -8,6 +8,7 @@ import bg4 from "../assets/about-us-4.webp";
 import bg5 from "../assets/shape-9.png";
 import bg6 from "../assets/why-choose.webp";
 import bg7 from "../assets/testimonials-bg.webp";
+import bg8 from "../assets/schedule.webp";
 import shape3 from "../assets/shape-17.webp";
 import shape2 from "../assets/shape-13.png";
 import shape from "../assets/shape-17.webp";
@@ -24,6 +25,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation } from "swiper/modules";
 
 import { useScreenWidth } from "../Utils/utils";
+import SendText from "../Components/forms/SendText";
 
 function AboutUs() {
   const [swip, setSwip] = useState();
@@ -157,7 +159,7 @@ function AboutUs() {
       </article>
 
       <article className="my-28 w-full overflow-x-hidden h-[680px]  overflow-hidden relative ">
-        <aside className="grid md:grid-cols-[1fr_2fr] gap-6 h-full relative mx-auto z-10 max-w-7xl w-11/12">
+        <motion.aside {...fadeIn("","",.5,1)} className="grid md:grid-cols-[1fr_2fr] gap-6 h-full relative mx-auto z-10 max-w-7xl w-11/12">
           {/* TESTIMONIALS  */}
 
           <div className="self-center w-full">
@@ -194,12 +196,30 @@ function AboutUs() {
           <div className="self-center text-white flex gap-4 h-96 w-full  overflow-hidden">
             <ReviewSlides setSwip={setSwip} />
           </div>
-        </aside>
+        </motion.aside>
         <img src={bg7} className="h-full w-full object-cover absolute top-0" />
         <img
           src={shape4}
           className="absolute bottom-16  left-1/4 w-28 rotating"
         />
+      </article>
+
+      {/* SEND FORM */}
+      <article className="my-20 w-11/12 mx-auto px-12 gap-8 max-w-8xl grid md:grid-cols-2 overflow-hidden">
+        <motion.img {...fadeIn("right","",.3,.7)} src={bg8} className="self-center" />
+
+        <motion.aside {...fadeIn("left","",0.3,.7)} className="text-black">
+          <TitleS
+            title="BOOK A SCHEDULE"
+            size="!w-8 !h-8"
+            className="text-[15px]"
+          />
+          <h1 className="text-[52px] leading-tight text-fif font-bold w-10/12 tracking-wide">
+            Schedule Expert Repairs Instantly
+          </h1>
+
+          <SendText />
+        </motion.aside>
       </article>
     </section>
   );
@@ -289,7 +309,7 @@ const ReviewCard = ({ text, name, country, image }) => {
         </div>
       </aside>
 
-      <aside className="line-clamp-5 my-8 text-white/70 text-lg font-semibold">
+      <aside className="line-clamp-5 my-8 text-white/70 text-xl tracking-wide font-semibold">
         {text}
       </aside>
 
@@ -303,5 +323,15 @@ const ReviewCard = ({ text, name, country, image }) => {
     </article>
   );
 };
+
+export const TitleS = ({ title, className, size }) => (
+  <div
+    className={`flex gap-2 mb-4 md:justify-start justify-center items-center text-lg font-bold tracking-wide text-tertiary ${className}`}
+  >
+    <img src={shape} className={`w-9 h-9 object-cover ${size}`} />
+    <p className="text-center">{title}</p>{" "}
+    <img src={shape} className={`w-9 h-9 object-cover ${size}`} />
+  </div>
+);
 
 export default AboutUs;

@@ -21,18 +21,18 @@ function Input({
 
   return (
     <article
-      className={`w-full text-white duration-500 relative 
+      className={`w-full  duration-500 relative 
         ${focus && "text-tertiary"} ${className} ${disabled && "opacity-60"}`}
     >
       {title && (
-        <h1 className="font-semibold tracking-widest text-base mb-2.5 ml-1">
+        <h1 className="font-semibold text-current tracking-widest text-base mb-2.5 ml-1">
           {title}
         </h1>
       )}
       <aside
-        className={`rounded-md w-full relative overflow-hidden border-secondary duration-500 bg-white  border items-center px-2 flex 
+        className={`rounded-md w-full relative overflow-hidden border-black/30 duration-500 bg-white  border items-center px-2 flex 
           ${focus && "!border-tertiary "}
-          ${err && "!border-red-600 !bg-red-600 "}
+          ${err && "!border-red-600 !bg-red-600 !bg-opacity-10"}
           ${classs}
           `}
       >
@@ -72,7 +72,7 @@ function Input({
         )}
       </aside>
       <h1
-        className={`text-sm tracking-wider m-1 mt-1.5 duration-200 opacity-0 ${
+        className={`text-sm tracking-wider m-1 mt-1.5 text-red-600 font-medium duration-200 opacity-0 ${
           err ? "opacity-100 my-3" : "-my-2.5"
         }`}
       >

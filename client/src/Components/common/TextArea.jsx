@@ -11,7 +11,7 @@ function TextArea({
   return (
     <article>
       {true && (
-        <h1 className="font-semibold text-white tracking-widest text-base mb-2.5 ml-1">
+        <h1 className="font-semibold  tracking-widest text-base mb-2.5 ml-1">
           {title}
         </h1>
       )}
@@ -19,7 +19,7 @@ function TextArea({
         rows={rows}
         onChange={(e) => set((old) => ({ ...old, [name]: e.target.value }))}
         placeholder={placeholder}
-        className="text-base p-4 focus:border-tertiary border rounded-md w-full font-medium tracking-wider bg-white text-black placeholder:tracking-widest placeholder:text-black/50 outline-none"
+        className="text-base p-4 focus:border-tertiary border border-black/40 rounded-md w-full font-medium tracking-wider bg-white text-black placeholder:tracking-widest placeholder:text-black/50 outline-none"
       >
         {children}
       </textarea>
