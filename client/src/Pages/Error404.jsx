@@ -13,7 +13,7 @@ function Error404() {
         routes={["/", "/"]}
         title="NOT FOUND"
       />
-      <div className="py-20 grid place-content-center text-center font-bold tracking-wider">
+      <div className="pb-20 grid place-content-center text-center font-bold tracking-wider">
         <h1 className="lg:text-[300px] text-[90px]  text-qua font-sans">
           4<span className="text-fif">0</span>4
         </h1>

@@ -23,3 +23,21 @@ export const accountSlice = create((set) => ({
   },
   setAccount: (fn) => set((state) => ({ account: fn(state.account) })),
 }));
+
+export const addressSlice = create((set) => ({
+  address: {
+    email: "",
+    username: "",
+    
+    firstName: "",
+    phoneNumber: "",
+    lastName: "",
+    country: "Algeria",
+    streetAddress1: "",
+    streetAddress2: "",
+    city: "",
+    state: "Adrar",
+    postalCode: "",
+  },
+  setAddress: (fn) => set((state) => ({ address: fn(state.address) })),
+}));

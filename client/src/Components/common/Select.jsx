@@ -1,7 +1,15 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { BsChevronDown } from "react-icons/bs";
 
-function Select({ title = "", options, err, name, set, number = false }) {
+function Select({
+  title = "",
+  options,
+  err,
+  name,
+  set,
+  number = false,
+  value,
+}) {
   return (
     <article className=" font-bold">
       {title && (
@@ -9,10 +17,11 @@ function Select({ title = "", options, err, name, set, number = false }) {
           {title}
         </h1>
       )}
-      <aside className="relative">
+      <aside className="relative max-h-20 overflow-y-auto">
         <select
+          value={value}
           onChange={(e) => set((old) => ({ ...old, [name]: e.target.value }))}
-          className="outline-none text-black/70 relative peer rounded-md py-4 w-full px-4 border border-black/30 focus:border-tertiary"
+          className="outline-none  text-black/70  overflow-y-visible relative peer rounded-md py-4 w-full px-4 border border-black/30 focus:border-tertiary"
           name=""
           id=""
         >
@@ -21,7 +30,7 @@ function Select({ title = "", options, err, name, set, number = false }) {
               value={o}
               className="rounded-md text-black/70 mt-4 translate-y-2"
             >
-              {number && `${i + 1}-`} {" "} {o}
+              {number && `${i + 1}-`} {o}
             </option>
           ))}
         </select>

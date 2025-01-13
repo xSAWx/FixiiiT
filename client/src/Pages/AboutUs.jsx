@@ -159,7 +159,10 @@ function AboutUs() {
       </article>
 
       <article className="my-28 w-full overflow-x-hidden h-[680px]  overflow-hidden relative ">
-        <motion.aside {...fadeIn("","",.5,1)} className="grid md:grid-cols-[1fr_2fr] gap-6 h-full relative mx-auto z-10 max-w-7xl w-11/12">
+        <motion.aside
+          {...fadeIn("", "", 0.5, 1)}
+          className="grid md:grid-cols-[1fr_2fr] gap-6 h-full relative mx-auto z-10 max-w-7xl w-11/12"
+        >
           {/* TESTIMONIALS  */}
 
           <div className="self-center w-full">
@@ -205,22 +208,7 @@ function AboutUs() {
       </article>
 
       {/* SEND FORM */}
-      <article className="my-20 w-11/12 mx-auto px-12 gap-8 max-w-8xl grid md:grid-cols-2 overflow-hidden">
-        <motion.img {...fadeIn("right","",.3,.7)} src={bg8} className="self-center" />
-
-        <motion.aside {...fadeIn("left","",0.3,.7)} className="text-black">
-          <TitleS
-            title="BOOK A SCHEDULE"
-            size="!w-8 !h-8"
-            className="text-[15px]"
-          />
-          <h1 className="text-[52px] leading-tight text-fif font-bold w-10/12 tracking-wide">
-            Schedule Expert Repairs Instantly
-          </h1>
-
-          <SendText />
-        </motion.aside>
-      </article>
+      <SendForm />
     </section>
   );
 }
@@ -332,6 +320,29 @@ export const TitleS = ({ title, className, size }) => (
     <p className="text-center">{title}</p>{" "}
     <img src={shape} className={`w-9 h-9 object-cover ${size}`} />
   </div>
+);
+
+export const SendForm = () => (
+  <article className="my-20 w-11/12 mx-auto px-12 gap-8 max-w-8xl grid md:grid-cols-2 overflow-hidden">
+    <motion.img
+      {...fadeIn("right", "", 0.3, 0.7)}
+      src={bg8}
+      className="self-center"
+    />
+
+    <motion.aside {...fadeIn("left", "", 0.3, 0.7)} className="text-black">
+      <TitleS
+        title="BOOK A SCHEDULE"
+        size="!w-8 !h-8"
+        className="text-[15px]"
+      />
+      <h1 className="text-[52px] leading-tight text-fif font-bold w-10/12 tracking-wide">
+        Schedule Expert Repairs Instantly
+      </h1>
+
+      <SendText />
+    </motion.aside>
+  </article>
 );
 
 export default AboutUs;

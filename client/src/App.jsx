@@ -1,7 +1,6 @@
 import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
 import Header from "./Components/layouts/Header";
 import Navbar from "./Components/layouts/Navbar";
-
 import Home from "./Pages/Home/Home";
 import Footer from "./Components/layouts/Footer";
 import Error404 from "./Pages/Error404";
@@ -10,9 +9,11 @@ import PrivacyPolicy from "./Pages/PrivacyPolicy";
 import FAQ from "./Pages/FAQ";
 import AboutUs from "./Pages/AboutUs";
 import Sign from "./Pages/Auth/Sign";
-import { useEffect } from "react";
 import Auth from "./Components/routes/Auth.routes";
 import MyAccount from "./Pages/Authenticated/MyAccount";
+import Contact from "./Pages/Contact";
+import MailIn from "./Pages/MailIn";
+import OurTeam from "./Pages/Home/OurTeam";
 
 function App() {
   
@@ -29,6 +30,9 @@ function App() {
         <Route path="/faq" element={<FAQ/>} />
         <Route path="/about-us" element={<AboutUs/>} />
         <Route path="/sign" element={<Sign />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/mailin" element={<MailIn />} />
+        <Route path="/our-team" element={<OurTeam />} />
 
         <Route path="/" element={<Auth />}>
           <Route path="/myaccount" element={<MyAccount />} />

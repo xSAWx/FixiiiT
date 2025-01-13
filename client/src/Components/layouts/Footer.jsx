@@ -20,7 +20,7 @@ function Footer() {
         <article className=" w-full grid gap-8 md:grid-cols-3 grid-cols-1">
           {/* LOGO  */}
           <aside>
-            <img src={logo} />
+            <img src={logo} className="w-32 " />
             <p className="mt-3">
               Our skilled technicians are dedicated to restoring your devices to
               their optimal functionality.

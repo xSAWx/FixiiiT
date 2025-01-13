@@ -17,7 +17,12 @@ function Navbar() {
     <>
       <nav className="mx-auto absolute left-1/2 -translate-x-1/2 z-40  text-qua flex w-[calc(100%-80px)] max-w-[1760px] md:-translate-y-[30%] bg-white shadow-xl -translate-y-2.5 rounded-lg  h-[72px] md:h-20  ">
         <aside className="flex w-full h-full px-8 items-center">
-          <img src={logo} className="mr-12" />
+          <Link to={"/"}>
+            <img
+              src={logo}
+              className="mr-12 w-32 hover:scale-105 duration-200"
+            />
+          </Link>
           <Navs />
         </aside>
 
@@ -56,7 +61,6 @@ function Navbar() {
 const Li = ({ to, children }) => {
   const { pathname } = useLocation();
 
-
   return (
     <Link
       to={to}
@@ -89,7 +93,7 @@ const SideNav = ({ open, setopen }) => {
         >
           {/* HEADER  */}
           <header className=" p-3 px-6 w-full border-b flex justify-between items-center">
-            <img src={logoW} className="" />
+            <img src={logoW} className="w-32" />
             <MdClose
               className="text-red-600 hover:scale-105 text-3xl cursor-pointer duration-200"
               onClick={() => setopen(false)}
@@ -203,7 +207,9 @@ const SecondNav = ({ setopen, open, p }) => {
     >
       <section className="max-w-8xl h-20 text-white flex justify-between items-center mx-auto sm:px-16 px-8 ">
         <Navs />
-        <img src={logoW} className="lg:hidden block" />
+        <Link to="/">
+          <img src={logoW} className="lg:hidden block w-32" />
+        </Link>
         <aside className="flex gap-6">
           <div className="flex gap-5 items-center  text-[26px] text-white">
             <Link

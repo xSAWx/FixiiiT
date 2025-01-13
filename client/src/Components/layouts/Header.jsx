@@ -9,11 +9,15 @@ import {
 import useInHome from "../../Utils/useInHome";
 import { useSetTitle } from "../../Utils/utils";
 import { useLocation } from "react-router-dom";
+import { useGetAddress } from "../../Hooks/useUpdate";
 
 function Header() {
   useInHome();
   useSetTitle();
+  useGetAddress();
   const {pathname} = useLocation()
+
+
   useEffect(() => {
     window.scrollTo(0, 0); // Scroll to the top of the page
   }, [pathname]); 
@@ -82,7 +86,9 @@ export const UrgentNeedSupport = () => (
     </span>
     <aside>
       <h1 className="mb-2">Urgent Need Support?</h1>
-      <h1 className="text-nowrap">0673142128 &nbsp; &nbsp; 0673142128</h1>
+      <h1 className="text-nowrap">0673142128 &nbsp; &nbsp; 0794914158
+
+</h1>
     </aside>
   </article>
 );

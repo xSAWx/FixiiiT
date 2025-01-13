@@ -7,7 +7,6 @@ const userSchema = mongoose.Schema(
     isVerified: { type: Boolean, required: true, default: false },
     email: { type: String, required: true, unique: true },
     username: { type: String, required: true, minlength: 3 },
-    fullName: { type: String },
     phoneNumber: { type: String },
     googleProvider: { type: Boolean, default: false },
     googleSub: { type: String },
@@ -15,6 +14,13 @@ const userSchema = mongoose.Schema(
       type: String,
       default: String(Math.floor(100000 + Math.random() * 900000)),
     },
+    firstName: { type: String },
+    lastName: { type: String },
+    streetAddress1: { type: String },
+    streetAddress2: { type: String },
+    state: { type: String },
+    city: { type: String },
+    postalCode: { type: String },
   },
   { timestamps: true }
 );
