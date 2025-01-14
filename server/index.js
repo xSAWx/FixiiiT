@@ -3,7 +3,11 @@ import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import path from "path";
-import userRoutes from "./routes/user.routes.js"
+import userRoutes from "./routes/user.routes.js";
+import categoryRoutes from "./routes/category.routes.js";
+import itemRoutes from "./routes/item.routes.js";
+import orderRoutes from "./routes/order.routes.js";
+
 
 const app = express();
 const __dirname = path.resolve();
@@ -21,8 +25,9 @@ app.use(cookieParser());
 })();
 
 app.use("/api/auth", userRoutes);
-
-
+app.use("/api/category", categoryRoutes);
+app.use("/api/item", itemRoutes);
+app.use("/api/order", orderRoutes);
 
 app.use(express.static(path.join(__dirname, "/client/dist")));
 app.get("*", (req, res) => {
