@@ -83,8 +83,11 @@ input:-webkit-autofill:active {
 }
 
 .loader {
-  @apply animate-spin border-[4px] border-white/20  border-t-white/90  rounded-full;
+  @apply animate-spin border-[6px] border-black/20  border-t-tertiary  rounded-full;
 }
+
+
+
 
 
 input[type="number"]::-webkit-inner-spin-button, 

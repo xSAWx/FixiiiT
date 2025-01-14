@@ -57,7 +57,20 @@ export const useUpdateAddress = () => {
     if (addressError(address, seterr)) return;
     setloading(true);
     try {
-      const resp = await axios.put("/api/auth/profile", address);
+      const resp = await axios.put("/api/auth/profile", {
+        firstName: address?.firstName,
+        lastName: address?.lastName,
+        state: address?.state,
+        city: address?.city,
+        phoneNumber: address?.phoneNumber,
+        streetAddress1: address?.streetAddress,
+        postalCode: address?.postalCode,
+        streetAddress1: address?.streetAddress1,
+        streetAddress2: address?.streetAddress2,
+      });
+
+      console.log(resp);
+
       seterr({ success: true });
     } catch (error) {
       seterr({ fail: "Somthing Went Wrong" });

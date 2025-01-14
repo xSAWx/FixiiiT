@@ -3,6 +3,7 @@ import { useLogout } from "../../Hooks/useSign";
 import ShippingAddress from "../../Components/forms/ShippingAddress";
 import ChangePassword from "../../Components/forms/ChangePassword";
 import BreadCrumbs from "../../Components/common/BreadCrumbs";
+import Orders from "./Orders";
 
 function MyAccount() {
   const [tab, settab] = useState("Addresses");
@@ -36,6 +37,7 @@ function MyAccount() {
         <article className="w-full min-h-96 border p-6 border-black/20 rounded-lg">
           {tab === "Addresses" && <ShippingAddress />}
           {tab === "Change Password" && <ChangePassword />}
+          {tab === "Orders" && <Orders />}
         </article>
       </section>
     </>

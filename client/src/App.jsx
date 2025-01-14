@@ -14,6 +14,7 @@ import MyAccount from "./Pages/Authenticated/MyAccount";
 import Contact from "./Pages/Contact";
 import MailIn from "./Pages/MailIn";
 import OurTeam from "./Pages/Home/OurTeam";
+import Test from "./Pages/Test";
 
 function App() {
   
@@ -33,6 +34,8 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/mailin" element={<MailIn />} />
         <Route path="/our-team" element={<OurTeam />} />
+
+        <Route path="/test" element={<Test />} />
 
         <Route path="/" element={<Auth />}>
           <Route path="/myaccount" element={<MyAccount />} />
