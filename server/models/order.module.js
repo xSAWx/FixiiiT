@@ -7,20 +7,20 @@ const orderSchema = mongoose.Schema(
       ref: "User",
       required: true,
     },
-    items: [
-      { type: mongoose.Schema.Types.ObjectId, ref: "Item", required: true },
-    ],
+    item: { type: mongoose.Schema.Types.ObjectId, ref: "Item", required: true },
+    image: { type: String },
+    serialNumber: { type: String },
     totalPrice: {
       type: Number,
-      required: true,
     },
     status: {
       type: String,
       enum: ["pending", "processing", "shipped", "delivered", "cancelled"],
       default: "pending",
     },
+    options: [{ type: mongoose.Schema.Types.ObjectId, ref: "Option" }],
     node: { type: String },
-    coupon:{type:String}
+    coupon: { type: String },
   },
   { timestamps: true }
 );

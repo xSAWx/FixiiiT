@@ -1,18 +1,24 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useLogout } from "../../Hooks/useSign";
 import ShippingAddress from "../../Components/forms/ShippingAddress";
 import ChangePassword from "../../Components/forms/ChangePassword";
 import BreadCrumbs from "../../Components/common/BreadCrumbs";
 import Orders from "./Orders";
+import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 
 function MyAccount() {
   const [tab, settab] = useState("Addresses");
-  
+  const { pathname } = useLocation();
+  const navigate = useNavigate();
   const { logout, loading } = useLogout();
 
   const handler = async () => {
     logout();
   };
+
+  useEffect(() => {
+    if (pathname === "/myaccount") navigate("/myaccount/dashboard");
+  }, [pathname]);
 
   return (
     <>
@@ -22,40 +28,52 @@ function MyAccount() {
         title="My Account"
       />
       <section className="lg:w-11/12 w-10/12 max-w-7xl mx-auto my-20 gap-12 grid md:grid-cols-[2fr_5fr] font-semibold">
-        <article className="w-full h-96 border border-black/20 p-6 rounded-lg">
-          <Tab tab={tab} settab={settab} title="Dashboard" />
-          <Tab tab={tab} settab={settab} title="Orders" />
-          <Tab tab={tab} settab={settab} title="Addresses" />
-          <Tab tab={tab} settab={settab} title="Change Password" />
+        <article className="w-full h-96 border grid   border-black/20 p-6 rounded-lg">
+          <Tab to="dashboard" tab={tab} settab={settab} title="Dashboard" />
+          <Tab to="orders" tab={tab} settab={settab} title="Orders" />
+          <Tab to="addresses" tab={tab} settab={settab} title="Addresses" />
           <Tab
-            onClick={handler}
+            to="changepassword"
             tab={tab}
+            settab={settab}
+            title="Change Password"
+          />
+          <Tab
+            to=""
+            onClick={handler}
             settab={settab}
             title={loading ? <div className="loader w-4 h-4" /> : "Logout"}
           />
         </article>
         <article className="w-full min-h-96 border p-6 border-black/20 rounded-lg">
-          {tab === "Addresses" && <ShippingAddress />}
+          <Outlet />
+          {/* {tab === "Addresses" && <ShippingAddress />}
           {tab === "Change Password" && <ChangePassword />}
-          {tab === "Orders" && <Orders />}
+          {tab === "Orders" && <Orders />} */}
         </article>
       </section>
     </>
   );
 }
 
-const Tab = ({ tab, settab, title = "", onClick }) => (
-  <aside
-    onClick={() => {
-      settab(title);
-      onClick && onClick();
-    }}
-    className={`w-full rounded-sm text-black/60 mb-3 text-base font-medium tracking-wider py-2.5 px-6 hover:bg-tertiary hover:text-white duration-300 cursor-pointer ${
-      title === tab && "text-white bg-tertiary"
-    }`}
-  >
-    {title}
-  </aside>
-);
+const Tab = ({ tab, settab, title = "", to, onClick }) => {
+  const { pathname } = useLocation();
+  const pth = pathname?.split("/")[2];
+
+  return (
+    <Link
+      to={to}
+      onClick={() => {
+        settab(title);
+        onClick && onClick();
+      }}
+      className={`w-full rounded-sm text-black/60 mb-3 items-center flex text-base font-medium tracking-wider py-2.5 px-6 hover:bg-tertiary hover:text-white duration-300 cursor-pointer ${
+        pth === to && "text-white bg-tertiary"
+      }`}
+    >
+      {title}
+    </Link>
+  );
+};
 
 export default MyAccount;

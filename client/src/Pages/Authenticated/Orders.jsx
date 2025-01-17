@@ -37,7 +37,7 @@ function Orders() {
               {order.totalPrice} DA
             </div>
             <div className="flex  items-center justify-between">
-                <button className="Button w-8/12">view</button>
+                <button className="Button w-8/12 focus:!translate-y-0">view</button>
                 <MdDelete className="text-4xl text-red-600 mx-1 cursor-pointer   hover:rotate-12 duration-300 hover:scale-105"/>
             </div>
           </>

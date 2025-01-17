@@ -1,4 +1,5 @@
 import Item from "../models/item.module.js";
+import Option from "../models/options.module.js";
 
 //////////!   CREATE ITEM   !//////////
 
@@ -8,7 +9,9 @@ export const createItem = async ({ body: b }, res) => {
 
   try {
     const already = await Item.find({ name: b.name });
-    if (already) return res.status(406).json("name already used");
+    console.log(already);
+
+    if (already.length) return res.status(406).json("name already used");
 
     const item = await Item.create(b);
     res.status(201).json(item);
@@ -64,6 +67,52 @@ export const deleteItem = async ({ params }, res) => {
   try {
     await Item.findByIdAndDelete(params._id);
     res.status(202).json(`${params._id} deleted successfuly`);
+  } catch (error) {
+    res.status(401).json(error);
+  }
+};
+
+//////////!        !//////////
+//////////!        !//////////
+//////////!        !//////////
+
+//////////!   CREATE OPTION   !//////////
+
+export const createOption = async ({ body }, res) => {
+  if (!body.name || !body.price || !body.item)
+    return res.status(404).json("missing somthing");
+
+  try {
+    const already = await Option.findOne({ name: body.name, item: body.item });
+    console.log(already);
+
+    if (already) return res.status(406).json("name already exist");
+
+    const option = await Option.create(body);
+
+    res.status(202).json(option);
+  } catch (error) {
+    res.status(401).json(error);
+  }
+};
+
+//////////!   GET OPTIONS BY ITEM   !//////////
+
+export const getOptionByItem = async ({ params }, res) => {
+  try {
+    const options = await Option.find({ item: params._id });
+    res.status(202).json(options);
+  } catch (error) {
+    res.status(401).json(error);
+  }
+};
+
+//////////!   GET OPTIONS BY ID   !//////////
+
+export const getOneOption = async ({ params }, res) => {
+  try {
+    const option = await Option.findById(params._id);
+    res.status(202).json(option);
   } catch (error) {
     res.status(401).json(error);
   }

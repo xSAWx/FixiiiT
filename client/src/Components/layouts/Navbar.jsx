@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import logo from "../../assets/logo-black.png";
 import logoW from "../../assets/logo-white.png";
-import { MdClose, MdMenu, MdPhoneInTalk } from "react-icons/md";
+import { MdClose, MdMenu, MdPerson, MdPhoneInTalk } from "react-icons/md";
 import { Link, useLocation } from "react-router-dom";
 import Dropdown from "../common/Dropdown";
 import { LuShoppingBag } from "react-icons/lu";
@@ -27,17 +27,25 @@ function Navbar() {
         </aside>
 
         <aside className="flex gap-5 items-center mr-6 text-[26px] text-qua">
-          <Link
-            to="/cart"
-            className={`relative cursor-pointer group  ${
-              p === "/cart" && "text-tertiary"
-            }`}
+          <Dropdown
+            component={
+              <div
+                className={`relative cursor-pointer group  text-current ${
+                  p?.split("/").find((e) => e === "myaccount") &&
+                  "text-tertiary"
+                }`}
+              >
+                <MdPerson className="xl:text-4xl text-3xl" />
+              </div>
+            }
           >
-            <LuShoppingBag />
-            <div className="absolute right-0 top-0 h-4 w-4 grid duration-200 group-hover:bg-tertiary place-content-center rounded-full translate-x-1.5 -translate-y-1 bg-black text-[9px] text-white">
-              0
-            </div>
-          </Link>
+            <aside className="w-60  bg-white  shadow-xl shadow-black/30  rounded-md translate-y-6 -translate-x-1/3 text-base font-semibold  p-4 grid gap-2">
+              <Li to="/myaccount/dashboard">Dashboard</Li>
+              <Li to="/myaccount/orders">Orders</Li>
+              <Li to="/myaccount/addresses">Addresses</Li>
+              <Li to="/myaccount/changepassword">Change Password</Li>
+            </aside>
+          </Dropdown>
 
           <MdMenu
             onClick={() => setopen(true)}
@@ -161,9 +169,9 @@ const Navs = () => (
         <Li to="/myaccount">My Account</Li>
       </aside>
     </Dropdown>
-
+    <Li to="/mailin">MAIL-IN</Li>
     {/* PAGES  */}
-    <Dropdown
+    {/* <Dropdown
       chevron="-translate-y-0.5"
       direction={{ x: "left", y: "bottom" }}
       component={
@@ -175,7 +183,7 @@ const Navs = () => (
         <Li to="/privacy-policy">Privacy Policy</Li>
         <Li to="/terms-conditions">Terms & Conditions</Li>
       </aside>
-    </Dropdown>
+    </Dropdown> */}
 
     {/* COMPANY  */}
     <Dropdown
@@ -191,38 +199,45 @@ const Navs = () => (
       </aside>
     </Dropdown>
 
-    <Li to="/mailin">MAIL-IN</Li>
-    <Li to="/blog">BLOG</Li>
     <Li to="/contact">CONTACT</Li>
   </ul>
 );
 
 const SecondNav = ({ setopen, open, p }) => {
   const show = useShowNav();
+
   return (
     <nav
       className={`w-[90%] max-w-8xl rounded-xl left-1/2 -translate-x-1/2  fixed top-0  opacity-0 z-50 bg-secondary -translate-y-full duration-300 ${
-        show && "translate-y-3 opacity-100"
+        show && "translate-y-1.5 opacity-100"
       }`}
     >
-      <section className="max-w-8xl h-20 text-white flex justify-between items-center mx-auto sm:px-16 px-8 ">
+      <section className="max-w-8xl 2xl:h-20 h-16 text-white flex justify-between items-center mx-auto sm:px-16 px-8 ">
         <Navs />
         <Link to="/">
           <img src={logoW} className="lg:hidden block w-32" />
         </Link>
         <aside className="flex gap-6">
-          <div className="flex gap-5 items-center  text-[26px] text-white">
-            <Link
-              to="/cart"
-              className={`relative cursor-pointer group  ${
-                p === "/cart" && "text-tertiary"
-              }`}
+          <div className={`flex gap-5 items-center  text-[34px] text-white `}>
+            <Dropdown
+              component={
+                <div
+                  className={`relative cursor-pointer group  text-current ${
+                    p?.split("/").find((e) => e === "myaccount") &&
+                    "text-tertiary"
+                  }`}
+                >
+                  <MdPerson />
+                </div>
+              }
             >
-              <LuShoppingBag />
-              <div className="absolute right-0 top-0 h-4 w-4 grid duration-200 group-hover:bg-tertiary place-content-center rounded-full translate-x-1.5 -translate-y-1 bg-white text-[9px] text-black font-bold">
-                0
-              </div>
-            </Link>
+              <aside className="w-60  bg-white  shadow-xl shadow-black/30  rounded-md translate-y-6 -translate-x-1/3 text-base font-semibold  p-4 grid gap-2">
+                <Li to="/myaccount/dashboard">Dashboard</Li>
+                <Li to="/myaccount/orders">Orders</Li>
+                <Li to="/myaccount/addresses">Addresses</Li>
+                <Li to="/myaccount/changepassword">Change Password</Li>
+              </aside>
+            </Dropdown>
             <Button className="2xl:text-base sm:flex hidden text-xs px-6">
               GET A REPAIR NOW
             </Button>

@@ -28,8 +28,6 @@ import { useScreenWidth } from "../Utils/utils";
 import SendText from "../Components/forms/SendText";
 
 function AboutUs() {
-  const [swip, setSwip] = useState();
-
   return (
     <section>
       <BreadCrumbs
@@ -158,60 +156,67 @@ function AboutUs() {
         </aside>
       </article>
 
-      <article className="my-28 w-full overflow-x-hidden h-[680px]  overflow-hidden relative ">
-        <motion.aside
-          {...fadeIn("", "", 0.5, 1)}
-          className="grid md:grid-cols-[1fr_2fr] gap-6 h-full relative mx-auto z-10 max-w-7xl w-11/12"
-        >
-          {/* TESTIMONIALS  */}
-
-          <div className="self-center w-full">
-            <div className="flex gap-2 mb-4 md:justify-start justify-center items-center text-lg font-bold tracking-wide text-tertiary">
-              <img src={shape} className="w-9 h-9 object-cover" />
-              <p className="text-center">TESTIMONIALS</p>{" "}
-              <img src={shape} className="w-9 h-9 object-cover" />
-            </div>
-            <h1 className="text-white md:text-start text-center md:text-[50px] text-[35px] leading-tight font-bold">
-              Success Stories: From Our Client’s Perspective
-            </h1>
-            <div className="flex gap-4 md:justify-start justify-center mt-4 text-white ">
-              {" "}
-              <button
-                className="w-10 h-10 rotate-180 text-2xl text-black/70 bg-white/90 duration-200 hover:text-white hover:bg-tertiary rounded-full grid place-content-center"
-                onClick={() => {
-                  swip?.slidePrev();
-                }}
-              >
-                <MdEast />
-              </button>
-              <button
-                className="w-10 h-10 text-2xl text-black/70 bg-white/90 duration-200 hover:text-white hover:bg-tertiary rounded-full grid place-content-center"
-                onClick={() => {
-                  swip?.slideNext();
-                }}
-              >
-                <MdEast />
-              </button>
-            </div>
-          </div>
-          {/* SLIDES  */}
-
-          <div className="self-center text-white flex gap-4 h-96 w-full  overflow-hidden">
-            <ReviewSlides setSwip={setSwip} />
-          </div>
-        </motion.aside>
-        <img src={bg7} className="h-full w-full object-cover absolute top-0" />
-        <img
-          src={shape4}
-          className="absolute bottom-16  left-1/4 w-28 rotating"
-        />
-      </article>
+      <ReviewsSection />
 
       {/* SEND FORM */}
       <SendForm />
     </section>
   );
 }
+
+export const ReviewsSection = () => {
+  const [swip, setSwip] = useState();
+  return (
+    <article className="my-28 w-full overflow-x-hidden h-[680px]  overflow-hidden relative ">
+      <img src={bg7} className="h-full w-full object-cover absolute top-0" />
+      <img
+        src={shape4}
+        className="absolute bottom-16  left-1/4 w-28 rotating"
+      />
+      <motion.aside
+        {...fadeIn("", "", 0.5, 1)}
+        className="grid md:grid-cols-[1fr_2fr] gap-6 h-full relative mx-auto z-10 max-w-7xl w-11/12"
+      >
+        {/* TESTIMONIALS  */}
+
+        <div className="self-center w-full">
+          <div className="flex gap-2 mb-4 md:justify-start justify-center items-center text-lg font-bold tracking-wide text-tertiary">
+            <img src={shape} className="w-9 h-9 object-cover" />
+            <p className="text-center">TESTIMONIALS</p>{" "}
+            <img src={shape} className="w-9 h-9 object-cover" />
+          </div>
+          <h1 className="text-white md:text-start text-center md:text-[50px] text-[35px] leading-tight font-bold">
+            Success Stories: From Our Client’s Perspective
+          </h1>
+          <div className="flex gap-4 md:justify-start justify-center mt-4 text-white ">
+            {" "}
+            <button
+              className="w-10 h-10 rotate-180 text-2xl text-black/70 bg-white/90 duration-200 hover:text-white hover:bg-tertiary rounded-full grid place-content-center"
+              onClick={() => {
+                swip?.slidePrev();
+              }}
+            >
+              <MdEast />
+            </button>
+            <button
+              className="w-10 h-10 text-2xl text-black/70 bg-white/90 duration-200 hover:text-white hover:bg-tertiary rounded-full grid place-content-center"
+              onClick={() => {
+                swip?.slideNext();
+              }}
+            >
+              <MdEast />
+            </button>
+          </div>
+        </div>
+        {/* SLIDES  */}
+
+        <div className="self-center text-white flex gap-4 h-96 w-full  overflow-hidden">
+          <ReviewSlides setSwip={setSwip} />
+        </div>
+      </motion.aside>
+    </article>
+  );
+};
 
 const ReviewSlides = ({ setSwip }) => {
   const screen = useScreenWidth();

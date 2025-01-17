@@ -6,7 +6,7 @@ function Input({
   onChange,
   className,
   classPrefix = "",
-  classs ="",
+  classs = "",
   title,
   placeholder = "",
   type = "text",

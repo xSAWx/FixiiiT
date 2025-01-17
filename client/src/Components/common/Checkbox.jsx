@@ -25,7 +25,9 @@ export default function Checkbox({
             `}
       >
         {" "}
-        <FaCheck className={`duration-300 text-white ${!check && "scale-0 opacity-0"}`} />
+        <FaCheck
+          className={`duration-300 text-white ${!check && "scale-0 opacity-0"}`}
+        />
       </div>
       {text}
     </article>

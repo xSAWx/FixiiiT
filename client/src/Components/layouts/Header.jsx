@@ -15,12 +15,11 @@ function Header() {
   useInHome();
   useSetTitle();
   useGetAddress();
-  const {pathname} = useLocation()
-
+  const { pathname } = useLocation();
 
   useEffect(() => {
-    window.scrollTo(0, 0); // Scroll to the top of the page
-  }, [pathname]); 
+    if (pathname.split("/").length < 3) window.scrollTo(0, 0); // Scroll to the top of the page
+  }, [pathname]);
   return (
     <header className="w-full bg-gradient-to-r font-medium text-white  min-h-24 dark:min-h-32  from-[#FC962B] to-[#EE572A]">
       <nav className="max-w-[1820px] h-24 mx-auto px-4 pt-3 pb-6 flex md:flex-row flex-col   justify-between items-center">
@@ -86,9 +85,7 @@ export const UrgentNeedSupport = () => (
     </span>
     <aside>
       <h1 className="mb-2">Urgent Need Support?</h1>
-      <h1 className="text-nowrap">0673142128 &nbsp; &nbsp; 0794914158
-
-</h1>
+      <h1 className="text-nowrap">0673142128 &nbsp; &nbsp; 0794914158</h1>
     </aside>
   </article>
 );

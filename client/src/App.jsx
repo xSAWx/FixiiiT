@@ -15,30 +15,39 @@ import Contact from "./Pages/Contact";
 import MailIn from "./Pages/MailIn";
 import OurTeam from "./Pages/Home/OurTeam";
 import Test from "./Pages/Test";
+import Shop from "./Pages/Shop/Shop";
+import Category from "./Pages/Shop/Category";
+import ShippingAddress from "./Components/forms/ShippingAddress";
+import Orders from "./Pages/Authenticated/Orders";
+import ChangePassword from "./Components/forms/ChangePassword";
 
 function App() {
-  
-  
-
   return (
     <BrowserRouter>
       <Header />
       <Navbar />
       <Routes>
-        <Route path="/" element={<Home/>} />
-        <Route path="/terms-conditions" element={<TOS/>} />
-        <Route path="/privacy-policy" element={<PrivacyPolicy/>} />
-        <Route path="/faq" element={<FAQ/>} />
-        <Route path="/about-us" element={<AboutUs/>} />
+        <Route path="/" element={<Home />} />
+        <Route path="/terms-conditions" element={<TOS />} />
+        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+        <Route path="/faq" element={<FAQ />} />
+        <Route path="/about-us" element={<AboutUs />} />
         <Route path="/sign" element={<Sign />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/mailin" element={<MailIn />} />
         <Route path="/our-team" element={<OurTeam />} />
+        <Route path="/shop" element={<Shop />}></Route>
+        <Route path="shop/:_id" element={<Category />} />
 
         <Route path="/test" element={<Test />} />
 
         <Route path="/" element={<Auth />}>
-          <Route path="/myaccount" element={<MyAccount />} />
+          <Route path="/myaccount" element={<MyAccount />}>
+            <Route path="dashboard" element={<></>} />
+            <Route path="Addresses" element={<ShippingAddress />} />
+            <Route path="changepassword" element={<ChangePassword />} />
+            <Route path="orders" element={<Orders />} />
+          </Route>
         </Route>
 
         <Route path="*" element={<Error404 />} />

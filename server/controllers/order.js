@@ -3,8 +3,8 @@ import Order from "../models/order.module.js";
 //////////!   CREATE ORDER   !//////////
 
 export const createOrder = async ({ body: b, user }, res) => {
-  if (!b?.items?.length)
-    return res.status(404).json("must be atleast one item");
+  if (!b?.item)
+    return res.status(404).json("item is missing");
 
   try {
     const order = await Order.create({ ...b, user: user._id });

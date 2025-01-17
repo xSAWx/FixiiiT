@@ -33,7 +33,7 @@ export const getCategory = async (req, res) => {
 
 export const getCategories = async (req, res) => {
   try {
-    const categories = await Category.find().select("name");
+    const categories = await Category.find().select("image name description");
     res.status(202).json(categories);
   } catch (error) {
     res.status(401).json(error);

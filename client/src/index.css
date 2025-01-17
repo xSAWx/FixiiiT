@@ -75,23 +75,25 @@ input:-webkit-autofill:active {
 }
 
 .title {
-  @apply text-5xl text-fif font-bold tracking-wide;
+  @apply md:text-5xl text-4xl text-fif font-bold tracking-wide;
 }
 
 .Button {
-  @apply px-4 py-1.5 border rounded-sm font-bold tracking-wide text-lg border-tertiary bg-tertiary text-white  hover:bg-white hover:text-tertiary duration-200 focus-within:translate-y-0.5 cursor-pointer disabled:cursor-not-allowed disabled:hover:bg-tertiary disabled:hover:text-white disabled:opacity-60;
+  @apply px-4 py-1.5 border rounded-sm font-bold tracking-wide text-lg border-tertiary bg-tertiary text-white  hover:bg-white hover:text-tertiary duration-200 focus:translate-y-0.5 cursor-pointer disabled:cursor-not-allowed disabled:hover:bg-tertiary disabled:hover:text-white disabled:opacity-60;
 }
 
 .loader {
   @apply animate-spin border-[6px] border-black/20  border-t-tertiary  rounded-full;
 }
 
+.swiper-transition {
+  -webkit-transition-timing-function: linear;
+  -o-transition-timing-function: linear;
+  transition-timing-function: linear;
+}
 
-
-
-
-input[type="number"]::-webkit-inner-spin-button, 
-input[type="number"]::-webkit-outer-spin-button { 
-  -webkit-appearance: none; 
-  margin: 0; 
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }

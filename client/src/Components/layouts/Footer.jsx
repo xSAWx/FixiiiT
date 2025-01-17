@@ -5,7 +5,7 @@ import logo from "../../assets/logo-white.png";
 import { MdLocationOn, MdPhoneInTalk } from "react-icons/md";
 import { FaFacebookF, FaInstagram, FaLinkedin } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Button from "../common/Button";
 
 function Footer() {
@@ -71,7 +71,7 @@ function Footer() {
         {/* DIVDIR  */}
         <div className="w-full py-px bg-white/20 my-12" />
 
-        <article className="w-full grid mt-20 gap-6 gap-y-12 md:grid-cols-[1fr_1fr_1fr_2fr] grid-cols-1">
+        <article className="w-full grid mt-20 gap-6 gap-y-12 md:grid-cols-3 grid-cols-1">
           {/* URGENT SUPPORT   */}
           <aside className="flex gap-3 group cursor-pointer md:self-start self-center md:justify-self-start justify-self-center">
             <span className="h-12 flex-shrink-0 cursor-pointer w-12 group-hover:text-white group-hover:bg-tertiary rounded-full duration-300 text-3xl text-tertiary grid place-content-center bg-[#4A4269] hover:bg-tertiary hover:text-white">
@@ -86,38 +86,14 @@ function Footer() {
             </div>
           </aside>
 
-          {/* QUICK LINKS  */}
-          <aside className="font-light justify-self-center">
-            <h1 className="text-[20px]  text-white font-bold  mb-2">
-              Quick Links
-            </h1>
-            <div className="grid gap-1">
-              <Link to="/" className="hover:text-tertiary duration-200">
-                Home
-              </Link>
-              <Link to="/about-us" className="hover:text-tertiary duration-200">
-                About Us
-              </Link>
-              <Link to="/services" className="hover:text-tertiary duration-200">
-                Services
-              </Link>
-              <Link
-                to="/contact-us"
-                className="hover:text-tertiary duration-200"
-              >
-                Contact Us
-              </Link>
-              <Link to="/blog" className="hover:text-tertiary duration-200">
-                Our Blog
-              </Link>
-            </div>
-          </aside>
-
           {/* OUR SERVICES  */}
-          <aside className="justify-self-center">
+          <aside className="md:justify-self-start  justify-self-center">
             <h1 className="text-[20px] text-white font-bold  mb-2">
               Quick Links
             </h1>
+            <LINK to={"/faq"}>FAQ</LINK>
+            <LINK to={"/privacy-policy"}>Privacy-Policy</LINK>
+            <LINK to={"/terms-conditions"}>Terms & Conditions</LINK>
           </aside>
 
           {/* Subscribe to Our Newsletter  */}
@@ -142,5 +118,22 @@ function Footer() {
     </footer>
   );
 }
+
+const LINK = ({ to = "/", children }) => {
+  const { pathname } = useLocation();
+
+  return (
+    <div className="my-1">
+      <Link
+        to={to}
+        className={`hover:text-tertiary duration-200 my-3 ml-1 ${
+          pathname === to && "text-tertiary text-[18px]"
+        }`}
+      >
+        {children}
+      </Link>
+    </div>
+  );
+};
 
 export default Footer;

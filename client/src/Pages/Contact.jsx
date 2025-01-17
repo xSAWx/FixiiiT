@@ -4,7 +4,7 @@ import { MdDoneAll, MdLocationOn, MdPhoneInTalk } from "react-icons/md";
 import { FaFacebook, FaInstagram } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import { TitleS } from "./AboutUs";
-import bg from "../assets/map-1536x478.webp"
+import bg from "../assets/map-1536x478.webp";
 
 import SnedMessage from "../Components/forms/SnedMessage";
 
@@ -41,8 +41,7 @@ function Contact() {
                 <MdDoneAll />
               </span>
               <div className=" text-black/60 font-semibold">
-                From 8 AM to 5 PM ,
-                <p>7/7</p>
+                From 8 AM to 5 PM ,<p>7/7</p>
               </div>
             </div>
           </div>

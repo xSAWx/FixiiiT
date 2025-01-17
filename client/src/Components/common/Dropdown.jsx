@@ -29,7 +29,7 @@ function Dropdown({
       ref={ref}
       className={`relative z-40 ${classPrefix}`}
     >
-      <div className="flex gap-2 items-center cursor-pointer">
+      <div className="flex gap-2 items-center hover:text-tertiary cursor-pointer">
         {React.cloneElement(component, {
           // onClick: ,
           onBlur: () => setopen(false),
