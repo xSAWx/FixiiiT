@@ -47,7 +47,7 @@ const updateHandler = (
 
 //////!   UPDATE ADDRESS   !//////
 
-export const useUpdateAddress = () => {
+export const useUpdateAddress = (setmdl) => {
   const [loading, setloading] = useState(false);
   const [err, seterr] = useState({});
   const { address, setAddress } = addressSlice();
@@ -69,7 +69,7 @@ export const useUpdateAddress = () => {
         streetAddress2: address?.streetAddress2,
       });
 
-      console.log(resp);
+      if (setmdl) setmdl(false);
 
       seterr({ success: true });
     } catch (error) {

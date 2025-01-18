@@ -4,7 +4,7 @@ import Select from "../common/Select";
 import { addressSlice } from "../../Store/user";
 import { useUpdateAddress } from "../../Hooks/useUpdate";
 
-function ShippingAddress() {
+function ShippingAddress({setmdl}) {
   const [credentials, setcredentials] = useState({
     firstName: "",
     phoneNumber: "",
@@ -19,13 +19,12 @@ function ShippingAddress() {
 
   const { setAddress, address } = addressSlice();
 
-  const { loading, update, err } = useUpdateAddress();
+  const { loading, update, err } = useUpdateAddress(setmdl);
 
   const submitHandler = async (e) => {
     e.preventDefault();
     await update();
   };
-  
 
   return (
     <form onSubmit={submitHandler} className="grid gap-6">
@@ -109,25 +108,34 @@ function ShippingAddress() {
         value={address.postalCode}
       />
       <div className="flex gap-4 items-end font-bold">
-      <button
-        
-        disabled={
-          !(
-            address.firstName &&
-            address.lastName &&
-            address.postalCode &&
-            address.state &&
-            address.streetAddress1 &&
-            address.city &&
-            address.phoneNumber
-          ) || loading
-        }
-        className="Button w-44 !text-base mt-2"
-      >
-        {loading ? <div className="w-6 h-6 loader mx-auto " /> : "Save Address"}
-      </button>
-      {err.success && <h1 className="text-sm text-tertiary ">Address Changed Successfuly</h1>}
-      {err.fail && <h1 className="text-sm text-red-600 ">Somthing Went Wrong</h1>}
+        <button
+          disabled={
+            !(
+              address.firstName &&
+              address.lastName &&
+              address.postalCode &&
+              address.state &&
+              address.streetAddress1 &&
+              address.city &&
+              address.phoneNumber
+            ) || loading
+          }
+          className="Button w-44 !text-base mt-2"
+        >
+          {loading ? (
+            <div className="w-6 h-6 loader mx-auto " />
+          ) : (
+            "Save Address"
+          )}
+        </button>
+        {err.success && (
+          <h1 className="text-sm text-tertiary ">
+            Address Changed Successfuly
+          </h1>
+        )}
+        {err.fail && (
+          <h1 className="text-sm text-red-600 ">Somthing Went Wrong</h1>
+        )}
       </div>
     </form>
   );

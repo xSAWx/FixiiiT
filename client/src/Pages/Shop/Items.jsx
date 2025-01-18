@@ -8,6 +8,8 @@ import TextArea from "../../Components/common/TextArea";
 import { MdImage } from "react-icons/md";
 import Input from "../../Components/common/Input";
 import { useCreateOrder } from "../../Hooks/useOrder";
+import Modal from "../../Components/common/Modal";
+import ShippingAddress from "../../Components/forms/ShippingAddress";
 
 function Items() {
   const { _id } = useParams();
@@ -21,21 +23,21 @@ function Items() {
     item: items[0]?._id,
   });
 
+  const [mdl, setmdl] = useState(false);
+
   useEffect(() => {
     setcredentials({ ...credentials, item: items[0]?._id });
   }, [items]);
-
-  console.log(credentials);
 
   const { options, loading } = useGetOption(credentials.item);
 
   const itm = items.find((e) => credentials.item === e._id);
 
-  const {create} = useCreateOrder()
+  const { create } = useCreateOrder(setmdl);
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    await create(credentials)
+    await create(credentials);
   };
 
   return (
@@ -144,6 +146,14 @@ function Items() {
           <button className="Button !px-6 ">Place An Order</button>
         </aside>
       )}
+      <Modal
+        className="bg-white p-8 rounded-lg"
+        
+        onClose={setmdl}
+        open={mdl}
+      >
+        <ShippingAddress setmdl={setmdl}/>
+      </Modal>
     </form>
   );
 }

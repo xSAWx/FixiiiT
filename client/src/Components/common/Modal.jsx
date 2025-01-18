@@ -1,8 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import Portal from "../layouts/Portal";
+import { useLocation } from "react-router-dom";
 
 const Modal = ({ children, className, open, onClose, closabel = true }) => {
   const ref = useRef();
+  const { pathname } = useLocation();
 
   const [animate, setanimate] = useState(false);
   const [kill, setkill] = useState(true);
@@ -14,6 +16,10 @@ const Modal = ({ children, className, open, onClose, closabel = true }) => {
       ref.current.classList.remove("shake");
     }, 1000);
   };
+
+  useEffect(()=>{
+    onClose(false)
+  }, [pathname])
 
   useEffect(() => {
     if (open) {
@@ -28,9 +34,9 @@ const Modal = ({ children, className, open, onClose, closabel = true }) => {
       }, 400);
     }
     if (open) {
-      document.body.style.overflow = 'hidden';
+      document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = 'auto'; // or "scroll"
+      document.body.style.overflow = "auto"; // or "scroll"
     }
   }, [open]);
 

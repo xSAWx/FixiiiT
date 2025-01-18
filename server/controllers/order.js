@@ -3,8 +3,7 @@ import Order from "../models/order.module.js";
 //////////!   CREATE ORDER   !//////////
 
 export const createOrder = async ({ body: b, user }, res) => {
-  if (!b?.item)
-    return res.status(404).json("item is missing");
+  if (!b?.item) return res.status(404).json("item is missing");
 
   try {
     const order = await Order.create({ ...b, user: user._id });
@@ -55,14 +54,22 @@ export const getAllOrders = async ({ query }, res) => {
   }
 };
 
-//////////!   CREATE ORDER FOR   !//////////
+//////////!   GET MY ORDERS   !//////////
 
 export const getMyOrders = async ({ query, user }, res) => {
   try {
     const orders = await Order.find({ user: user._id })
+      .populate([
+        {
+          path: "item",
+          select: "name category",
+          populate: { path: "category", select: "name" },
+        },
+        { path: "options", select: "name" },
+      ])
       .limit(query?.limit || 10)
       .skip((query?.page - 1) * query?.limit)
-      .select("-__v");
+      .select("-__v   ");
     res.status(202).json(orders);
   } catch (error) {
     res.status(401).json(error);
@@ -99,6 +106,6 @@ export const deleteMyOrder = async (req, res) => {
     await Order.findOneAndDelete({ user: req.user._id, _id: req.params._id });
     res.status(202).json(`your order deleted successfuly`);
   } catch (error) {
-    res.status(401).json(error)
+    res.status(401).json(error);
   }
 };
