@@ -15,7 +15,13 @@ function Order({ setmdl, order, i }) {
       <article className="flex justify-between items-center px-6 py-4 border-b border-black/30 ">
         <h1 className="title !text-3xl ">ORDER #{i + 1}</h1>
         <aside className="flex gap-4 items-center">
-          <div className="px-6 py-2 rounded-xl font-semibold text-lg text-yellow-900 bg-yellow-600 bg-opacity-30">
+          <div
+            style={{
+              color: color(order?.status),
+              backgroundColor: `${color(order?.status)}66`,
+            }}
+            className="px-6 py-2 rounded-xl font-semibold text-lg bg-yellow-600 bg-opacity-30"
+          >
             {order?.status}
           </div>
           <MdClose
@@ -26,7 +32,7 @@ function Order({ setmdl, order, i }) {
       </article>
 
       {/* BODY  */}
-      <article className="p-3 px-8 pt-6 overflow-y-auto max-h-[500px] ">
+      <article className="p-3 px-8 pt-6 overflow-y-auto max-h-[500px] max-h-[60dvh] ">
         <h1 className="title md:!text-2xl !text-[22px] mb-4">
           Order Details :
         </h1>
@@ -61,6 +67,7 @@ function Order({ setmdl, order, i }) {
           {address?.streetAddress2 && (
             <Line title="Street 2 :">{address?.streetAddress2}</Line>
           )}
+          <Line title="Postal Code :">{address?.postalCode}</Line>
         </aside>
       </article>
 
@@ -88,5 +95,17 @@ const Line = ({ title, children }) => (
     <h2 className="max-w-96 line-clamp-1">{children}</h2>
   </div>
 );
+
+const color = (status) => {
+  switch (status) {
+    case "cancelled":
+      return "##dc2626";
+
+    case "shipping" || "delivered":
+      return "#16a34a";
+    default:
+      return "#ca8a04";
+  }
+};
 
 export default Order;

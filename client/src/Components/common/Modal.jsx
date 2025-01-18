@@ -1,10 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import Portal from "../layouts/Portal";
-import { useLocation } from "react-router-dom";
 
 const Modal = ({ children, className, open, onClose, closabel = true }) => {
   const ref = useRef();
-  const { pathname } = useLocation();
 
   const [animate, setanimate] = useState(false);
   const [kill, setkill] = useState(true);
@@ -17,9 +15,6 @@ const Modal = ({ children, className, open, onClose, closabel = true }) => {
     }, 1000);
   };
 
-  useEffect(()=>{
-    onClose(false)
-  }, [pathname])
 
   useEffect(() => {
     if (open) {
