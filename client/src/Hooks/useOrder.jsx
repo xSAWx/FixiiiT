@@ -11,21 +11,23 @@ export const useGetMyOrders = () => {
   const [err, seterr] = useState(false);
   const [orders, setorders] = useState([]);
 
+  const getOrders = async () => {
+    try {
+      setloading(true);
+      const resp = await axios.get("/api/order/my");
+      setorders(resp.data);
+    } catch (error) {
+      seterr(true);
+      console.log(error);
+    } finally {
+      setloading(false);
+    }
+  };
+
   useEffect(() => {
-    (async () => {
-      try {
-        setloading(true);
-        const resp = await axios.get("/api/order/my");
-        setorders(resp.data);
-      } catch (error) {
-        seterr(true);
-        console.log(error);
-      } finally {
-        setloading(false);
-      }
-    })();
+    getOrders()
   }, []);
-  return { loading, err, orders };
+  return { loading, err, orders , getOrders };
 };
 
 //////////!   CREATE ORDER   !/////////
@@ -82,9 +84,23 @@ const checkAdress = (a) => {
   return false;
 };
 
-// country: "Algeria",
-//     streetAddress1: "",
-//     streetAddress2: "",
-//     city: "",
-//     state: "Adrar",
-//     postalCode: "",
+//////////!   DELETE MY ORDER   !/////////
+
+export const useDeleteOrder = () => {
+  const [loading, setloading] = useState(false);
+  const [err, seterr] = useState();
+
+  const Delete = async (_id) => {
+    try {
+      setloading(true);
+      const resp = await axios.delete(`/api/order/my/${_id}`);
+    } catch (error) {
+      seterr(true);
+      console.log(error);
+    } finally {
+      setloading(false);
+    }
+  };
+
+  return { loading, err, Delete };
+};

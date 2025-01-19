@@ -1,48 +1,34 @@
-import React, { useState } from "react";
-import Input from "../Components/common/Input";
-import axios from "axios";
-function Test() {
-  const [credentials, setcredentials] = useState();
+import React, { useRef } from "react";
+import html2pdf from "html2pdf.js";
+import OrderInvoic from "./Authenticated/OrderInvoic";
+const TEST = () => {
 
-  const handleUpload = (e) => {
-    setcredentials({ ...credentials, image: e.target.files[0] });
-    console.log(credentials);
-  };
+  
 
-  const submit = async (e) => {
-    e.preventDefault();
-    const formData = new FormData();
-    formData.append("image", credentials.image);
-    try {
-      const resp = await axios.post(
-        "https://api.imgbb.com/1/upload?key=bb0e3b9f7ea1d5279df7c88644f0fa79",
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
-      console.log(resp);
-    } catch (error) {
-      console.log(error);
-    }
+  const invoiceRef = useRef();
+
+  const handleDownload = () => {
+    const options = {
+      margin: 10,
+      filename: "invoice.pdf",
+      image: { type: "jpeg", quality: 0.98 },
+      html2canvas: { scale: 2 },
+      jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
+    };
+    html2pdf().from(invoiceRef.current).set(options).save();
   };
 
   return (
-    <form onSubmit={submit} className="my-44 grid place-content-center gap-10">
-      <input onChange={handleUpload} type="file" />
-      <Input
-        set={setcredentials}
-        name="name"
-        title="Category Name"
-        placeholder="Category Name"
-      />
-      <button type="submit" className="Button px-4">
-        Submit
+    <>
+      <OrderInvoic invoiceRef={invoiceRef}/>
+      <button
+        onClick={handleDownload}
+        className="mt-4 bg-blue-500 text-white py-2 px-4 rounded-md"
+      >
+        Download PDF
       </button>
-    </form>
+    </>
   );
-}
+};
 
-export default Test;
+export default TEST;
