@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { focusing } from "../../Utils/utils";
 import { BsEyeFill, BsEyeSlashFill } from "react-icons/bs";
 
@@ -15,9 +15,25 @@ function Input({
   err,
   disabled = false,
   value,
+  icon,
+  wait = false,
 }) {
   const [focus, setfocus] = useState(false);
   const [hide, sethide] = useState(false);
+  const timeoutRef = useRef(null);
+
+  const handleChange = (e) => {
+    clearTimeout(timeoutRef.current); // Clear previous timeout
+    timeoutRef.current = setTimeout(() => {
+      // Perform server-side action here (e.g., API call)
+      console.log("Input value:", e.target.value);
+      onChange
+        ? onChange
+        : set((state) => ({ ...state, [name]: e.target.value }));
+      // Clear the timeout ref after the action is completed
+      timeoutRef.current = null;
+    }, 500); // Adjust the delay as needed (in milliseconds)
+  };
 
   return (
     <article
@@ -36,20 +52,22 @@ function Input({
           ${classs}
           `}
       >
+        {icon && React.cloneElement(icon, { className: "text-2xl " })}
         <input
+          ref={timeoutRef}
           {...focusing(setfocus)}
           type={type == "password" ? (hide ? "text" : "password") : type}
           className={`w-full h-full p-4 text-base font-medium tracking-wider bg-transparent text-black placeholder:tracking-widest placeholder:text-black/50 outline-none  ${classPrefix}`}
           placeholder={placeholder}
           disabled={disabled}
           value={value}
-          onChange={
-            onChange
+          onChange={(e) => {
+            wait
+              ? handleChange(e)
+              : onChange
               ? onChange
-              : (e) => {
-                  set((state) => ({ ...state, [name]: e.target.value }));
-                }
-          }
+              : set((state) => ({ ...state, [name]: e.target.value }));
+          }}
         />
         {type === "password" &&
           (!hide ? (

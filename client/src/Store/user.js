@@ -11,6 +11,8 @@ export const authSlice = create((set) => ({
   setAdmin: (value) => set(() => ({ isAdmin: value })),
 }));
 
+
+
 export const accountSlice = create((set) => ({
   account: {
     username: "",
@@ -23,6 +25,8 @@ export const accountSlice = create((set) => ({
   },
   setAccount: (fn) => set((state) => ({ account: fn(state.account) })),
 }));
+
+
 
 export const addressSlice = create((set) => ({
   address: {

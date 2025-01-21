@@ -202,9 +202,34 @@ export const getAllAccounts = async (req, res) => {
   const { page, limit } = req.query;
   const skip = (page - 1) * limit;
 
+  let sort = {};
+  let args = {};
+
+  if (req.query.sort) sort = { ...sort, [req.query.sort]: -1 };
+  if (req.query.search)
+    args = {
+      ...args,
+      $or: [
+        { email: { $regex: req.query.search, $options: "i" } },
+        { username: { $regex: req.query.search, $options: "i" } },
+        { state: { $regex: req.query.search, $options: "i" } },
+        { phoneNumber: { $regex: req.query.search } },
+      ],
+    };
+
   try {
-    const users = await User.find().skip(skip).limit(limit);
-    return res.json({ users, page });
+    const totalCount = await User.countDocuments(args);
+    const users = await User.find(args)
+      .skip(skip)
+      .limit(limit)
+      .sort({ [req.query.sort]: -1 });
+    return res.json({
+      users,
+      pages: {
+        current: Number(req.query?.page) || 1,
+        total: Math.ceil(totalCount / req.query?.limit) || 1,
+      },
+    });
   } catch (error) {
     res.status(406).json({ error });
   }

@@ -10,7 +10,8 @@ function Select({
   number = false,
   value,
   list,
-  className=""
+  className = "",
+  classPrefix = "",
 }) {
   return (
     <article className={` font-bold ${className}`}>
@@ -19,16 +20,17 @@ function Select({
           {title}
         </h1>
       )}
-      <aside className="relative max-h-20 overflow-y-auto">
+      <aside className={`relative max-h-20 overflow-y-auto`}>
         <select
           value={value}
           onChange={(e) => set((old) => ({ ...old, [name]: e.target.value }))}
-          className="outline-none cursor-pointer  text-black/70  overflow-y-visible relative peer rounded-md py-4 w-full px-4 border border-black/30 focus:border-tertiary"
+          className={`outline-none cursor-pointer  text-black/70  overflow-y-visible relative peer rounded-md py-4 w-full px-4 border border-black/30 focus:border-tertiary ${classPrefix}`}
           name=""
           id=""
         >
           {options?.map((o, i) => (
             <option
+            key={i}
               value={o}
               className="rounded-md text-black/70 mt-4 translate-y-2"
             >
@@ -36,7 +38,7 @@ function Select({
             </option>
           ))}
         </select>
-        <BsChevronDown className="absolute duration-300 peer-focus-within:rotate-180 z-10 text-xl right-4 top-1/2 -translate-y-1/2" />
+        <BsChevronDown className="absolute duration-300 pointer-events-none peer-focus-within:rotate-180 z-10 text-xl right-4 top-1/2 -translate-y-1/2" />
       </aside>
       <h1
         className={`text-sm tracking-wider text-red-600 m-1 mt-1.5 duration-200 opacity-0 

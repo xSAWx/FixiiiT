@@ -9,12 +9,10 @@ import {
 import useInHome from "../../Utils/useInHome";
 import { useSetTitle } from "../../Utils/utils";
 import { useLocation } from "react-router-dom";
-import { useGetAddress } from "../../Hooks/useUpdate";
 
 function Header() {
   useInHome();
   useSetTitle();
-  useGetAddress();
   const { pathname } = useLocation();
 
   useEffect(() => {

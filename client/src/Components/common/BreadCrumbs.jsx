@@ -7,10 +7,12 @@ function BreadCrumbs({ title = "", routes, navs }) {
   return (
     <section className="w-full h-80 grid place-content-center  bg-gradient-to-r from-[#FFEBE5] to-[#E4E7FE]">
       <aside>
-        <h1 className="text-[#0D0239] lg:text-[50px] text-[30px] mb-3 text-center font-bold">{title}</h1>
+        <h1 className="text-[#0D0239] lg:text-[50px] text-[30px] mb-3 text-center font-bold">
+          {title}
+        </h1>
         <div className="flex gap-3 justify-center">
           {navs?.map((e, i) => (
-            <>
+            <div className="flex gap-1" key={e}>
               <Link
                 className={` ${
                   i + 1 !== navs.length
@@ -22,9 +24,9 @@ function BreadCrumbs({ title = "", routes, navs }) {
                 {e}
               </Link>
               {i + 1 !== navs.length && (
-                <MdChevronRight className="text-2xl text-qua opacity-60" />
+                <MdChevronRight k className="text-2xl text-qua opacity-60" />
               )}
-            </>
+            </div>
           ))}
         </div>
       </aside>

@@ -1,7 +1,14 @@
 import React, { useEffect, useState } from "react";
 import logo from "../../assets/logo-black.png";
 import logoW from "../../assets/logo-white.png";
-import { MdClose, MdMenu, MdPerson, MdPhoneInTalk } from "react-icons/md";
+import {
+  MdAdminPanelSettings,
+  MdClose,
+  MdLogin,
+  MdMenu,
+  MdPerson,
+  MdPhoneInTalk,
+} from "react-icons/md";
 import { Link, useLocation } from "react-router-dom";
 import Dropdown from "../common/Dropdown";
 import { LuShoppingBag } from "react-icons/lu";
@@ -9,10 +16,15 @@ import Portal from "./Portal";
 import Accordion from "../common/Accordion";
 import { useShowNav } from "../../Utils/utils";
 import Button from "../common/Button";
+import { authSlice } from "../../Store/user";
+import { useGetAddress } from "../../Hooks/useUpdate";
 
 function Navbar() {
   const { pathname: p } = useLocation();
   const [open, setopen] = useState(false);
+  const { admin } = useGetAddress();
+
+  const { auth } = authSlice();
   return (
     <>
       <nav className="mx-auto absolute left-1/2 -translate-x-1/2 z-40  text-qua flex w-[calc(100%-80px)] max-w-[1760px] md:-translate-y-[30%] bg-white shadow-xl -translate-y-2.5 rounded-lg  h-[72px] md:h-20  ">
@@ -27,25 +39,45 @@ function Navbar() {
         </aside>
 
         <aside className="flex gap-5 items-center mr-6 text-[26px] text-qua">
-          <Dropdown
-            component={
-              <div
-                className={`relative cursor-pointer group  text-current ${
-                  p?.split("/").find((e) => e === "myaccount") &&
-                  "text-tertiary"
+          {auth ? (
+            <Dropdown
+              component={
+                <div
+                  className={`relative cursor-pointer group  text-current ${
+                    p?.split("/").find((e) => e === "myaccount") &&
+                    "text-tertiary"
+                  }`}
+                >
+                  <MdPerson className="xl:text-4xl text-3xl" />
+                </div>
+              }
+            >
+              <aside className="w-60  bg-white  shadow-xl shadow-black/30  rounded-md translate-y-6 -translate-x-1/3 text-base font-semibold  p-4 grid gap-2">
+                <Li to="/myaccount/dashboard">Dashboard</Li>
+                <Li to="/myaccount/orders">Orders</Li>
+                <Li to="/myaccount/addresses">Addresses</Li>
+                <Li to="/myaccount/changepassword">Change Password</Li>
+              </aside>
+            </Dropdown>
+          ) : (
+            <Link to="/sign">
+              <MdLogin
+                className={`xl:text-4xl text-3xl hover:text-tertiary duration-200 cursor-pointer ${
+                  p === "/sign" && "text-tertiary"
                 }`}
-              >
-                <MdPerson className="xl:text-4xl text-3xl" />
-              </div>
-            }
-          >
-            <aside className="w-60  bg-white  shadow-xl shadow-black/30  rounded-md translate-y-6 -translate-x-1/3 text-base font-semibold  p-4 grid gap-2">
-              <Li to="/myaccount/dashboard">Dashboard</Li>
-              <Li to="/myaccount/orders">Orders</Li>
-              <Li to="/myaccount/addresses">Addresses</Li>
-              <Li to="/myaccount/changepassword">Change Password</Li>
-            </aside>
-          </Dropdown>
+              />
+            </Link>
+          )}
+
+          {admin && (
+            <Link to="/admin">
+              <MdAdminPanelSettings
+                className={`xl:text-4xl text-3xl hover:text-blue-600 duration-200 cursor-pointer ${
+                  p?.split("/").find((e) => e === "admin") && "text-blue-600"
+                }`}
+              />
+            </Link>
+          )}
 
           <MdMenu
             onClick={() => setopen(true)}
@@ -61,7 +93,13 @@ function Navbar() {
         </aside>
         <SideNav open={open} setopen={setopen} />
       </nav>
-      <SecondNav open={open} setopen={setopen} p={p} />
+      <SecondNav
+        open={open}
+        setopen={setopen}
+        p={p}
+        auth={auth}
+        admin={admin}
+      />
     </>
   );
 }
@@ -203,7 +241,7 @@ const Navs = () => (
   </ul>
 );
 
-const SecondNav = ({ setopen, open, p }) => {
+const SecondNav = ({ setopen, open, p, auth, admin }) => {
   const show = useShowNav();
 
   return (
@@ -219,25 +257,45 @@ const SecondNav = ({ setopen, open, p }) => {
         </Link>
         <aside className="flex gap-6">
           <div className={`flex gap-5 items-center  text-[34px] text-white `}>
-            <Dropdown
-              component={
-                <div
-                  className={`relative cursor-pointer group  text-current ${
-                    p?.split("/").find((e) => e === "myaccount") &&
-                    "text-tertiary"
+            {auth ? (
+              <Dropdown
+                component={
+                  <div
+                    className={`relative cursor-pointer group  text-current ${
+                      p?.split("/").find((e) => e === "myaccount") &&
+                      "text-tertiary"
+                    }`}
+                  >
+                    <MdPerson className="xl:text-4xl text-3xl" />
+                  </div>
+                }
+              >
+                <aside className="w-60  bg-white  shadow-xl shadow-black/30  rounded-md translate-y-6 -translate-x-1/3 text-base font-semibold  p-4 grid gap-2">
+                  <Li to="/myaccount/dashboard">Dashboard</Li>
+                  <Li to="/myaccount/orders">Orders</Li>
+                  <Li to="/myaccount/addresses">Addresses</Li>
+                  <Li to="/myaccount/changepassword">Change Password</Li>
+                </aside>
+              </Dropdown>
+            ) : (
+              <Link to="/sign">
+                <MdLogin
+                  className={`xl:text-4xl text-3xl hover:text-tertiary duration-200 cursor-pointer ${
+                    p === "/sign" && "text-tertiary"
                   }`}
-                >
-                  <MdPerson />
-                </div>
-              }
-            >
-              <aside className="w-60  bg-white  shadow-xl shadow-black/30  rounded-md translate-y-6 -translate-x-1/3 text-base font-semibold  p-4 grid gap-2">
-                <Li to="/myaccount/dashboard">Dashboard</Li>
-                <Li to="/myaccount/orders">Orders</Li>
-                <Li to="/myaccount/addresses">Addresses</Li>
-                <Li to="/myaccount/changepassword">Change Password</Li>
-              </aside>
-            </Dropdown>
+                />
+              </Link>
+            )}
+
+            {admin && (
+              <Link to="/admin">
+                <MdAdminPanelSettings
+                  className={`xl:text-4xl text-3xl hover:text-blue-600 duration-200 cursor-pointer ${
+                    p?.split("/").find((e) => e === "admin") && "text-blue-600"
+                  }`}
+                />
+              </Link>
+            )}
             <Button className="2xl:text-base sm:flex hidden text-xs px-6">
               GET A REPAIR NOW
             </Button>

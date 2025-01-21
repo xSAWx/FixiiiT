@@ -19,7 +19,11 @@ import Shop from "./Pages/Shop/Shop";
 import Category from "./Pages/Shop/Category";
 import ShippingAddress from "./Components/forms/ShippingAddress";
 import Orders from "./Pages/Authenticated/Orders";
+import ORders from "./Pages/Admin/Orders";
 import ChangePassword from "./Components/forms/ChangePassword";
+import Admin from "./Pages/Admin/Admin";
+import Dashboard from "./Pages/Admin/Dashboard";
+import Users from "./Pages/Admin/Users";
 
 function App() {
   return (
@@ -48,6 +52,14 @@ function App() {
             <Route path="changepassword" element={<ChangePassword />} />
             <Route path="orders" element={<Orders />} />
           </Route>
+        </Route>
+
+        <Route path="/admin" element={<Admin />}>
+          <Route path="users" element={<Users />} />
+          <Route path="category" element={<></>} />
+          <Route path="orders" element={<ORders />} />
+          <Route path="items" element={<></>} />
+          <Route path="" element={<Dashboard />} />
         </Route>
 
         <Route path="*" element={<Error404 />} />

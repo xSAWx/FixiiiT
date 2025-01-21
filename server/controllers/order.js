@@ -41,7 +41,15 @@ export const getAllOrders = async ({ query }, res) => {
       })
       .limit(query?.limit || 10)
       .skip((query?.page - 1) * query?.limit)
-      .select("-__v");
+      .select("-__v")
+      .populate([
+        {
+          path: "item",
+          select: " name category",
+          populate: { path: "category", select: "name" },
+        },
+        { path: "user", select: "email username" },
+      ]);
     res.status(202).json({
       orders,
       pages: {

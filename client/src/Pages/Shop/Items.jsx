@@ -17,7 +17,7 @@ function Items() {
 
   const [credentials, setcredentials] = useState({
     options: [],
-    image: "",
+    img: "",
     serialNumber: "",
     node: "",
     item: items[0]?._id,
@@ -117,9 +117,9 @@ function Items() {
                 Add Image (optional)
               </h1>
               <div className="relative h-60 grid place-content-center overflow-hidden text-6xl text-black/60  border border-black/50 cursor-pointer hover:bg-black/10 rounded-lg">
-                {credentials.image ? (
+                {credentials.img ? (
                   <img
-                    src={URL.createObjectURL(credentials.image)}
+                    src={URL.createObjectURL(credentials.img)}
                     className="!object-cover h-60 min-w-96"
                   />
                 ) : (
@@ -129,7 +129,7 @@ function Items() {
                 )}
                 <input
                   onChange={(e) =>
-                    setcredentials({ ...credentials, image: e.target.files[0] })
+                    setcredentials({ ...credentials, img: e.target.files[0] })
                   }
                   type="file"
                   className="absolute w-full h-full opacity-0 z-10 cursor-pointer"

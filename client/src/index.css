@@ -4,6 +4,11 @@
 
 :root {
   font-family: "Urbanist", serif;
+  scrollbar-width: thin !important;
+}
+
+.scroll-thin {
+  scrollbar-width: thin !important;
 }
 
 .max-w-8xl {

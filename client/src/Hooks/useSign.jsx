@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { authSlice } from "../Store/user";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 //////!   LOGIN   !//////
 
@@ -115,7 +116,6 @@ export const useSignOtp = () => {
   const [loading, setloading] = useState(false);
   const [message, setmessage] = useState({ send: "", check: "" });
   const navigate = useNavigate();
-  
 
   const sendOtp = async () => {
     setloading(true);
@@ -136,7 +136,6 @@ export const useSignOtp = () => {
     try {
       const resp = await axios.post("/api/auth/checkOTP", { OTP });
       if (resp.data) {
-        
         setTimeout(() => {
           window.location.reload();
         }, 700);
@@ -247,4 +246,55 @@ const handleSignup = ({
     return true;
   }
   return false;
+};
+
+// -----------   ADMIN  -----------   //
+
+//////!   GET ALL USERS   !//////
+
+export const useGetAllUsers = ({ page, filter }) => {
+  const [loading, setloading] = useState(false);
+  const [err, seterr] = useState(false);
+  const [users, setusers] = useState([]);
+
+  const getAll = async () => {
+    let args = [`page=${page}`, `limit=${filter.limit}`, `sort=${filter.sort}`];
+    if (filter.search) args.push(`search=${filter.search}`);
+
+    try {
+      setloading(true);
+      const resp = await axios.get(`/api/auth/all?${args.join("&")}`);
+      setusers(resp.data);
+    } catch (error) {
+      seterr(true);
+      console.log(error);
+    } finally {
+      setloading(false);
+    }
+  };
+
+  useEffect(() => {
+    getAll();
+  }, [page, filter]);
+
+  return { users, getAll, loading, err };
+};
+
+//////!   REMOVE USER   !//////
+
+export const useDeleteUser = () => {
+  const [loading, setloading] = useState(false);
+  const [err, seterr] = useState(false);
+
+  const Delete = async (_id) => {
+    try {
+      const resp = await axios.delete(`/api/auth/delete/${_id}`);
+      toast.error("Account Deleted");
+    } catch (error) {
+      seterr(true);
+      console.log(error);
+    }
+  };
+
+  return { loading, err, Delete };
 };

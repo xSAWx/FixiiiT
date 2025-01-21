@@ -10,7 +10,7 @@ function Order({ setmdl, order, i }) {
   console.log({ address });
 
   return (
-    <section className="w-[600px] max-w-[95vw] bg-white  rounded-lg border border-black/40">
+    <section className="w-[600px] max-w-[95vw] max-h-[90dvh] bg-white  rounded-lg border border-black/40">
       {/* HEADER  */}
       <article className="flex justify-between items-center px-6 py-4 border-b border-black/30 ">
         <h1 className="title !text-3xl ">ORDER #{i + 1}</h1>
@@ -32,7 +32,7 @@ function Order({ setmdl, order, i }) {
       </article>
 
       {/* BODY  */}
-      <article className="p-3 px-8 pt-6 overflow-y-auto max-h-[500px] max-h-[60dvh] ">
+      <article className="p-3 px-8 pt-6 overflow-y-auto h-[55dvh]   ">
         <h1 className="title md:!text-2xl !text-[22px] mb-4">
           Order Details :
         </h1>
@@ -71,6 +71,7 @@ function Order({ setmdl, order, i }) {
         </aside>
       </article>
 
+      {/* FOOTER  */}
       <article className="w-full border-t border-black/30 p-3 px-6 flex justify-end gap-4">
         <Link
           onClick={() => {

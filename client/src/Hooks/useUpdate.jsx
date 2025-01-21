@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { addressSlice } from "../Store/user";
+import { addressSlice, authSlice } from "../Store/user";
 
 //////!   UPDATE PASSWORD   !//////
 
@@ -120,9 +120,9 @@ const addressError = (
 export const useGetAddress = () => {
   const [loading, setloading] = useState(false);
   const [err, seterr] = useState({});
-  const { setAddress, address } = addressSlice();
-
-  console.log(address);
+  const { setAddress } = addressSlice();
+  const [admin, setadmin] = useState(false);
+  const { setAdmin } = authSlice();
 
   useEffect(() => {
     (async () => {
@@ -144,6 +144,8 @@ export const useGetAddress = () => {
             email: data?.email || "",
             username: data?.username || "",
           }));
+          setadmin(data.isAdmin);
+          setAdmin(data.isAdmin);
         }
       } catch (error) {
         seterr("Something Went Wrong");
@@ -154,5 +156,5 @@ export const useGetAddress = () => {
     })();
   }, []);
 
-  return { loading, err };
+  return { loading, err, admin };
 };

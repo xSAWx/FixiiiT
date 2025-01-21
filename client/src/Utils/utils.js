@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
 
@@ -157,3 +158,53 @@ export const useSetTitle = () => {
 function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
+
+export const useUploadImg = () => {
+  const [loading, setloading] = useState(false);
+  const [err, seterr] = useState(false);
+  const [image, setimage] = useState();
+  const upload = async (img) => {
+    try {
+      setloading(true);
+      const formData = new FormData();
+      formData.append("image", img);
+
+      const resp = await axios.post(
+        "https://api.imgbb.com/1/upload?key=bb0e3b9f7ea1d5279df7c88644f0fa79",
+        formData
+      );
+
+      setimage(resp.data.data.image.url);
+      return resp.data.data.image.url;
+    } catch (error) {
+      seterr(true);
+      console.log(error);
+    } finally {
+      setloading(false);
+    }
+  };
+
+  return { loading, err, upload, image };
+};
+
+export const useClipboard = () => {
+  const [isCopied, setIsCopied] = useState(false);
+
+  const copyToClipboard = (text) => {
+    navigator.clipboard
+      .writeText(text)
+      .then(() => {
+        setIsCopied(text);
+        setTimeout(() => setIsCopied(""), 2000); // Reset after 2 seconds
+      })
+      .catch((error) => {
+        console.error("Failed to copy: ", error);
+        setIsCopied("");
+      });
+  };
+
+  return {
+    isCopied,
+    copyToClipboard,
+  };
+};
