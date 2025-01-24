@@ -52,3 +52,30 @@ export const useGetOption = (_id) => {
 
   return { err, loading, options };
 };
+
+////////!    GET ALL OPTIONS    !////////
+
+export const useGetAllItems = () => {
+  const [loading, setloading] = useState(false);
+  const [err, seterr] = useState(false);
+  const [items, setitems] = useState([]);
+
+  const getItems = async () => {
+    try {
+      setloading(true);
+      const resp = await axios.get("/api/item");
+      setitems(resp.data);
+    } catch (error) {
+      console.log(error);
+      seterr(true);
+    } finally {
+      setloading(false);
+    }
+  };
+
+  useEffect(() => {
+    getItems();
+  }, []);
+
+  return { loading, err, getItems, items };
+};

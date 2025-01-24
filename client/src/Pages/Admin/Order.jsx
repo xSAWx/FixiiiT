@@ -1,16 +1,23 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
+  MdCheck,
+  MdClose,
   MdContentCopy,
+  MdContentPaste,
   MdDelete,
   MdEdit,
-  MdRemove,
   MdVisibility,
 } from "react-icons/md";
 import { useClipboard } from "../../Utils/utils";
 import { TH } from "./Users";
 import { TR } from "./Orders";
-import { useDeleteOrderById, useUpdateOrder } from "../../Hooks/useOrder";
+import {
+  useDeleteOrderById,
+  useGetOrder,
+  useUpdateOrder,
+} from "../../Hooks/useOrder";
 import Modal from "../../Components/common/Modal";
+import { addressSlice } from "../../Store/user";
 
 function Order({ o, getAll }) {
   const { copyToClipboard, isCopied } = useClipboard();
@@ -40,11 +47,17 @@ function Order({ o, getAll }) {
         {/* ID  */}
         <TH>
           <button
-            className="grid hover:scale-110 duration-200 justify-center cursor-pointer"
+            className="grid hover:scale-110 duration-200 relative text-2xl mx-auto rounded-md hover:bg-black/20 text-black/80 w-10 h-10 justify-center cursor-pointer"
             onClick={() => copyToClipboard(o._id)}
           >
-            <MdContentCopy className="line-clamp-1 text-center mx-auto" />
-            <p className="text-xs">{isCopied === o._id ? "copied" : "copy"}</p>
+            <MdContentPaste
+              className={`absolute left-1/2 top-1/2 -translate-y-1/2  -translate-x-1/2 scale-0  duration-200 ${
+                isCopied !== o._id && "scale-100 delay-200"
+              }`}
+            />
+            <MdCheck className={`absolute left-1/2 top-1/2 -translate-y-1/2  -translate-x-1/2 scale-0  duration-200 ${
+                isCopied === o._id && "scale-100 delay-200"
+              }`} />
           </button>
         </TH>
 
@@ -60,11 +73,12 @@ function Order({ o, getAll }) {
         {/* STATUS  */}
         <TH className="">
           <input
+            list="status-list"
             style={{
               color: color(credentials.status),
               backgroundColor: `${color(credentials.status)}55`,
             }}
-            className="rounded-md outline-none w-full h-10 text-lg py-1 text-center line-clamp-1"
+            className="rounded-md outline-none appearance-none w-full pl-6 h-10 text-lg py-1 text-center line-clamp-1"
             value={credentials.status}
             onChange={(e) =>
               setcredentials({ ...credentials, status: e.target.value })
@@ -74,6 +88,13 @@ function Order({ o, getAll }) {
               e.key === "Delete" && DeleteHandler();
             }}
           />
+          <datalist id="status-list">
+            {["pending", "processing", "shipped", "delivered", "cancelled"].map(
+              (option, index) => (
+                <option key={index} value={option} />
+              )
+            )}
+          </datalist>
         </TH>
 
         {/* DATE  */}
@@ -117,7 +138,7 @@ function Order({ o, getAll }) {
               className=" rounded-lg text-2xl text-center w-10 h-10 grid place-content-center disabled:opacity-60 disabled:pointer-events-none hover:text-red-600 hover:bg-white border-red-600 border  bg-red-600 text-white"
             >
               {LDelete ? (
-                <div className="loader w-7 h-7 !border-t-red-600" />
+                <div className="loader w-7 h-7 !border-t-red-600 !border-white" />
               ) : (
                 <MdDelete />
               )}
@@ -132,17 +153,13 @@ function Order({ o, getAll }) {
               className=" rounded-lg text-2xl text-center w-10 h-10 grid place-content-center disabled:pointer-events-none disabled:opacity-60  hover:text-blue-600 hover:bg-white border-blue-600 border  bg-blue-600 text-white"
             >
               {LUpdate ? (
-                <div className="loader w-7 h-7 !border-t-blue-600" />
+                <div className="loader w-7 h-7 !border-t-blue-600 !border-white" />
               ) : (
                 <MdEdit />
               )}
             </button>
-            <button
-              //   onDoubleClick={() => DeleteHandler(o._id)}
-              className=" rounded-lg text-2xl text-center w-10 h-10 grid place-content-center disabled:pointer-events-none disabled:opacity-60  hover:text-gray-600 hover:bg-white border-gray-600 border  bg-gray-600 text-white"
-            >
-              <MdVisibility />
-            </button>
+
+            <OrderDetails o={o} />
           </div>
         </TH>
       </TR>
@@ -153,13 +170,103 @@ function Order({ o, getAll }) {
   );
 }
 
+const OrderDetails = ({ o }) => {
+  const [mdl, setmdl] = useState(false);
+
+  return (
+    <>
+      <button
+        onClick={() => setmdl(true)}
+        //   onDoubleClick={() => DeleteHandler(o._id)}
+        className=" rounded-lg text-2xl text-center w-10 h-10 grid place-content-center disabled:pointer-events-none disabled:opacity-60  hover:text-gray-600 hover:bg-white border-gray-600 border  bg-gray-600 text-white"
+      >
+        <MdVisibility />
+      </button>
+      <Modal onClose={setmdl} open={mdl} closabel={false}>
+        <MDL o={o} set={setmdl} />
+      </Modal>
+    </>
+  );
+};
+
+const MDL = ({ o, set }) => {
+  const { order, loading } = useGetOrder(o._id);
+  const { address } = addressSlice();
+
+  return (
+    <article className="max-h-[90dvh] max-w-[95vw] w-[650px]  overflow-auto scroll-thin rounded-lg min-h-96 bg-white  border-fif">
+      {/* HEADER  */}
+      <header className="w-full grid sticky top-0 bg-white grid-cols-5 p-4 pb-2 max-h-16 items-center ">
+        <span></span>
+        <h1 className="title md:!text-2xl text-lg col-span-3 text-center">
+          {o.item.name}
+        </h1>
+        <MdClose
+          onClick={() => set(false)}
+          className="text-xl hover:scale-105 duration-200 hover:text-red-600 cursor-pointer justify-self-end"
+        />
+      </header>
+
+      {/* IMAGE  */}
+      <div>
+        {o.image && (
+          <>
+            <img
+              src={o.image}
+              className="max-h-72 w-10/12 mx-auto object-cover mb-4 shadow-lg shadow-black/40 rounded-md"
+            />
+          </>
+        )}
+        <div className="w-10/12 py-px my-2 mx-auto bg-black/40 rounded-lg " />
+
+        {/* ORDER DETAILS  */}
+        <aside className="grid mx-auto w-10/12 mt-4  font-semibold ">
+          <h1 className="text-tertiary font-bold">Order Details</h1> <h2></h2>
+          <Data data={o._id}>Order Id :</Data>
+          <Data data={o?.item?.category?.name}>Category :</Data>
+          <Data data={o.item.name}>Item :</Data>
+          <Data data={`${o.totalPrice} DA`}>PRICE :</Data>
+          {o?.options.map((oo, i) => (
+            <Data key={oo} data={oo}>
+              Option #{i + 1}
+            </Data>
+          ))}
+          <Data data={<p style={{ color: color(o.status) }}>{o.status}</p>}>
+            Status :
+          </Data>
+          <Data data={<p>{order?.node}</p>}>Note :</Data>
+        </aside>
+
+        <div className="w-10/12 py-px my-5 mx-auto bg-black/40 rounded-lg " />
+
+        {/* BILLING DETAILS  */}
+        <aside className="grid mx-auto w-10/12 mt-4  font-semibold ">
+          <h1 className="text-tertiary font-bold">Billing Details</h1> <h2></h2>
+          {order?.user &&
+            Object.keys(address).map((e, i) => (
+              <Data data={Object.values(address)[i]}>{e} : </Data>
+            ))}
+        </aside>
+      </div>
+      <div className="flex w-full justify-center">
+        <button
+          onClick={() => set(false)}
+          className="Button  w-10/12 my-4 !py-1"
+        >
+          Close
+        </button>
+      </div>
+    </article>
+  );
+};
+
 const color = (status) => {
   const s = status.toLowerCase();
   switch (s) {
     case "cancelled":
       return "#dc2626";
 
-    case "shipping":
+    case "shipped":
     case "delivered":
       return "#16a34a";
     case "pending":
@@ -170,5 +277,13 @@ const color = (status) => {
       return "#888888";
   }
 };
+
+const Data = ({ children, data = "", className }) => (
+  <div className="-my-1 flex w-full justify-between text-black/70 items-center">
+    <h1>{children}</h1>
+
+    <h2 className="justify-self-end my-2">{data} </h2>
+  </div>
+);
 
 export default Order;

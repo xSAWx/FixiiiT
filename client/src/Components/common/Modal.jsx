@@ -15,6 +15,7 @@ const Modal = ({ children, className, open, onClose, closabel = true }) => {
     }, 1000);
   };
 
+
   useEffect(() => {
     if (open) {
       setkill(false);

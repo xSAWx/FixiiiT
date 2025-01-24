@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import Order from "../models/order.module.js";
 
 //////////!   CREATE ORDER   !//////////
@@ -17,7 +18,12 @@ export const createOrder = async ({ body: b, user }, res) => {
 
 export const getOrder = async (req, res) => {
   try {
-    const order = await Order.findById(req.params._id);
+    const order = await Order.findById(req.params._id).populate([
+      {
+        path: "options",
+        select: "name",
+      },
+    ]);
     res.status(202).json(order);
   } catch (error) {
     res.status(401).json();
@@ -28,11 +34,19 @@ export const getOrder = async (req, res) => {
 
 export const getAllOrders = async ({ query }, res) => {
   let args = {};
-  if (query?.category) args.category = query.category;
   if (query?.status) args.status = query.status;
   if (query?.totalPrice) args.totalPrice = { $gt: Number(query.totalPrice) };
-  console.log(args);
+  if (query?.item) args.item = query.item;
 
+  if (isValidId(query?.search))
+    args.$or = [{ user: query.search }, { _id: query.search }];
+  else if (query?.search)
+    args.$or = [{ status: { $regex: query.search, $options: "i" } }];
+
+  console.log({ args });
+
+  let sort = {};
+  if (query.sort) sort = { ...sort, [query.sort]: -1 };
   try {
     const totalCount = await Order.countDocuments(args);
     const orders = await Order.find(args)
@@ -50,6 +64,7 @@ export const getAllOrders = async ({ query }, res) => {
         },
         { path: "user", select: "email username" },
       ]);
+
     res.status(202).json({
       orders,
       pages: {
@@ -116,4 +131,8 @@ export const deleteMyOrder = async (req, res) => {
   } catch (error) {
     res.status(401).json(error);
   }
+};
+
+const isValidId = (id) => {
+  return mongoose.Types.ObjectId.isValid(id);
 };

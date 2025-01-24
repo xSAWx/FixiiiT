@@ -50,7 +50,7 @@ export const updateCategory = async (req, res) => {
   try {
     const category = await Category.findByIdAndUpdate(
       req.params._id,
-      { name: req.body.name },
+      { ...req.body },
       { new: true }
     );
     res.status(202).json(category);

@@ -9,4 +9,5 @@ export default defineConfig({
       "/api": "http://localhost:1337",
     },
   },
+  
 });

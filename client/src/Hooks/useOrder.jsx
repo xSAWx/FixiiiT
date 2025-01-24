@@ -56,7 +56,7 @@ export const useCreateOrder = (setmdl) => {
 
     try {
       const image = await upload(credenitals.img);
-      const resp = await axios.post("/api/order", { ...credenitals,image });
+      const resp = await axios.post("/api/order", { ...credenitals, image });
 
       navigate("/myaccount/orders");
       toast.success("Order Create Successfuly");
@@ -123,10 +123,11 @@ export const useGetAllOrders = ({ filter }) => {
   const getAll = async () => {
     let args = [
       `page=${filter.page}`,
-      `limit=${filter.limit}`,
+      `limit=1`,
       `sort=${filter?.sort}`,
     ];
     if (filter.search) args.push(`search=${filter.search}`);
+    if (filter.item) args.push(`item=${filter.item}`);
 
     try {
       setloading(true);
@@ -146,6 +147,8 @@ export const useGetAllOrders = ({ filter }) => {
 
   return { orders, getAll, loading, err };
 };
+
+//////!   UPDATE ORDER   !//////
 
 export const useDeleteOrderById = () => {
   const [loading, setloading] = useState(false);
@@ -187,4 +190,29 @@ export const useUpdateOrder = () => {
   };
 
   return { loading, err, Update };
+};
+
+export const useGetOrder = (_id) => {
+  const [loading, setloading] = useState(false);
+  const [err, seterr] = useState(false);
+  const [order, setorder] = useState();
+
+  const getOrder = async () => {
+    try {
+      setloading(true);
+      const resp = await axios.get(`/api/order/${_id}`);
+      setorder(resp.data);
+    } catch (error) {
+      seterr(true);
+      console.log(error);
+    } finally {
+      setloading(false);
+    }
+  };
+
+  useEffect(() => {
+    getOrder();
+  }, []);
+
+  return { loading, err, getOrder, order };
 };

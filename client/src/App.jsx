@@ -10,6 +10,7 @@ import FAQ from "./Pages/FAQ";
 import AboutUs from "./Pages/AboutUs";
 import Sign from "./Pages/Auth/Sign";
 import Auth from "./Components/routes/Auth.routes";
+import CateogoryR from "./Components/routes/Category.routes";
 import MyAccount from "./Pages/Authenticated/MyAccount";
 import Contact from "./Pages/Contact";
 import MailIn from "./Pages/MailIn";
@@ -24,6 +25,9 @@ import ChangePassword from "./Components/forms/ChangePassword";
 import Admin from "./Pages/Admin/Admin";
 import Dashboard from "./Pages/Admin/Dashboard";
 import Users from "./Pages/Admin/Users";
+import Categories from "./Pages/Admin/Categories/Categories";
+import AddCategory from "./Pages/Admin/Categories/AddCategory";
+import EditCategory from "./Pages/Admin/Categories/EditCategory";
 
 function App() {
   return (
@@ -56,7 +60,11 @@ function App() {
 
         <Route path="/admin" element={<Admin />}>
           <Route path="users" element={<Users />} />
-          <Route path="category" element={<></>} />
+          <Route path="category" element={<CateogoryR />}>
+            <Route path="" element={<Categories />} />
+            <Route path="addCategory" element={<AddCategory />} />
+            <Route path=":_id" element={<EditCategory />} />
+          </Route>
           <Route path="orders" element={<ORders />} />
           <Route path="items" element={<></>} />
           <Route path="" element={<Dashboard />} />

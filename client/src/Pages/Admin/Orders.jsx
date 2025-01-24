@@ -12,17 +12,18 @@ import Select from "../../Components/common/Select";
 import { TH } from "./Users";
 import { useClipboard } from "../../Utils/utils";
 import Order from "./Order";
+import { useGetAllItems } from "../../Hooks/useItem";
 
 function Orders() {
   const [filter, setfilter] = useState({
     page: 1,
     limit: 40,
-    category: "",
     item: "",
+    sort: "createdAt",
   });
 
+  const { items } = useGetAllItems();
   const { orders, getAll } = useGetAllOrders({ filter });
-  const { categories } = useGetCategories();
 
   return (
     <section className="border-2 border-black/20  scroll-thin rounded-xl max-w-[100vw] overflow-auto min-h-96 p-4">
@@ -74,10 +75,18 @@ function Orders() {
           <Select
             className="w-32"
             classPrefix="!p-0.5 !p-2 !px-3"
-            name="category"
+            name="item"
             set={setfilter}
-            options={categories?.map((c) => c._id)}
-            list={categories?.map((c) => c.name)}
+            options={["", ...items?.map((c) => c._id)]}
+            list={["No Item", ...items?.map((c) => c.name)]}
+          />
+          <Select
+            className="w-40"
+            classPrefix="!p-0.5 !p-2 !px-3"
+            name="sort"
+            set={setfilter}
+            options={["createdAt", "updatedAt", "totalPrice"]}
+            list={["Created Date", "Updated Date", "Price"]}
           />
           <Select
             className="w-20"
@@ -92,7 +101,7 @@ function Orders() {
       {/* //! TABLE !//  */}
 
       <article className=" my-4  max-h-[500px]  ">
-        <TR className="sticky -top-4 z-50  group">
+        <TR className="sticky -top-4 z-20  group">
           <TH className="rounded-tl-lg justify-center"># ID</TH>
           <TH className="flex justify-center">Image</TH>
           <TH className="justify-center">Status</TH>
