@@ -123,7 +123,7 @@ export const useGetAllOrders = ({ filter }) => {
   const getAll = async () => {
     let args = [
       `page=${filter.page}`,
-      `limit=1`,
+      `limit=${filter.limit}`,
       `sort=${filter?.sort}`,
     ];
     if (filter.search) args.push(`search=${filter.search}`);

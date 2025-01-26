@@ -2,6 +2,7 @@ import express from "express";
 import { adminAuth, userAuth } from "../utils/userAuth.js";
 import {
   createItem,
+  createManyOptions,
   createOption,
   deleteItem,
   getManyItems,
@@ -23,5 +24,6 @@ router
 router
   .post("/option", userAuth, adminAuth, createOption)
   .get("/options/:_id", getOptionByItem)
-  .get("/option/:_id", getOneOption);
+  .get("/option/:_id", getOneOption)
+  .post("/options", createManyOptions);
 export default router;

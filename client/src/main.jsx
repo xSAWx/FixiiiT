@@ -3,6 +3,7 @@ import "./index.css";
 import App from "./App.jsx";
 import "swiper/css/bundle";
 import { ToastContainer } from "react-toastify";
+import "react-quill/dist/quill.snow.css";
 
 createRoot(document.getElementById("root")).render(
   <>

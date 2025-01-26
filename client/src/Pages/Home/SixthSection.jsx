@@ -1,5 +1,5 @@
 import React from "react";
-import bg1 from "../../assets/shape-9.png";
+// import bg1 from "../../assets/shape-9.png";
 import shape3 from "../../assets/shape-17.webp";
 import shape2 from "../../assets/shape-13.png";
 import bg2 from "../../assets/shape-12.png";
@@ -14,11 +14,11 @@ import { GiAutoRepair } from "react-icons/gi";
 function SixthSection() {
   return (
     <section className="max-w-8xl overflow-hidden relative mx-auto mb-20 lg:h-[680px] 2xl:rounded-2xl bg-gradient-to-r from-[#FC962B] via-[#F26C2A] to-[#EE572A]">
-      <img src={bg1} className="absolute  lg:w-[28vw] max-w-[400px]" />
+      {/* <img src={bg1} className="absolute  lg:w-[28vw] max-w-[400px]" />
       <img
         src={bg1}
         className="absolute  right-0 bottom-0 rotate-180  lg:w-[28vw] max-w-[400px]"
-      />
+      /> */}
       <img
         src={shape3}
         className="lg:block  hidden absolute 2xl:hidden  top-1/2 -translate-y-1/2 !-translate-x-1/2 w-36"
@@ -34,7 +34,10 @@ function SixthSection() {
 
       <article className="w-full h-full py-24 px-[10vw] grid lg:grid-cols-[2fr_3fr] gap-8">
         {/* HEADER  */}
-        <motion.aside {...fadeIn("right","",0.3,.7)} className="grid items-center">
+        <motion.aside
+          {...fadeIn("right", "", 0.3, 0.7)}
+          className="grid items-center"
+        >
           <nav>
             <div className="flex lg:justify-start justify-center  gap-2  items-center  font-bold tracking-wide text-white">
               <img src={shape} className="w-10 h-10 object-cover" />

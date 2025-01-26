@@ -13,8 +13,8 @@ function Sidebar() {
     <nav className=" py-4  gap-2 2xl:block grid 2xl:grid-cols-1 grid-cols-5">
       <Nav to="" icon={<MdSettings />} title="General" />
       <Nav to="users" icon={<MdGroup />} title="Users" />
-      <Nav to="category" icon={<MdCategory />} title="Categories" />
       <Nav to="orders" icon={<MdRequestQuote />} title="Orders" />
+      <Nav to="category" icon={<MdCategory />} title="Categories" />
       <Nav to="items" icon={<MdComputer />} title="Items" />
     </nav>
   );

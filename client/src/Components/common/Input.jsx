@@ -65,7 +65,7 @@ function Input({
             wait
               ? handleChange(e)
               : onChange
-              ? onChange
+              ? onChange(e)
               : set((state) => ({ ...state, [name]: e.target.value }));
           }}
         />

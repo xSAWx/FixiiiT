@@ -117,3 +117,29 @@ export const getOneOption = async ({ params }, res) => {
     res.status(401).json(error);
   }
 };
+
+//////////!   CREATE MANY OPTIONS   !//////////
+
+export const createManyOptions = async (req, res) => {
+  try {
+    if (!req.body.length)
+      return res.status(406).json("Insert At Least One Option");
+    const options = await Option.insertMany(req.body);
+    res.status(201).json(options);
+  } catch (error) {
+    res.status(401).json(error);
+  }
+};
+
+//////////!   UPDATE MANY OPTIONS   !//////////
+
+export const updateManyOptions = async (req, res) => {
+  try {
+    if (!req.body.length)
+      return res.status(406).json("Insert At Least One Option");
+    const options = await Option.insertMany(req.body);
+    res.status(201).json(options);
+  } catch (error) {
+    res.status(401).json(error);
+  }
+};

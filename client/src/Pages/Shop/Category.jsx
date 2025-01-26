@@ -3,8 +3,8 @@ import { useParams } from "react-router-dom";
 import { useGetCategory } from "../../Hooks/useCategory";
 import BreadCrumbs from "../../Components/common/BreadCrumbs";
 import { MdStar } from "react-icons/md";
-import { getItemsByCategory } from "../../Hooks/useItem";
-import Select from "../../Components/common/Select";
+import ReactQuill from "react-quill"; // Import React Quill
+
 import Items from "./Items";
 
 function Category() {
@@ -68,11 +68,15 @@ function Category() {
         </article>
 
         <div className="md:w-full w-11/12 my-8 mx-auto">
-          <h2 className="md:text-3xl text-2xl  font-bold text-fif mb-3.5">{category?.name} Description :</h2>
-          <h1 className="2xl:text-xl text-lg font-medium max-w-7xl   text-black/70 mb-6">
-            {category?.description}
-          </h1>
-          
+          <h2 className="md:text-3xl text-2xl  font-bold text-fif mb-3.5">
+            {category?.name} Description :
+          </h2>
+          <ReactQuill
+            value={category?.description}
+            readOnly={true}
+            theme="bubble"
+            className="-mx-3"
+          />
         </div>
 
         <Items />

@@ -27,6 +27,7 @@ function Select({
           className={`outline-none cursor-pointer  text-black/70  overflow-y-visible relative peer rounded-md py-4 w-full px-4 border border-black/30 focus:border-tertiary ${classPrefix}`}
           name=""
           id=""
+          
         >
           {options?.map((o, i) => (
             <option

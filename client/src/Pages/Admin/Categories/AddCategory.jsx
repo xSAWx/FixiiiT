@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Input from "../../../Components/common/Input";
 import { MdImage } from "react-icons/md";
 import ReactQuill from "react-quill";
-import "react-quill/dist/quill.snow.css";
+
 
 import { useCreateCategory } from "../../../Hooks/useCategory";
 

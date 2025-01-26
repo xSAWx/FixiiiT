@@ -28,6 +28,10 @@ import Users from "./Pages/Admin/Users";
 import Categories from "./Pages/Admin/Categories/Categories";
 import AddCategory from "./Pages/Admin/Categories/AddCategory";
 import EditCategory from "./Pages/Admin/Categories/EditCategory";
+import ITEMS from "./Pages/Admin/Items/Items";
+import ItemLayout from "./Pages/Admin/Items/ItemLayout";
+import CreateItem from "./Pages/Admin/Items/CreateItem";
+import EditItem from "./Pages/Admin/Items/EditItem";
 
 function App() {
   return (
@@ -66,7 +70,11 @@ function App() {
             <Route path=":_id" element={<EditCategory />} />
           </Route>
           <Route path="orders" element={<ORders />} />
-          <Route path="items" element={<></>} />
+          <Route path="items" element={<ItemLayout />}>
+            <Route path="" element={<ITEMS />} />
+            <Route path="newItem" element={<CreateItem />} />
+            <Route path=":_id" element={<EditItem />} />
+          </Route>
           <Route path="" element={<Dashboard />} />
         </Route>
 
