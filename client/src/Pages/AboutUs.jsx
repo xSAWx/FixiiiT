@@ -5,7 +5,7 @@ import bg1 from "../assets/about-us-1.webp";
 import bg2 from "../assets/about-2.webp";
 import bg3 from "../assets/about-us-3.webp";
 import bg4 from "../assets/about-us-4.webp";
-import bg5 from "../assets/shape-9.png";
+import bg5 from "../assets/SHAPE9.png";
 import bg6 from "../assets/why-choose.webp";
 import bg7 from "../assets/testimonials-bg.webp";
 import bg8 from "../assets/schedule.webp";

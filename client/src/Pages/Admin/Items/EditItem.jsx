@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { useGetItem } from "../../../Hooks/useItem";
+import { useGetItem, useUpdateItem } from "../../../Hooks/useItem";
 import { useGetCategories } from "../../../Hooks/useCategory";
 import Select from "../../../Components/common/Select";
 import Input from "../../../Components/common/Input";
@@ -19,9 +19,11 @@ function EditItem() {
     category: "",
     price: 0,
   });
-  const [options, setoptions] = useState([]);
+  const [options, setoptions] = useState([{}]);
   const [opCount, setopCount] = useState(1);
-  
+
+  const { update, loading } = useUpdateItem();
+
   useEffect(() => {
     setcredentials({
       name: item?.name,
@@ -33,13 +35,15 @@ function EditItem() {
     setopCount(opts.length);
   }, [item]);
 
-  console.log({ options });
+  const handleUpdate = async () => {
+    await update(credentials, options, _id);
+  };
 
   return (
     <>
       {" "}
       <aside className="flex w-full justify-between items-center mb-6">
-        <h1 className="text-fif lg:text-3xl text-2xl ">Create Item</h1>
+        <h1 className="text-fif lg:text-3xl text-2xl ">Edit Item</h1>
         <Select
           list={categories?.map((c) => c.name)}
           set={setcredentials}
@@ -61,7 +65,7 @@ function EditItem() {
         />
         <Input
           set={setcredentials}
-          name="name"
+          name="price"
           placeholder="Item Price "
           title="Item Price (DA)"
           className="col-span-1"
@@ -91,10 +95,13 @@ function EditItem() {
       </aside>
       {/* //! OPTIONS /!!  */}
       <aside className="flex justify-between mt-16 pr-2 items-center mb-6">
-        <h1 className="text-fif lg:text-3xl text-2xl ">Create Options</h1>
+        <h1 className="text-fif lg:text-3xl text-2xl ">Edit Options</h1>
         <button
           disabled={opCount === 10}
-          onClick={() => setopCount(opCount + 1)}
+          onClick={() => {
+            setopCount(opCount + 1);
+            setoptions([...options, {}]);
+          }}
           className="px-4 py-1.5 rounded-lg disabled:pointer-events-none disabled:opacity-40 hover:bg-white hover:text-blue-600 text-white border-blue-600 bg-blue-600  border"
         >
           Add Option
@@ -108,17 +115,22 @@ function EditItem() {
             setoptions={setoptions}
             options={options}
             opCount={opCount}
+            key={i}
           />
         ))}
       </aside>
       <button
-        // onClick={handleCreate}
+        onClick={handleUpdate}
+        disabled={
+          !credentials.name ||
+          !options.map((e) => e?.name).some((item) => !!item)
+        }
         className="Button mt-6 group !text-base w-40"
       >
-        {true ? (
+        {loading ? (
           <div className="w-6 h-6 !border-t-white mx-auto group-hover:!border-t-tertiary loader" />
         ) : (
-          "Create Item"
+          "Edit Item"
         )}
       </button>
     </>

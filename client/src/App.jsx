@@ -54,28 +54,31 @@ function App() {
         <Route path="/test" element={<Test />} />
 
         <Route path="/" element={<Auth />}>
+          
+          {/* USER  */}
           <Route path="/myaccount" element={<MyAccount />}>
             <Route path="dashboard" element={<></>} />
             <Route path="Addresses" element={<ShippingAddress />} />
             <Route path="changepassword" element={<ChangePassword />} />
             <Route path="orders" element={<Orders />} />
           </Route>
-        </Route>
-
-        <Route path="/admin" element={<Admin />}>
-          <Route path="users" element={<Users />} />
-          <Route path="category" element={<CateogoryR />}>
-            <Route path="" element={<Categories />} />
-            <Route path="addCategory" element={<AddCategory />} />
-            <Route path=":_id" element={<EditCategory />} />
+          
+          {/* ADMIN  */}
+          <Route path="/admin" element={<Admin />}>
+            <Route path="users" element={<Users />} />
+            <Route path="category" element={<CateogoryR />}>
+              <Route path="" element={<Categories />} />
+              <Route path="addCategory" element={<AddCategory />} />
+              <Route path=":_id" element={<EditCategory />} />
+            </Route>
+            <Route path="orders" element={<ORders />} />
+            <Route path="items" element={<ItemLayout />}>
+              <Route path="" element={<ITEMS />} />
+              <Route path="newItem" element={<CreateItem />} />
+              <Route path=":_id" element={<EditItem />} />
+            </Route>
+            <Route path="" element={<Dashboard />} />
           </Route>
-          <Route path="orders" element={<ORders />} />
-          <Route path="items" element={<ItemLayout />}>
-            <Route path="" element={<ITEMS />} />
-            <Route path="newItem" element={<CreateItem />} />
-            <Route path=":_id" element={<EditItem />} />
-          </Route>
-          <Route path="" element={<Dashboard />} />
         </Route>
 
         <Route path="*" element={<Error404 />} />

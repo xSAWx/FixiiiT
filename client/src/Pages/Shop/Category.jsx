@@ -75,7 +75,7 @@ function Category() {
             value={category?.description}
             readOnly={true}
             theme="bubble"
-            className="-mx-3"
+            className="-mx-3 -mb-16"
           />
         </div>
 

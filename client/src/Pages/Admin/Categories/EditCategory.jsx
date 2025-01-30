@@ -110,10 +110,10 @@ function EditCategory() {
       </article>
       <button
         onClick={updateHandler}
-        className="Button !text-base group !px-8 "
+        className="Button !text-base group w-44 "
       >
         {loading || loading2 ? (
-          <div className="loader w-8 h-8 mx-auto !border-t-white group-hover:!border-t-tertiary" />
+          <div className="loader w-6 h-6 mx-auto !border-t-white group-hover:!border-t-tertiary" />
         ) : (
           "Update Category"
         )}
@@ -123,7 +123,7 @@ function EditCategory() {
         className="text-white bg-red-600 py-1.5 duration-200  ml-4 px-6 tracking-wide border border-red-600 hover:bg-white hover:text-red-600"
       >
         {Dloading ? (
-          <div className="loader w-8 h-8 mx-auto !border-t-white group-hover:!border-t-red-600" />
+          <div className="loader w-6 h-6 mx-auto !border-t-white group-hover:!border-t-red-600" />
         ) : (
           "Delete"
         )}

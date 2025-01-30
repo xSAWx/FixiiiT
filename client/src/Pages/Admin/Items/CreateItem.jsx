@@ -4,7 +4,7 @@ import { useGetCategories } from "../../../Hooks/useCategory";
 import Select from "../../../Components/common/Select";
 import ReactQuill from "react-quill";
 import { modules } from "../Categories/AddCategory";
-import { useCreateItem } from "../../../Hooks/useItem";
+import { useCreateItem, useDeleteOption } from "../../../Hooks/useItem";
 import { MdDelete } from "react-icons/md";
 
 function CreateItem() {
@@ -19,6 +19,8 @@ function CreateItem() {
   });
 
   const [options, setoptions] = useState([]);
+
+  console.log(options);
 
   const [opCount, setopCount] = useState(1);
 
@@ -56,7 +58,7 @@ function CreateItem() {
         />
         <Input
           set={setcredentials}
-          name="name"
+          name="price"
           placeholder="Item Price "
           title="Item Price (DA)"
           className="col-span-1"
@@ -83,10 +85,15 @@ function CreateItem() {
 
       {/* //! OPTIONS /!!  */}
       <aside className="flex justify-between mt-16 pr-2 items-center mb-6">
-        <h1 className="text-fif lg:text-3xl text-2xl ">Create Options</h1>
+        <div className="flex gap-6">
+          <h1 className="text-fif lg:text-3xl text-2xl ">Create Options</h1>
+          {err?.options && <p className="text-red-600 text-sm mt-auto">{err?.options}</p>}
+        </div>
         <button
           disabled={opCount === 10}
-          onClick={() => setopCount(opCount + 1)}
+          onClick={() => {
+            setopCount(opCount + 1);
+          }}
           className="px-4 py-1.5 rounded-lg disabled:pointer-events-none disabled:opacity-40 hover:bg-white hover:text-blue-600 text-white border-blue-600 bg-blue-600  border"
         >
           Add Option
@@ -120,8 +127,20 @@ function CreateItem() {
 }
 
 export const Option = ({ i, setopCount, setoptions, options, opCount }) => {
+  const { Delete, loading } = useDeleteOption();
+
+  const handleDelete = async () => {
+    if (options[i]?._id) await Delete(options[i]?._id);
+    setopCount((e) => e - 1);
+    setoptions((o) => {
+      const newA = [...o];
+      newA.pop();
+      return newA;
+    });
+  };
+
   return (
-    <aside className="grid grid-cols-12 gap-2">
+    <aside className="grid grid-cols-12 gap-2 fadeIn">
       <Input
         value={options[i]?.name}
         onChange={(e) =>
@@ -159,17 +178,16 @@ export const Option = ({ i, setopCount, setoptions, options, opCount }) => {
         className="col-span-8"
         placeholder="Option Description"
       />
-      {i || opCount !== 1 ? (
+      {i === opCount - 1 && i ? (
         <button
-          onClick={() => {
-            setopCount((e) => e - 1);
-            setoptions((o) =>
-              o.filter((x) => !x?.name).filter((_, index) => index !== i)
-            );
-          }}
-          className="w-full h-full text-white text-3xl hover:bg-white hover:text-red-600 grid place-content-center bg-red-600 rounded-md border border-red-600"
+          onClick={handleDelete}
+          className="w-full h-full text-white text-3xl group hover:bg-white hover:text-red-600 grid place-content-center bg-red-600 rounded-md border border-red-600"
         >
-          <MdDelete />
+          {loading ? (
+            <div className="w-6 h-6 !border-t-white loader mx-auto group-hover:!border-t-red-600" />
+          ) : (
+            <MdDelete />
+          )}
         </button>
       ) : (
         <></>

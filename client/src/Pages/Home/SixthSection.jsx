@@ -1,5 +1,5 @@
 import React from "react";
-// import bg1 from "../../assets/shape-9.png";
+import bg1 from "../../assets/SHAPE9.png";
 import shape3 from "../../assets/shape-17.webp";
 import shape2 from "../../assets/shape-13.png";
 import bg2 from "../../assets/shape-12.png";

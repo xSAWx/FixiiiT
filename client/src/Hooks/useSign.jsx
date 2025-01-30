@@ -181,18 +181,20 @@ export const useReset = () => {
   return { loading, message, sendPassword };
 };
 
+//////!   LOGOUT   !//////
+
 export const useLogout = () => {
   const [loading, setloading] = useState(false);
   const [err, seterr] = useState("");
   const { setAuth } = authSlice();
+
   const logout = async () => {
     setloading(true);
     try {
-      const resp = await axios.get("/api/auth/logout");
-      if (resp.data) {
-        setAuth("");
-        localStorage.clear();
-      }
+      setAuth("");
+      localStorage.clear();
+      await axios.get("/api/auth/logout");
+      toast.error("logged out successfuly");
     } catch (error) {
       if (error.response.status === 401) seterr("Not Authorized");
 
@@ -201,7 +203,22 @@ export const useLogout = () => {
       setloading(false);
     }
   };
-  return { loading, err, logout };
+
+  const noProfile = async () => {
+    setloading(true);
+    try {
+      await axios.get("/api/auth/profile");
+    } catch (error) {
+      if (error.response.data.error === "UnAuthorized - No Token Provided")
+        await logout();
+      console.log(error);
+      seterr(true);
+    } finally {
+      setloading(false);
+    }
+  };
+
+  return { loading, err, logout, noProfile };
 };
 
 const handleSignup = ({

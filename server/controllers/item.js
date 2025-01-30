@@ -43,7 +43,9 @@ export const getManyItems = async (req, res) => {
   console.log(args);
 
   try {
-    const item = await Item.find(args).select("-__v -updatedAt");
+    const item = await Item.find(args)
+      .select("-__v -updatedAt")
+      .populate({ path: "category", select: "name" });
     res.status(202).json(item);
   } catch (error) {
     res.status(401).json(error);
@@ -134,11 +136,32 @@ export const createManyOptions = async (req, res) => {
 //////////!   UPDATE MANY OPTIONS   !//////////
 
 export const updateManyOptions = async (req, res) => {
+  console.log("qsd");
   try {
     if (!req.body.length)
       return res.status(406).json("Insert At Least One Option");
-    const options = await Option.insertMany(req.body);
+
+    const bulk = req.body.map((option) => ({
+      updateOne: {
+        filter: { name: option.name, item: option.item }, // The query to find the document
+        update: { $set: option }, // The update to apply
+        upsert: true, // Create the document if it doesn't exist
+      },
+    }));
+
+    await Option.bulkWrite(bulk);
+
+    const options = await Option.find({ item: req.body[0].item });
     res.status(201).json(options);
+  } catch (error) {
+    res.status(402).json(error);
+  }
+};
+
+export const deleteOption = async ({ params }, res) => {
+  try {
+    await Option.findByIdAndDelete(params._id);
+    res.status(202).json("Option Deleted Successfuly");
   } catch (error) {
     res.status(401).json(error);
   }

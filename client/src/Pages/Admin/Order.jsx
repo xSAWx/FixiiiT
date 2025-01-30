@@ -270,7 +270,7 @@ const color = (status) => {
     case "delivered":
       return "#16a34a";
     case "pending":
-    case "proccessing":
+    case "processing":
       return "#ca8a04";
 
     default:

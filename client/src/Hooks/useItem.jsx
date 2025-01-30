@@ -109,7 +109,7 @@ export const useGetItem = (_id) => {
     getItem();
   }, []);
 
-  return { item, err, loading, getItem,opts };
+  return { item, err, loading, getItem, opts };
 };
 
 ////////!    CREATE ITEM    !////////
@@ -172,4 +172,57 @@ export const useDeleteItem = () => {
     }
   };
   return { err, loading, Delete };
+};
+////////!    UPDATE ITEM    !////////
+
+export const useUpdateItem = () => {
+  const [loading, setloading] = useState(false);
+  const [err, seterr] = useState(false);
+
+  const update = async (credentials, options, _id) => {
+    try {
+      const NewO = options
+        .filter((e) => !!e.name)
+        .map((o) => ({
+          name: o.name,
+          item: _id,
+          price: o?.price,
+          description: o?.description,
+        }));
+
+      await axios.put("/api/item/optionss", NewO);
+
+      await axios.put(`/api/item/${_id}`, credentials);
+      toast.success("Item Updated Successfuly");
+
+      setloading(true);
+    } catch (error) {
+      console.log(err);
+      seterr(true);
+    } finally {
+      setloading(false);
+    }
+  };
+  return { loading, err, update };
+};
+
+////////!    DELETE OPTION    !////////
+
+export const useDeleteOption = () => {
+  const [loading, setloading] = useState(false);
+  const [err, seterr] = useState(false);
+
+  const Delete = async (_id) => {
+    try {
+      setloading(true);
+      await axios.delete(`/api/item/option/${_id}`);
+    } catch (error) {
+      console.log(error);
+      seterr(true);
+    } finally {
+      setloading(false);
+    }
+  };
+
+  return { Delete, loading, err };
 };

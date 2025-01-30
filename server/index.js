@@ -7,7 +7,7 @@ import userRoutes from "./routes/user.routes.js";
 import categoryRoutes from "./routes/category.routes.js";
 import itemRoutes from "./routes/item.routes.js";
 import orderRoutes from "./routes/order.routes.js";
-
+import dashboardRoutes from "./routes/dashboard.routes.js";
 
 const app = express();
 const __dirname = path.resolve();
@@ -28,6 +28,7 @@ app.use("/api/auth", userRoutes);
 app.use("/api/category", categoryRoutes);
 app.use("/api/item", itemRoutes);
 app.use("/api/order", orderRoutes);
+app.use("/api/dashboard", dashboardRoutes);
 
 app.use(express.static(path.join(__dirname, "/client/dist")));
 app.get("*", (req, res) => {

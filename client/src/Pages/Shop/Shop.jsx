@@ -80,7 +80,7 @@ const CardCategory = ({ _id, name, image, description }) => (
   >
     <img
       src={image}
-      className="2xl:w-[17vw] lg:w-[20vw] w-80 rounded-lg  object-cover   mx-auto mb-3"
+      className="2xl:w-[17vw] lg:w-[20vw] w-80 rounded-lg aspect-square  object-cover   mx-auto mb-3"
     />
     <h1 className="text-tertiary md:text-[28px] group-hover:tracking-wider duration-200 text-2xl translate-x-1 text-center font-bold tracking-wide">
       {name}

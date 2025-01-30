@@ -10,6 +10,7 @@ import Input from "../../Components/common/Input";
 import { useCreateOrder } from "../../Hooks/useOrder";
 import Modal from "../../Components/common/Modal";
 import ShippingAddress from "../../Components/forms/ShippingAddress";
+import ReactQuill from "react-quill";
 
 function Items() {
   const { _id } = useParams();
@@ -50,7 +51,12 @@ function Items() {
         title="Item"
         className="max-w-96 mb-8"
       />
-      <h1 className="text-xl text-black/80 font-bold">{itm?.description}</h1>
+      <ReactQuill
+        value={itm?.description}
+        readOnly={true}
+        theme="bubble"
+        className="-mx-3 -mb-16"
+      />
 
       {/* OPTIONS  */}
 
@@ -146,13 +152,8 @@ function Items() {
           <button className="Button !px-6 ">Place An Order</button>
         </aside>
       )}
-      <Modal
-        className="bg-white p-8 rounded-lg"
-        
-        onClose={setmdl}
-        open={mdl}
-      >
-        <ShippingAddress setmdl={setmdl}/>
+      <Modal className="bg-white p-8 rounded-lg" onClose={setmdl} open={mdl}>
+        <ShippingAddress setmdl={setmdl} />
       </Modal>
     </form>
   );

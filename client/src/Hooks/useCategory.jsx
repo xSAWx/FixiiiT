@@ -114,9 +114,7 @@ export const useEditCategory = () => {
       const resp = await axios.put(`/api/category/${_id}`, {
         ...credentials,
         image:
-          typeof credentials?.image === "string"
-            ? credentials?.image
-            : URL.createObjectURL(credentials?.image),
+          typeof credentials?.image === "string" ? credentials?.image : image,
       });
 
       toast.success("Category Updated Successfuly");
