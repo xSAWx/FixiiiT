@@ -49,7 +49,7 @@ const Block = ({ color, loading, title = "", value, symbol }) => (
       <div className="w-8 h-8 !border-t-white loader" />
     ) : (
       <div className="text-center fadeUp text-xl font-bold tracking-wider">
-        <h1 className="mb-1.5">{title}</h1>
+        <h1 className="mb-1.5 sqd">{title}</h1>
         <h2>
           {value} {symbol}
         </h2>
