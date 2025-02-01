@@ -5,14 +5,14 @@ import {
   MdContentCopy,
   MdSearch,
 } from "react-icons/md";
-import Input from "../../Components/common/Input";
-import { useGetAllOrders } from "../../Hooks/useOrder";
-import { useGetCategories } from "../../Hooks/useCategory";
-import Select from "../../Components/common/Select";
-import { TH } from "./Users";
-import { useClipboard } from "../../Utils/utils";
+import Input from "../../../Components/common/Input";
+import { useGetAllOrders } from "../../../Hooks/useOrder";
+import { useGetCategories } from "../../../Hooks/useCategory";
+import Select from "../../../Components/common/Select";
+import { TH } from "../Users";
+import { useClipboard } from "../../../Utils/utils";
 import Order from "./Order";
-import { useGetAllItems } from "../../Hooks/useItem";
+import { useGetAllItems } from "../../../Hooks/useItem";
 
 function Orders() {
   const [filter, setfilter] = useState({
@@ -100,8 +100,8 @@ function Orders() {
 
       {/* //! TABLE !//  */}
 
-      <article className=" my-4  max-h-[500px]  ">
-        <TR className="sticky -top-4 z-20  group">
+      <article className=" my-4  h-[2000px] scroll-thin  min-w-[1000px] overflow-x-auto ">
+        <TR className="sticky top-0 z-40   group ">
           <TH className="rounded-tl-lg justify-center"># ID</TH>
           <TH className="flex justify-center">Image</TH>
           <TH className="justify-center">Status</TH>
@@ -121,7 +121,7 @@ function Orders() {
 
 export const TR = ({ children, className }) => (
   <tr
-    className={`break-all  line-clamp-1 overflow-hidden grid grid-cols-[.5fr_1fr_1fr_1fr_.8fr_1fr_.8fr_1fr] ${className}`}
+    className={`break-all    grid grid-cols-[.5fr_1fr_1fr_1fr_.8fr_1fr_.8fr_.7fr] ${className}`}
   >
     {children}
   </tr>

@@ -35,6 +35,7 @@ router
 router
   .delete("/delete/:_id", userAuth, adminAuth, deleteAccount)
   .put("/update/:_id", userAuth, adminAuth, updateAccount)
+  .get("/getone/:_id", userAuth, adminAuth, updateAccount)
   .get("/all", userAuth, adminAuth, getAllAccounts);
 
 export default router;

@@ -27,17 +27,23 @@ function Dropdown({
     <aside
       onClick={() => setopen(!show)}
       ref={ref}
-      className={`relative z-40 ${classPrefix}`}
+      className={`relative  ${classPrefix}`}
     >
-      <div className="flex gap-2 items-center hover:text-tertiary cursor-pointer">
+      <div className="flex gap-2 items-center hover:text-tertiary  cursor-pointer">
         {React.cloneElement(component, {
           // onClick: ,
           onBlur: () => setopen(false),
         })}
-        {chevron && <FaChevronDown className={`text-sm text-current duration-200 ${show && "rotate-180"} ${chevron}`}/>}
+        {chevron && (
+          <FaChevronDown
+            className={`text-sm text-current duration-200 ${
+              show && "rotate-180"
+            } ${chevron}`}
+          />
+        )}
       </div>
       <div
-        className={`absolute duration-200 text-qua
+        className={`absolute duration-200 z-40 text-qua
         ${Direction(direction.x, direction.y)} 
         ${className}
         ${show ? "opacity-100" : "pointer-events-none opacity-0"}

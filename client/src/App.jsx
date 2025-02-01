@@ -20,7 +20,7 @@ import Shop from "./Pages/Shop/Shop";
 import Category from "./Pages/Shop/Category";
 import ShippingAddress from "./Components/forms/ShippingAddress";
 import Orders from "./Pages/Authenticated/Orders";
-import ORders from "./Pages/Admin/Orders";
+import ORders from "./Pages/Admin/Order/Orders";
 import ChangePassword from "./Components/forms/ChangePassword";
 import Admin from "./Pages/Admin/Admin";
 import Dashboard from "./Pages/Admin/Dashboard";

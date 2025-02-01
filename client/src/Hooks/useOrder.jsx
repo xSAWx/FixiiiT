@@ -148,7 +148,7 @@ export const useGetAllOrders = ({ filter }) => {
   return { orders, getAll, loading, err };
 };
 
-//////!   UPDATE ORDER   !//////
+//////!   DELETE ORDER   !//////
 
 export const useDeleteOrderById = () => {
   const [loading, setloading] = useState(false);
@@ -171,6 +171,8 @@ export const useDeleteOrderById = () => {
   return { loading, err, Delete };
 };
 
+//////!   UPDATE ORDER   !//////
+
 export const useUpdateOrder = () => {
   const [loading, setloading] = useState(false);
   const [err, seterr] = useState(false);
@@ -191,6 +193,7 @@ export const useUpdateOrder = () => {
 
   return { loading, err, Update };
 };
+//////!   GET ORDER   !//////
 
 export const useGetOrder = (_id) => {
   const [loading, setloading] = useState(false);
@@ -215,4 +218,60 @@ export const useGetOrder = (_id) => {
   }, []);
 
   return { loading, err, getOrder, order };
+};
+
+//////!   GET COIL   !//////
+
+export const useGetTracking = (Tracking) => {
+  const [loading, setloading] = useState();
+  const [err, seterr] = useState(false);
+  const [tracking, settracking] = useState();
+
+  const getOne = async () => {
+    try {
+      setloading(true);
+      const resp = await axios.get(`/api/order/coil/${Tracking}`);
+      settracking(resp.data);
+    } catch (error) {
+      seterr(true);
+    } finally {
+      setloading(false);
+    }
+  };
+
+  useEffect(() => {
+    if (Tracking) getOne();
+  }, []);
+
+  return { loading, err, getOne, tracking };
+};
+
+//////!   CREATE COIL   !//////
+
+export const useCreateCoil = () => {
+  const [loading, setloading] = useState(false);
+  const [err, seterr] = useState(false);
+
+  const create = async (credenitals, _id) => {
+    try {
+      setloading(true);
+
+      const resp = await axios.post(
+        `http://localhost:1337/api/order/coil/${
+          _id || "67901da92d8f14643a385852"
+        }`,
+        credenitals
+      );
+
+      toast.success("Coil Created Successfuly");
+
+      console.log(resp.data);
+    } catch (error) {
+      seterr(true);
+    } finally {
+      setloading(false);
+    }
+  };
+
+  return { loading, err, create };
 };

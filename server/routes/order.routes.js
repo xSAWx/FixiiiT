@@ -8,6 +8,7 @@ import {
   getOrder,
   updateOrder,
 } from "../controllers/order.js";
+import { addCoil, readCoil } from "../controllers/zrExpress.js";
 
 const router = express.Router();
 
@@ -18,6 +19,8 @@ router
   .put("/:_id", userAuth, adminAuth, updateOrder)
   .get("/:_id", userAuth, getOrder)
   .delete("/my/:_id", userAuth, deleteOrder)
-  .delete("/:_id", userAuth, adminAuth, deleteOrder);
+  .delete("/:_id", userAuth, adminAuth, deleteOrder)
+  .post("/coil/:_id", addCoil)
+  .get("/coil/:Tracking", userAuth, adminAuth, readCoil);
 
 export default router;

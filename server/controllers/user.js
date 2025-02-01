@@ -1,3 +1,4 @@
+import { response } from "express";
 import User from "../models/user.module.js";
 import { Mailer } from "../utils/Emailer.pipe.js";
 import { generatePassword } from "../utils/functions.js";
@@ -117,6 +118,17 @@ export const checkOTP = async (req, res) => {
     return res.status(402).json({ error: "OTP Expired" });
   } catch (error) {
     res.status(401).json({ error });
+  }
+};
+
+//////!  RESET PASSWORD  !//////
+
+export const getOneUser = async ({ params },res) => {
+  try {
+    const user = await User.findById(params._id).select("-password");
+    res.status(202).json(user)
+  } catch (error) {
+    res.status(401).json(error);
   }
 };
 

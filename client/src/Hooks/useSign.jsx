@@ -265,6 +265,30 @@ const handleSignup = ({
   return false;
 };
 
+//////!   GET ONE USER   !//////
+
+export const useGetOneUser = (_id) => {
+  const [loading, setloading] = useState(false);
+  const [err, seterr] = useState(false);
+  const [user, setuser] = useState();
+  const getOne = async () => {
+    try {
+      setloading(true);
+      const resp = await axios.get(`/api/auth/getone/${_id}`);
+      setuser(resp.data);
+    } catch (error) {
+      seterr(true);
+    } finally {
+      setloading(true);
+    }
+  };
+
+  useEffect(() => {
+    if (_id) getOne();
+  }, []);
+  return { loading, err, getOne, user };
+};
+
 // -----------   ADMIN  -----------   //
 
 //////!   GET ALL USERS   !//////

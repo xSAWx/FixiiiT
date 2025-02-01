@@ -4,7 +4,7 @@ import Select from "../common/Select";
 import { addressSlice } from "../../Store/user";
 import { useUpdateAddress } from "../../Hooks/useUpdate";
 
-function ShippingAddress({setmdl}) {
+function ShippingAddress({ setmdl }) {
   const [credentials, setcredentials] = useState({
     firstName: "",
     phoneNumber: "",
@@ -67,7 +67,8 @@ function ShippingAddress({setmdl}) {
         />
         <Select
           err={err?.state}
-          options={wilayas}
+          options={[...Array(58)].map((_, i) => `${i + 1}`)}
+          list={wilayas}
           name="state"
           set={setAddress}
           title="State"
@@ -143,7 +144,7 @@ function ShippingAddress({setmdl}) {
 
 export default ShippingAddress;
 
-const wilayas = [
+export const wilayas = [
   "Adrar",
   "Chlef",
   "Laghouat",

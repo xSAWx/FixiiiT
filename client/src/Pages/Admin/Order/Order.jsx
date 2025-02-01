@@ -5,19 +5,24 @@ import {
   MdContentCopy,
   MdContentPaste,
   MdDelete,
+  MdDeliveryDining,
   MdEdit,
+  MdLocalShipping,
+  MdMoreHoriz,
   MdVisibility,
 } from "react-icons/md";
-import { useClipboard } from "../../Utils/utils";
-import { TH } from "./Users";
+import { useClipboard } from "../../../Utils/utils";
+import { TH } from "../Users";
 import { TR } from "./Orders";
 import {
   useDeleteOrderById,
   useGetOrder,
   useUpdateOrder,
-} from "../../Hooks/useOrder";
-import Modal from "../../Components/common/Modal";
-import { addressSlice } from "../../Store/user";
+} from "../../../Hooks/useOrder";
+import Modal from "../../../Components/common/Modal";
+import { addressSlice } from "../../../Store/user";
+import Dropdown from "../../../Components/common/Dropdown";
+import ZrSend from "./ZrSend";
 
 function Order({ o, getAll }) {
   const { copyToClipboard, isCopied } = useClipboard();
@@ -26,6 +31,7 @@ function Order({ o, getAll }) {
     totalPrice: o.totalPrice || 0,
   });
   const [mdl, setmdl] = useState(false);
+  const [Zrmdl, setZrmdl] = useState(false);
   const { loading: LDelete, Delete } = useDeleteOrderById();
   const { loading: LUpdate, Update } = useUpdateOrder();
 
@@ -55,9 +61,11 @@ function Order({ o, getAll }) {
                 isCopied !== o._id && "scale-100 delay-200"
               }`}
             />
-            <MdCheck className={`absolute left-1/2 top-1/2 -translate-y-1/2  -translate-x-1/2 scale-0  duration-200 ${
+            <MdCheck
+              className={`absolute left-1/2 top-1/2 -translate-y-1/2  -translate-x-1/2 scale-0  duration-200 ${
                 isCopied === o._id && "scale-100 delay-200"
-              }`} />
+              }`}
+            />
           </button>
         </TH>
 
@@ -131,38 +139,66 @@ function Order({ o, getAll }) {
 
         {/* ACTION  */}
         <TH>
-          <div className="flex gap-2 justify-center min-w-full">
-            <button
-              disabled={o.isAdmin}
-              onDoubleClick={DeleteHandler}
-              className=" rounded-lg text-2xl text-center w-10 h-10 grid place-content-center disabled:opacity-60 disabled:pointer-events-none hover:text-red-600 hover:bg-white border-red-600 border  bg-red-600 text-white"
-            >
-              {LDelete ? (
-                <div className="loader w-7 h-7 !border-t-red-600 !border-white" />
-              ) : (
-                <MdDelete />
-              )}
-            </button>
-            <button
-              onClick={handleUpdate}
-              disabled={
-                credentials.status === o.status &&
-                credentials.totalPrice === o?.totalPrice
+          <div className="flex gap-2 justify-center items-center min-w-full">
+            <Dropdown
+              component={
+                <div className="p-1.5 bg-black/5 hover:bg-black/20 rounded-md">
+                  <MdMoreHoriz className="text-3xl relative !z-0 hover:text-black" />
+                </div>
               }
-              //   onDoubleClick={() => DeleteHandler(o._id)}
-              className=" rounded-lg text-2xl text-center w-10 h-10 grid place-content-center disabled:pointer-events-none disabled:opacity-60  hover:text-blue-600 hover:bg-white border-blue-600 border  bg-blue-600 text-white"
+              direction={{ x: "right", y: "bottom" }}
+              chevron={false}
+              className="w-56 p-2 bg-white rounded-lg border border-black/20  shadow-xl shadow-black/30"
             >
-              {LUpdate ? (
-                <div className="loader w-7 h-7 !border-t-blue-600 !border-white" />
-              ) : (
-                <MdEdit />
-              )}
-            </button>
+              <div className="text-lg font-bold tracking-wide">
+                <OrderDetails o={o} />
 
-            <OrderDetails o={o} />
+                <button
+                  onClick={handleUpdate}
+                  disabled={
+                    credentials.status === o.status &&
+                    credentials.totalPrice === o?.totalPrice
+                  }
+                  className="pl-4 py-2 hover:bg-black/10 items-center flex gap-3 w-full text-left rounded-md disabled:opacity-50 cursor-pointer"
+                >
+                  {LUpdate ? (
+                    <div className="loader w-7 h-7 !border-t-blue-600 !border-white" />
+                  ) : (
+                    <>
+                      <MdEdit className="text-2xl" /> Edit Order
+                    </>
+                  )}
+                </button>
+
+                <button
+                  onClick={() => setZrmdl(true)}
+                  //   onDoubleClick={() => DeleteHandler(o._id)}
+                  className=" pl-4 py-2 hover:bg-black/10 items-center flex gap-3 w-full text-left rounded-md  disabled:opacity-50 cursor-pointer "
+                >
+                  <MdLocalShipping className="text-2xl" /> Send Package
+                </button>
+
+                <div className="w-full h-px my-1.5 bg-black/20" />
+                <button
+                  onClick={DeleteHandler}
+                  className="pl-4 py-2 hover:bg-black/10 items-center flex gap-3 w-full text-left rounded-md text-red-600 disabled:opacity-50 cursor-pointer hover:text-red-700"
+                >
+                  {LDelete ? (
+                    <div className="loader w-6 h-6 !border-t-red-600 !border-white" />
+                  ) : (
+                    <>
+                      <MdDelete className="text-2xl" /> Delete Order
+                    </>
+                  )}
+                </button>
+              </div>
+            </Dropdown>
           </div>
         </TH>
       </TR>
+
+      <ZrSend open={Zrmdl} setopen={setZrmdl} o={o}/>
+
       <Modal closabel={false} onClose={setmdl} open={mdl}>
         <img src={o?.image} className="max-h-[75vh] max-w-[75vw]" />
       </Modal>
@@ -178,9 +214,9 @@ const OrderDetails = ({ o }) => {
       <button
         onClick={() => setmdl(true)}
         //   onDoubleClick={() => DeleteHandler(o._id)}
-        className=" rounded-lg text-2xl text-center w-10 h-10 grid place-content-center disabled:pointer-events-none disabled:opacity-60  hover:text-gray-600 hover:bg-white border-gray-600 border  bg-gray-600 text-white"
+        className=" pl-4 py-2 hover:bg-black/10 items-center flex gap-3 w-full text-left rounded-md  disabled:opacity-50 cursor-pointer "
       >
-        <MdVisibility />
+        <MdVisibility className="text-2xl" /> Order Details
       </button>
       <Modal onClose={setmdl} open={mdl} closabel={false}>
         <MDL o={o} set={setmdl} />

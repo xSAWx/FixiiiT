@@ -3,6 +3,7 @@ import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import path from "path";
+import cors from "cors";
 import userRoutes from "./routes/user.routes.js";
 import categoryRoutes from "./routes/category.routes.js";
 import itemRoutes from "./routes/item.routes.js";
@@ -11,6 +12,11 @@ import dashboardRoutes from "./routes/dashboard.routes.js";
 
 const app = express();
 const __dirname = path.resolve();
+app.use(
+  cors({
+    origin: "http://localhost:5173", // Allow requests from your Vite dev server
+  })
+);
 
 dotenv.config();
 app.use(express.json());

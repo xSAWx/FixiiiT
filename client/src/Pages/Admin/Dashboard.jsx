@@ -35,7 +35,14 @@ function Dashboard() {
         />
       </article>
 
-      {loading ? <></> : <OrderChart chartData={totalPrice} />}
+      <article className="lg:grid grid-cols-5 gap-6">
+        <aside className="grid min-h-96 col-span-3  border-black/20  rounded-xl">
+          {loading ? <></> : <OrderChart chartData={totalPrice} />}
+        </aside>
+        <aside className="grid min-h-96 col-span-2 font-bold  border border-black/20 p-4 rounded-xl">
+          <h1 className="text-lg tracking-wider">Last Week Orders</h1>
+        </aside>
+      </article>
     </section>
   );
 }

@@ -21,6 +21,7 @@ const orderSchema = mongoose.Schema(
     options: [{ type: mongoose.Schema.Types.ObjectId, ref: "Option" }],
     node: { type: String },
     coupon: { type: String },
+    Tracking: { type: String },
   },
   { timestamps: true }
 );
