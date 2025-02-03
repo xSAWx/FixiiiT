@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   MdChevronLeft,
   MdChevronRight,
@@ -6,13 +6,14 @@ import {
   MdSearch,
 } from "react-icons/md";
 import Input from "../../../Components/common/Input";
-import { useGetAllOrders } from "../../../Hooks/useOrder";
+import { useCreateCoils, useGetAllOrders } from "../../../Hooks/useOrder";
 import { useGetCategories } from "../../../Hooks/useCategory";
 import Select from "../../../Components/common/Select";
 import { TH } from "../Users";
 import { useClipboard } from "../../../Utils/utils";
 import Order from "./Order";
 import { useGetAllItems } from "../../../Hooks/useItem";
+import Checkbox from "../../../Components/common/Checkbox";
 
 function Orders() {
   const [filter, setfilter] = useState({
@@ -24,6 +25,18 @@ function Orders() {
 
   const { items } = useGetAllItems();
   const { orders, getAll } = useGetAllOrders({ filter });
+  const [selectOrder, setselectOrder] = useState([]);
+
+  const { createMany, loading: Cloading } = useCreateCoils();
+
+  useEffect(() => {
+    setselectOrder([]);
+  }, [orders]);
+
+  const sendHandler = async () => {
+    await createMany(selectOrder);
+    setselectOrder([]);
+  };
 
   return (
     <section className="border-2 border-black/20  scroll-thin rounded-xl max-w-[100vw] overflow-auto min-h-96 p-4">
@@ -60,6 +73,7 @@ function Orders() {
             max={orders?.pages?.total || 1}
             className="w-6 outline-tertiary text-lg py-1.5 mx-auto text-center"
           />
+
           <p className="text-lg">/ {orders?.pages?.total}</p>
           <Input
             set={setfilter}
@@ -72,6 +86,13 @@ function Orders() {
         </aside>
 
         <aside className="flex gap-4">
+          <button
+            onClick={sendHandler}
+            disabled={selectOrder.length < 2}
+            className="w-32 h-full border disabled:opacity-40 duration-200 disabled:pointer-events-none border-blue-600 rounded-lg text-white bg-blue-600 font-bold text-[17px] hover:text-blue-600 hover:bg-white"
+          >
+            Send Colis
+          </button>
           <Select
             className="w-32"
             classPrefix="!p-0.5 !p-2 !px-3"
@@ -102,6 +123,16 @@ function Orders() {
 
       <article className=" my-4  h-[2000px] scroll-thin  min-w-[1000px] overflow-x-auto ">
         <TR className="sticky top-0 z-40   group ">
+          <TH className="rounded-tl-lg justify-center">
+            <Checkbox
+              check={selectOrder.length}
+              onChange={() => {
+                selectOrder.length
+                  ? setselectOrder([])
+                  : setselectOrder(orders?.orders.map((o) => o._id));
+              }}
+            />
+          </TH>
           <TH className="rounded-tl-lg justify-center"># ID</TH>
           <TH className="flex justify-center">Image</TH>
           <TH className="justify-center">Status</TH>
@@ -112,7 +143,13 @@ function Orders() {
           <TH className="rounded-tr-lg">Actions</TH>
         </TR>
         {orders?.orders?.map((u) => (
-          <Order key={u._id} o={u} getAll={getAll} />
+          <Order
+            setSelect={setselectOrder}
+            select={selectOrder}
+            key={u._id}
+            o={u}
+            getAll={getAll}
+          />
         ))}
       </article>
     </section>
@@ -121,7 +158,7 @@ function Orders() {
 
 export const TR = ({ children, className }) => (
   <tr
-    className={`break-all    grid grid-cols-[.5fr_1fr_1fr_1fr_.8fr_1fr_.8fr_.7fr] ${className}`}
+    className={`break-all    grid grid-cols-[0.4fr_.5fr_1fr_1fr_1fr_.8fr_1fr_.8fr_.7fr] ${className}`}
   >
     {children}
   </tr>

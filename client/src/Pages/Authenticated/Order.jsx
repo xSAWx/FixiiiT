@@ -50,6 +50,9 @@ function Order({ setmdl, order, i }) {
               )}
             </Line>
           ))}
+          {order?.Tracking && (
+            <Line title="Tracking Number :">{order?.Tracking}</Line>
+          )}
 
           {order?.node && <Line title="Note :">{order?.node}</Line>}
 

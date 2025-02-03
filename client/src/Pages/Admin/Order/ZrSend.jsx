@@ -10,6 +10,10 @@ import { wilayas } from "../../../Components/forms/ShippingAddress";
 import { useCreateCoil, useGetTracking } from "../../../Hooks/useOrder";
 
 function ZrSend({ open, setopen, o }) {
+
+    
+    
+
   return (
     <Modal open={open} onClose={setopen}>
       <MDL o={o} setopen={setopen} />
@@ -27,7 +31,7 @@ const MDL = ({ o, setopen }) => {
     MobileA: "",
     Adresse: "",
     Commune: "",
-    Note: "",
+    Note: "Fragil",
     Total: "",
     TProduit: "",
     Confrimee: "",

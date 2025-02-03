@@ -23,6 +23,11 @@ export const getOrder = async (req, res) => {
         path: "options",
         select: "name",
       },
+      {
+        path: "item",
+        select: "name category",
+        populate: { path: "category", select: "name" },
+      },
     ]);
     res.status(202).json(order);
   } catch (error) {
@@ -135,4 +140,29 @@ export const deleteMyOrder = async (req, res) => {
 
 const isValidId = (id) => {
   return mongoose.Types.ObjectId.isValid(id);
+};
+
+//////////!   LAST WEEK    !//////////
+
+export const lastWeekOrders = async (req, res) => {
+  try {
+    const lastWeekStart = new Date();
+    lastWeekStart.setDate(lastWeekStart.getDate() - 7);
+
+    const orders = await Order.find({
+      updatedAt: {
+        $gte: lastWeekStart,
+      },
+    })
+      .select("-options -node -image -__v")
+      .populate([
+        { path: "user", select: "username" },
+        { path: "item", select: "name" },
+        { path: "options", select: "name" },
+      ]);
+
+    res.status(202).json(orders);
+  } catch (error) {
+    res.status(402).json(error);
+  }
 };

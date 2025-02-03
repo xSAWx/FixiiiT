@@ -77,6 +77,16 @@ function OrderInvoic({ invoiceRef, order }) {
                     <h2 className="">{o?.name}</h2>
                   </>
                 ))}
+                {order?.Tracking && (
+                  <>
+                    {order?.Tracking && (
+                      <>
+                        <h1>Tracking Number :</h1>
+                        <h2 className="">{order?.Tracking}</h2>
+                      </>
+                    )}
+                  </>
+                )}
               </>
             </div>
           </div>

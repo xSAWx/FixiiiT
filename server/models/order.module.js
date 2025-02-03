@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { generateRandomString } from "../utils/functions.js";
 
 const orderSchema = mongoose.Schema(
   {
@@ -21,6 +22,7 @@ const orderSchema = mongoose.Schema(
     options: [{ type: mongoose.Schema.Types.ObjectId, ref: "Option" }],
     node: { type: String },
     coupon: { type: String },
+    TRK: { type: String, default: generateRandomString(9) },
     Tracking: { type: String },
   },
   { timestamps: true }

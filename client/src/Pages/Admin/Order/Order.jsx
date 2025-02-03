@@ -23,8 +23,9 @@ import Modal from "../../../Components/common/Modal";
 import { addressSlice } from "../../../Store/user";
 import Dropdown from "../../../Components/common/Dropdown";
 import ZrSend from "./ZrSend";
+import Checkbox from "../../../Components/common/Checkbox";
 
-function Order({ o, getAll }) {
+function Order({ o, getAll, setSelect, select }) {
   const { copyToClipboard, isCopied } = useClipboard();
   const [credentials, setcredentials] = useState({
     status: o.status,
@@ -50,6 +51,21 @@ function Order({ o, getAll }) {
   return (
     <>
       <TR>
+        <TH>
+          <div className="grid place-content-center">
+            <Checkbox
+              check={select.find((e) => e === o._id)}
+              onChange={() => {
+                setSelect((s) =>
+                  s.find((e) => e === o._id)
+                    ? s.filter((e) => e !== o._id)
+                    : [...s, o._id]
+                );
+              }}
+            />
+          </div>
+        </TH>
+
         {/* ID  */}
         <TH>
           <button
@@ -197,7 +213,7 @@ function Order({ o, getAll }) {
         </TH>
       </TR>
 
-      <ZrSend open={Zrmdl} setopen={setZrmdl} o={o}/>
+      <ZrSend open={Zrmdl} setopen={setZrmdl} o={o} />
 
       <Modal closabel={false} onClose={setmdl} open={mdl}>
         <img src={o?.image} className="max-h-[75vh] max-w-[75vw]" />
@@ -206,7 +222,7 @@ function Order({ o, getAll }) {
   );
 }
 
-const OrderDetails = ({ o }) => {
+export const OrderDetails = ({ o }) => {
   const [mdl, setmdl] = useState(false);
 
   return (
@@ -259,14 +275,18 @@ const MDL = ({ o, set }) => {
         <aside className="grid mx-auto w-10/12 mt-4  font-semibold ">
           <h1 className="text-tertiary font-bold">Order Details</h1> <h2></h2>
           <Data data={o._id}>Order Id :</Data>
-          <Data data={o?.item?.category?.name}>Category :</Data>
+          <Data data={order?.item?.category?.name}>Category :</Data>
           <Data data={o.item.name}>Item :</Data>
           <Data data={`${o.totalPrice} DA`}>PRICE :</Data>
-          {o?.options.map((oo, i) => (
-            <Data key={oo} data={oo}>
-              Option #{i + 1}
-            </Data>
-          ))}
+          {o?.options?.length ? (
+            o?.options?.map((oo, i) => (
+              <Data key={oo} data={oo}>
+                Option #{i + 1}
+              </Data>
+            ))
+          ) : (
+            <></>
+          )}
           <Data data={<p style={{ color: color(o.status) }}>{o.status}</p>}>
             Status :
           </Data>

@@ -275,3 +275,24 @@ export const useCreateCoil = () => {
 
   return { loading, err, create };
 };
+
+//////!   CREATE COIL   !//////
+
+export const useCreateCoils = () => {
+  const [loading, setloading] = useState(false);
+  const [err, seterr] = useState(false);
+
+  const createMany = async (colis) => {
+    try {
+      setloading(true);
+      await axios.post("/api/order/coils/", colis);
+      toast.success("Created Many Colis Successfuly");
+    } catch (error) {
+      seterr(true);
+    } finally {
+      setloading(false);
+    }
+  };
+
+  return { loading, err, createMany };
+};
