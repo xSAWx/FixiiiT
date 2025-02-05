@@ -9,6 +9,8 @@ export const authSlice = create((set) => ({
     }),
   isAdmin: false,
   setAdmin: (value) => set(() => ({ isAdmin: value })),
+  isVerified: false,
+  setVerified: (value) => set(() => ({ isVerified: value })),
 }));
 
 

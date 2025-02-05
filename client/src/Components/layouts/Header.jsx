@@ -18,6 +18,7 @@ function Header() {
   useEffect(() => {
     if (pathname.split("/").length < 3) window.scrollTo(0, 0); // Scroll to the top of the page
   }, [pathname]);
+
   return (
     <header className="w-full bg-gradient-to-r font-medium text-white  min-h-24 dark:min-h-32  from-[#FC962B] to-[#EE572A]">
       <nav className="max-w-[1820px] h-24 mx-auto px-4 pt-3 pb-6 flex md:flex-row flex-col   justify-between items-center">

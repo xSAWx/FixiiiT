@@ -289,6 +289,31 @@ export const useGetOneUser = (_id) => {
   return { loading, err, getOne, user };
 };
 
+//////!   SEND NEW PASSWORD   !//////
+
+export const useSendPass = () => {
+  const [loading, setloading] = useState(false);
+  const [err, seterr] = useState(false);
+  const navigate = useNavigate()
+  
+  const send = async (email) => {
+    try {
+      setloading(true);
+      await axios.post("/api/auth/resetPassword", email);
+      navigate("/sign")
+      toast.success("New Password Sent To You Email");
+    } catch (error) {
+      seterr(true);
+      toast.error("Somthing Went Wrong");
+      seterr(true);
+    } finally {
+      setloading(false);
+    }
+  };
+
+  return {send,loading,err}
+};
+
 // -----------   ADMIN  -----------   //
 
 //////!   GET ALL USERS   !//////

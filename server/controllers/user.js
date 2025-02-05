@@ -3,6 +3,7 @@ import User from "../models/user.module.js";
 import { Mailer } from "../utils/Emailer.pipe.js";
 import { generatePassword } from "../utils/functions.js";
 import { setCookie } from "../utils/generateToken.js";
+import { confirmEmail, SendPassword } from "../utils/html.js";
 
 //////!   SIGNUP   !//////
 
@@ -92,7 +93,15 @@ export const sendOTP = async (req, res) => {
       { new: true }
     );
     if (user) {
-      Mailer({ email: user.email, text: String(user.OTP) });
+      Mailer({
+        email: user.email,
+        text: confirmEmail({
+          logoURL: "https://i.ibb.co/6RRD03j5/qsdqsd.png",
+          supportEmail: "xsm9512368740@gmail.com",
+          username: user.username,
+          OTP: user.OTP,
+        }),
+      });
       res.status(201).json(`OTP Sent To ${user.email}`);
     }
   } catch (error) {
@@ -123,10 +132,10 @@ export const checkOTP = async (req, res) => {
 
 //////!  RESET PASSWORD  !//////
 
-export const getOneUser = async ({ params },res) => {
+export const getOneUser = async ({ params }, res) => {
   try {
     const user = await User.findById(params._id).select("-password");
-    res.status(202).json(user)
+    res.status(202).json(user);
   } catch (error) {
     res.status(401).json(error);
   }
@@ -277,7 +286,15 @@ export const resetPassword = async (req, res) => {
       { password: generatePassword() },
       { new: true }
     );
-    Mailer({ email, text: String(user.password) });
+    Mailer({
+      email,
+      text: SendPassword({
+        logoURL: "https://i.ibb.co/6RRD03j5/qsdqsd.png",
+        OTP: user.password,
+        supportEmail: "xsm9512368740@gmail.com",
+        username: user.username,
+      }),
+    });
     res.status(201).json("Password Sent To Your Email");
   } catch (error) {
     res.status(404).json({ error });

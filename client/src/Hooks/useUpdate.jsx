@@ -122,7 +122,7 @@ export const useGetAddress = () => {
   const [err, seterr] = useState({});
   const { setAddress } = addressSlice();
   const [admin, setadmin] = useState(false);
-  const { setAdmin } = authSlice();
+  const { setAdmin, setVerified } = authSlice();
 
   useEffect(() => {
     (async () => {
@@ -146,6 +146,7 @@ export const useGetAddress = () => {
           }));
           setadmin(data.isAdmin);
           setAdmin(data.isAdmin);
+          setVerified(data.isVerified);
         }
       } catch (error) {
         seterr("Something Went Wrong");

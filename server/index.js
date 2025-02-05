@@ -11,12 +11,8 @@ import orderRoutes from "./routes/order.routes.js";
 import dashboardRoutes from "./routes/dashboard.routes.js";
 
 const app = express();
+app.use(cors());
 const __dirname = path.resolve();
-app.use(
-  cors({
-    origin: "http://localhost:5173", // Allow requests from your Vite dev server
-  })
-);
 
 dotenv.config();
 app.use(express.json());
