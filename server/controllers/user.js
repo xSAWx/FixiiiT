@@ -97,7 +97,7 @@ export const sendOTP = async (req, res) => {
         email: user.email,
         text: confirmEmail({
           logoURL: "https://i.ibb.co/6RRD03j5/qsdqsd.png",
-          supportEmail: "xsm9512368740@gmail.com",
+          supportEmail: "contact@fix-iiit.com",
           username: user.username,
           OTP: user.OTP,
         }),
@@ -291,7 +291,7 @@ export const resetPassword = async (req, res) => {
       text: SendPassword({
         logoURL: "https://i.ibb.co/6RRD03j5/qsdqsd.png",
         OTP: user.password,
-        supportEmail: "xsm9512368740@gmail.com",
+        supportEmail: "contact@fix-iiit.com",
         username: user.username,
       }),
     });

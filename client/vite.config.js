@@ -7,6 +7,7 @@ export default defineConfig({
   server: {
     proxy: {
       "/api": "http://localhost:1337",
+      "/api2": "http:https://procolis.com/api_v1",
     },
   },
   assetsInclude: ["**/*.webp"],

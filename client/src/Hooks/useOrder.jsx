@@ -276,7 +276,7 @@ export const useCreateCoil = () => {
   return { loading, err, create };
 };
 
-//////!   CREATE COIL   !//////
+//////!   CREATE COILS   !//////
 
 export const useCreateCoils = () => {
   const [loading, setloading] = useState(false);

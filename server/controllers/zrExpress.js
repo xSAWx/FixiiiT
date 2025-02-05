@@ -32,6 +32,11 @@ export const addCoil = async ({ body, params }, res) => {
         { new: true }
       );
     }
+    res.header('Access-Control-Allow-Origin', '*');
+  res.header(
+    'Access-Control-Allow-Headers',
+    'Origin, X-Requested-With, Content-Type, Accept'
+  );
     res.status(202).json(order || resp.data.Colis[0]);
   } catch (error) {
     res.status(401).json(error);

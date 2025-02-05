@@ -10,10 +10,6 @@ import { wilayas } from "../../../Components/forms/ShippingAddress";
 import { useCreateCoil, useGetTracking } from "../../../Hooks/useOrder";
 
 function ZrSend({ open, setopen, o }) {
-
-    
-    
-
   return (
     <Modal open={open} onClose={setopen}>
       <MDL o={o} setopen={setopen} />
@@ -54,9 +50,17 @@ const MDL = ({ o, setopen }) => {
       });
     if (tracking)
       setcredentials({
-        ...credentials,
-        ...tracking,
+        Client: tracking?.Client,
+        MobileA: tracking?.MobileA,
+        Adresse: tracking?.Adresse,
+        Commune: tracking?.Commune,
+        Note: tracking?.Note,
+        Total: o?.totalPrice,
+        IDWilaya: tracking?.IDWilaya,
+        Tracking: o?.TRK,
       });
+
+      console.log({ tracking, credentials });
   }, [user, tracking]);
 
   const handleSubmit = async (e) => {
@@ -65,7 +69,7 @@ const MDL = ({ o, setopen }) => {
     setopen(false);
   };
 
-  console.log(credentials);
+  
 
   return (
     <form

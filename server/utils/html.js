@@ -224,7 +224,7 @@ export const SendPassword = ({
 
         <!-- Footer -->
         <div class="footer">
-            <p>Need help? Contact us at <a href="mailto:xsm9512368740@gmail.com">xsm9512368740@gmail.com</a></p>
+            <p>Need help? Contact us at <a href="mailto:${supportEmail}">${supportEmail}</a></p>
             <p>© 2024 Fix iiit. All rights reserved.</p>
             
         </div>
