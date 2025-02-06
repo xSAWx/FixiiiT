@@ -2,9 +2,12 @@ import React, { useEffect, useState } from "react";
 import { addressSlice } from "../../Store/user";
 import Input from "../common/Input";
 import TextArea from "../common/TextArea";
+import { useContact } from "../../Hooks/useOrder";
 
 function SnedMessage() {
   const { address } = addressSlice();
+
+  const { contact, loading } = useContact();
 
   const [credentials, setcredentials] = useState({
     username: address.username || "",
@@ -22,6 +25,10 @@ function SnedMessage() {
       phoneNumber: address.phoneNumber || "",
     });
   }, [address]);
+
+  const Contact = async () => {
+    await contact(credentials);
+  };
 
   return (
     <>
@@ -64,6 +71,9 @@ function SnedMessage() {
         rows={4}
         set={setcredentials}
       />
+      <button className="Button" onClick={Contact}>
+        Send Email
+      </button>
     </>
   );
 }

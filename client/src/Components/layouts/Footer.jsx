@@ -94,6 +94,7 @@ function Footer() {
             <LINK to={"/faq"}>FAQ</LINK>
             <LINK to={"/privacy-policy"}>Privacy-Policy</LINK>
             <LINK to={"/terms-conditions"}>Terms & Conditions</LINK>
+            <LINK to={"/refund-policy"}>Refund-Policy</LINK>
           </aside>
 
           {/* Subscribe to Our Newsletter  */}

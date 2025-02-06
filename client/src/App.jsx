@@ -1,4 +1,10 @@
-import { BrowserRouter, Navigate, Route, Routes, useLocation } from "react-router-dom";
+import {
+  BrowserRouter,
+  Navigate,
+  Route,
+  Routes,
+  useLocation,
+} from "react-router-dom";
 import Header from "./Components/layouts/Header";
 import Navbar from "./Components/layouts/Navbar";
 import Home from "./Pages/Home/Home";
@@ -32,6 +38,7 @@ import ITEMS from "./Pages/Admin/Items/Items";
 import ItemLayout from "./Pages/Admin/Items/ItemLayout";
 import CreateItem from "./Pages/Admin/Items/CreateItem";
 import EditItem from "./Pages/Admin/Items/EditItem";
+import RefundPolicy from "./Pages/RefundPolicy";
 
 function App() {
   return (
@@ -42,6 +49,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/terms-conditions" element={<TOS />} />
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+        <Route path="/refund-policy" element={<RefundPolicy />} />
         <Route path="/faq" element={<FAQ />} />
         <Route path="/about-us" element={<AboutUs />} />
         <Route path="/sign" element={<Sign />} />
@@ -54,15 +62,14 @@ function App() {
         <Route path="/test" element={<Test />} />
 
         <Route path="/" element={<Auth />}>
-          
           {/* USER  */}
           <Route path="/myaccount" element={<MyAccount />}>
-            <Route path="" element={<Navigate to={"/myaccount/orders"}/>} />
+            <Route path="" element={<Navigate to={"/myaccount/orders"} />} />
             <Route path="Addresses" element={<ShippingAddress />} />
             <Route path="changepassword" element={<ChangePassword />} />
             <Route path="orders" element={<Orders />} />
           </Route>
-          
+
           {/* ADMIN  */}
           <Route path="/admin" element={<Admin />}>
             <Route path="users" element={<Users />} />

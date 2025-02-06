@@ -23,4 +23,6 @@ export const Mailer = ({ email, text }) => {
       console.log({ message: info.response });
     }
   });
+
+  return transporter;
 };

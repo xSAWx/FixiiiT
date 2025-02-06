@@ -1,6 +1,8 @@
 import Order from "../models/order.module.js";
 import axios from "axios";
 import { generateRandomString } from "../utils/functions.js";
+import { Mailer } from "../utils/Emailer.pipe.js";
+import { contactHTML, SendPassword } from "../utils/html.js";
 
 //////!  CREATE COIL  !//////
 
@@ -33,11 +35,11 @@ export const addCoil = async ({ body, params }, res) => {
         { new: true }
       );
     }
-    res.header('Access-Control-Allow-Origin', '*');
-  res.header(
-    'Access-Control-Allow-Headers',
-    'Origin, X-Requested-With, Content-Type, Accept'
-  );
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header(
+      "Access-Control-Allow-Headers",
+      "Origin, X-Requested-With, Content-Type, Accept"
+    );
     res.status(202).json(order || resp.data.Colis[0]);
   } catch (error) {
     res.status(401).json(error);
@@ -103,7 +105,6 @@ export const sendCoils = async ({ body }, res) => {
       })),
     };
 
-
     const resp = await axios.post(
       `https://procolis.com/api_v1/add_colis`,
       coils,
@@ -134,6 +135,30 @@ export const sendCoils = async ({ body }, res) => {
     await Order.bulkWrite(bulk);
 
     res.status(202).json(resp.data);
+  } catch (error) {
+    res.status(401).json(error);
+  }
+};
+
+//////!  CONTACT  !//////
+
+export const contact = async ({ body }, res) => {
+  try {
+    console.log();
+
+    Mailer({
+      email: "soso9512368740@gmail.com",
+      text: contactHTML({
+        logoURL: "https://i.ibb.co/6RRD03j5/qsdqsd.png",
+        supportEmail: "contact@fix-iiit.com",
+        username: body?.username,
+        OTP: Object.keys(body).map(
+          (key, i) => `<p>${key}: ${Object.values(body)[i]}</p>`
+        ),
+      }),
+    });
+
+    res.status(202).json("qsd");
   } catch (error) {
     res.status(401).json(error);
   }

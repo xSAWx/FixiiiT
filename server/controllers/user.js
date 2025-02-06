@@ -25,7 +25,12 @@ export const Signup = async (req, res) => {
     const { password: sss, __v, ...user1 } = newUser._doc;
 
     if (user1) {
-      Mailer({ email, text: String(newUser.OTP) });
+      Mailer({ email, text: confirmEmail({
+        logoURL: "https://i.ibb.co/6RRD03j5/qsdqsd.png",
+        supportEmail: "contact@fix-iiit.com",
+        username: newUser.username,
+        OTP: newUser.OTP,
+      }), });
       setCookie(user1._id, res);
       return res.status(201).json(user1);
     }

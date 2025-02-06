@@ -296,3 +296,24 @@ export const useCreateCoils = () => {
 
   return { loading, err, createMany };
 };
+
+//////!   CONTACT   !//////
+
+export const useContact = () => {
+  const [loading, setloading] = useState(false);
+  const [err, seterr] = useState(false);
+
+  const contact = async (credenitals) => {
+    try {
+      setloading(true);
+      await axios.post("/api/order/contact", credenitals);
+      toast.success("message sent succefully");
+    } catch (error) {
+      seterr(true);
+    } finally {
+      setloading(false);
+    }
+  };
+
+  return { contact, loading, err };
+};
