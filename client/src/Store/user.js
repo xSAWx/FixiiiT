@@ -9,11 +9,9 @@ export const authSlice = create((set) => ({
     }),
   isAdmin: false,
   setAdmin: (value) => set(() => ({ isAdmin: value })),
-  isVerified: false,
+  isVerified: true,
   setVerified: (value) => set(() => ({ isVerified: value })),
 }));
-
-
 
 export const accountSlice = create((set) => ({
   account: {
@@ -28,13 +26,11 @@ export const accountSlice = create((set) => ({
   setAccount: (fn) => set((state) => ({ account: fn(state.account) })),
 }));
 
-
-
 export const addressSlice = create((set) => ({
   address: {
     email: "",
     username: "",
-    
+
     firstName: "",
     phoneNumber: "",
     lastName: "",

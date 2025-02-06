@@ -19,9 +19,12 @@ function Auth() {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      setopen(!isVerified)
+      if (!isVerified) setopen(true);
+      else {
+        setopen(false);
+      }
     }, 500); // 1000ms = 1 second
-    
+
     // Cleanup function
     return () => clearTimeout(timer);
   }, [isVerified]); // Empty dependency array = runs on mount
