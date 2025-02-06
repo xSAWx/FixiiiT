@@ -16,7 +16,7 @@ function MyAccount() {
   };
 
   useEffect(() => {
-    if (pathname === "/myaccount") navigate("/myaccount/dashboard");
+    if (pathname === "/myaccount") navigate("/myaccount/orders");
   }, [pathname]);
 
   return (
@@ -28,7 +28,6 @@ function MyAccount() {
       />
       <section className="lg:w-11/12 w-10/12 max-w-7xl mx-auto my-20 gap-12 grid md:grid-cols-[2fr_5fr] font-semibold">
         <article className="w-full h-96 border grid   border-black/20 p-6 rounded-lg">
-          <Tab to="dashboard"  title="Dashboard" />
           <Tab to="orders"  title="Orders" />
           <Tab to="addresses"  title="Addresses" />
           <Tab

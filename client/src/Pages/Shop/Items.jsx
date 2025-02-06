@@ -90,12 +90,7 @@ function Items() {
                       className="relative z-20"
                     />
                   </div>
-                  <h1 className="">
-                    {opt.name}{" "}
-                    <span className="text-base ml-8 text-black/70">
-                      started from ({opt.price || 0} DA)
-                    </span>
-                  </h1>
+                  <h1 className="">{opt.name} </h1>
                 </div>
               }
               className={`text-xl text-black/90 tracking-wide p-4 border border-black/20 rounded-lg ${

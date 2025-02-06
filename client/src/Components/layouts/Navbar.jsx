@@ -11,7 +11,6 @@ import {
 } from "react-icons/md";
 import { Link, useLocation } from "react-router-dom";
 import Dropdown from "../common/Dropdown";
-import { LuShoppingBag } from "react-icons/lu";
 import Portal from "./Portal";
 import Accordion from "../common/Accordion";
 import { useShowNav } from "../../Utils/utils";
@@ -53,7 +52,6 @@ function Navbar() {
               }
             >
               <aside className="w-60  bg-white  shadow-xl shadow-black/30  rounded-md translate-y-6 -translate-x-1/3 text-base font-semibold  p-4 grid gap-2">
-                <Li to="/myaccount/dashboard">Dashboard</Li>
                 <Li to="/myaccount/orders">Orders</Li>
                 <Li to="/myaccount/addresses">Addresses</Li>
                 <Li to="/myaccount/changepassword">Change Password</Li>
@@ -152,7 +150,7 @@ const SideNav = ({ open, setopen }) => {
             <Li to="/qsd">HOME</Li>
 
             {/* OWNER SERVICE  */}
-            <Accordion className="text-qua" title="OWNER SERVICE">
+            <Accordion className="text-qua" title="OUR SERVICES">
               <aside className="grid gap-2.5  px-4 py-2">
                 <Li to="/shop">About Us</Li>
                 <Li to="/cart">Our Team</Li>
@@ -197,14 +195,13 @@ const Navs = () => (
       className={""}
       component={
         <li className="flex gap-1 items-center text-current hover:text-tertiary">
-          OWNER-SERVICE
+          OUR-SERVICE
         </li>
       }
     >
       <aside className="w-60  bg-white  shadow-xl shadow-black/30 rounded-md translate-y-6 p-4 grid gap-2">
         <Li to="/shop">I Need Repair</Li>
-        <Li to="/cart">Cart</Li>
-        <Li to="/myaccount">My Account</Li>
+        <Li to="/myaccount/">My Account</Li>
       </aside>
     </Dropdown>
     <Li to="/mailin">MAIL-IN</Li>
@@ -271,7 +268,6 @@ const SecondNav = ({ setopen, open, p, auth, admin }) => {
                 }
               >
                 <aside className="w-60  bg-white  shadow-xl shadow-black/30  rounded-md translate-y-6 -translate-x-1/3 text-base font-semibold  p-4 grid gap-2">
-                  <Li to="/myaccount/dashboard">Dashboard</Li>
                   <Li to="/myaccount/orders">Orders</Li>
                   <Li to="/myaccount/addresses">Addresses</Li>
                   <Li to="/myaccount/changepassword">Change Password</Li>

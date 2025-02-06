@@ -28,6 +28,7 @@ export const addCoil = async ({ body, params }, res) => {
         params._id,
         {
           Tracking: resp.data.Colis[0].Tracking,
+          TRK: generateRandomString(9),
         },
         { new: true }
       );

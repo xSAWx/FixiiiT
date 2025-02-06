@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes, useLocation } from "react-router-dom";
 import Header from "./Components/layouts/Header";
 import Navbar from "./Components/layouts/Navbar";
 import Home from "./Pages/Home/Home";
@@ -57,7 +57,7 @@ function App() {
           
           {/* USER  */}
           <Route path="/myaccount" element={<MyAccount />}>
-            <Route path="dashboard" element={<></>} />
+            <Route path="" element={<Navigate to={"/myaccount/orders"}/>} />
             <Route path="Addresses" element={<ShippingAddress />} />
             <Route path="changepassword" element={<ChangePassword />} />
             <Route path="orders" element={<Orders />} />

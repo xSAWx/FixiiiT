@@ -57,9 +57,6 @@ function Header() {
           >
             <FaFacebookF />
           </a>
-          <span className="h-9 cursor-pointer w-9 hover:text-white hover:bg-tertiary rounded-full duration-300 text-xl text-tertiary grid place-content-center bg-white">
-            <FaXTwitter className="translate-x-px" />
-          </span>
 
           <a
             target="_blank"
@@ -68,9 +65,6 @@ function Header() {
           >
             <FaInstagram />
           </a>
-          <span className="h-9 cursor-pointer w-9 hover:text-white hover:bg-tertiary rounded-full duration-300 text-xl text-tertiary grid place-content-center bg-white">
-            <FaLinkedin />
-          </span>
         </aside>
       </nav>
     </header>

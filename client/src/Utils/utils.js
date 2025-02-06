@@ -170,7 +170,7 @@ export const useUploadImg = () => {
       formData.append("image", img);
 
       const resp = await axios.post(
-        "https://api.imgbb.com/1/upload?key=bb0e3b9f7ea1d5279df7c88644f0fa79",
+        "https://api.imgbb.com/1/upload?key=e017e24585b5ce2b1a3904b241e8be8f",
         formData
       );
 

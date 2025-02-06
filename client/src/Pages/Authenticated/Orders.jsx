@@ -85,7 +85,7 @@ function Orders() {
                 </div>
 
                 {/* PRICE  */}
-                <div className="p-2 px-4  text-black/60 font- border line-clamp-1 text-base border-black/20">
+                <div className="p-2 px-4 items-center flex text-black/60 font- border line-clamp-1 text-base border-black/20">
                   {order.totalPrice} DA
                 </div>
 
