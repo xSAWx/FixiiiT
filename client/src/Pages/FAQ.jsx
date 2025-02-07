@@ -71,6 +71,8 @@ function FAQ() {
             <h1 className="font-semibold text-fif m-1">Your Comment</h1>
             <textarea className="w-full border duration-300 outline-none focus:border-tertiary rounded-lg p-4 border-black/40" cols={4} />
           </div>
+
+          <button disabled className="Button">Send</button>
         </aside>
       </article>
     </section>

@@ -60,7 +60,7 @@ const MDL = ({ o, setopen }) => {
         Tracking: o?.TRK,
       });
 
-      console.log({ tracking, credentials });
+    console.log({ tracking, credentials });
   }, [user, tracking]);
 
   const handleSubmit = async (e) => {
@@ -69,12 +69,10 @@ const MDL = ({ o, setopen }) => {
     setopen(false);
   };
 
-  
-
   return (
     <form
       onSubmit={handleSubmit}
-      className="max-w-11/12 w-[600px]  bg-white text-lg rounded-xl pb-5"
+      className=" md:w-[600px] w-screen  bg-white text-lg rounded-xl pb-5"
     >
       <header className="w-full border-b border-black/20 sticky top-0 rounded-xl z-20 bg-white grid grid-cols-8 items-center py-5">
         <div className=""></div>

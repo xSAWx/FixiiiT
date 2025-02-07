@@ -91,7 +91,7 @@ function AboutUs() {
 
           <h2 className="text-2xl  justify-self-center">OR</h2>
 
-          <Button to="/schedule" className="px-8 text-base">
+          <Button to="/shop" className="px-8 text-base">
             GET A SCHEDULE
           </Button>
         </motion.div>

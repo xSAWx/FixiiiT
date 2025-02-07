@@ -23,7 +23,6 @@ function Home() {
         <SecondSection />
         <ThirdSection />
       </section>
-      <FourthSection />
       <FifthSection />
       <SixthSection />
 

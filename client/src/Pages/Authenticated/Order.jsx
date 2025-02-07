@@ -100,15 +100,21 @@ const Line = ({ title, children }) => (
   </div>
 );
 
-const color = (status) => {
-  switch (status) {
+export const color = (status) => {
+  const s = status.toLowerCase();
+  switch (s) {
     case "cancelled":
-      return "##dc2626";
+      return "#dc2626";
 
-    case "shipping" || "delivered":
+    case "shipped":
+    case "delivered":
       return "#16a34a";
-    default:
+    case "pending":
+    case "processing":
       return "#ca8a04";
+
+    default:
+      return "#888888";
   }
 };
 

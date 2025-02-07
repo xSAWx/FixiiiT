@@ -12,11 +12,12 @@ import dashboardRoutes from "./routes/dashboard.routes.js";
 
 const app = express();
 
-app.options("*", cors()); // Enable preflight for all routes
 
 const __dirname = path.resolve();
 
 dotenv.config();
+app.use(cors());
+app.options("*", cors()); // Enable preflight for all routes
 app.use(express.json());
 app.use(cookieParser());
 (async () => {

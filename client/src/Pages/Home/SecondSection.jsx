@@ -89,7 +89,7 @@ export const About = () => (
       functionality. We understand the vital role technology plays in your daily
       life, and we are committed to keeping you connected.
     </p>
-    <Button className="w-52 mt-4">MORE ABOUT US</Button>
+    <Button to={"/about-us"} className="w-52 mt-4">MORE ABOUT US</Button>
   </motion.aside>
 );
 

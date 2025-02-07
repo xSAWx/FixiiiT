@@ -109,7 +109,10 @@ const Li = ({ to, children }) => {
     <Link
       to={to}
       className={`hover:text-tertiary duration-200 ${
-        pathname === to && "text-tertiary text font-extrabold scale-105"
+        pathname === to ||
+        (pathname.includes(to)
+          ? "text-tertiary text font-extrabold scale-105"
+          : "")
       }`}
     >
       {children}
@@ -152,9 +155,8 @@ const SideNav = ({ open, setopen }) => {
             {/* OWNER SERVICE  */}
             <Accordion className="text-qua" title="OUR SERVICES">
               <aside className="grid gap-2.5  px-4 py-2">
-                <Li to="/shop">About Us</Li>
-                <Li to="/cart">Our Team</Li>
-                <Li to="/myaccount">Cart</Li>
+                <Li to="/shop">Shop</Li>
+                <Li to="/myaccount">My Account</Li>
               </aside>
             </Accordion>
 
@@ -292,7 +294,10 @@ const SecondNav = ({ setopen, open, p, auth, admin }) => {
                 />
               </Link>
             )}
-            <Button className="2xl:text-base sm:flex hidden text-xs px-6">
+            <Button
+              to={"/shop"}
+              className="2xl:text-base sm:flex hidden text-xs px-6"
+            >
               GET A REPAIR NOW
             </Button>
             <MdMenu

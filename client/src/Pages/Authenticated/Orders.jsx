@@ -3,7 +3,7 @@ import { useDeleteOrder, useGetMyOrders } from "../../Hooks/useOrder";
 import moment from "moment"; // Import moment.js
 import { MdDelete } from "react-icons/md";
 import { BsEyeFill, BsFilePdfFill } from "react-icons/bs";
-import Order from "./Order";
+import Order, { color } from "./Order";
 import Modal from "../../Components/common/Modal";
 import { PiFilePdfFill } from "react-icons/pi";
 import OrderInvoic from "./OrderInvoic";
@@ -81,12 +81,20 @@ function Orders() {
 
                 {/* STATUS  */}
                 <div className="p-2 px-4 grid items-center text-black/60 font- border line-clamp-1 text-base border-black/20">
-                  {order.status}
+                  <h1
+                    style={{
+                      color: color(order?.status),
+                      backgroundColor: `${color(order?.status)}66`,
+                    }}
+                    className="px-2 py-1 rounded-lg text-center"
+                  >
+                    {order.status}
+                  </h1>
                 </div>
 
                 {/* PRICE  */}
                 <div className="p-2 px-4 items-center flex text-black/60 font- border line-clamp-1 text-base border-black/20">
-                  {order.totalPrice} DA
+                  {order.totalPrice ? `${order.totalPrice} DA` : "N/A"}
                 </div>
 
                 {/* ACTION  */}

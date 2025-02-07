@@ -97,8 +97,8 @@ const Order = ({ o, getMany }) => {
 
   return (
     <aside className="w-full flex justify-between mb-4 items-center px-4 py-2 tracking-wide border border-black/10 rounded-xl shadow-lg shadow-black/30">
-      <div className="flex gap-3">
-        <h1>{o?.user?.username || "User"} </h1>
+      <div className="flex gap-3 items-center">
+        <h1 className="line-clamp-1 break-all max-w-20">{o?.user?.username || "User"} </h1>
         <h2 className="text-xs text-black/60 mt-auto">( {o?.item?.name} )</h2>
         <h2 className="text-xs text-black/60 mt-auto">
           {" "}

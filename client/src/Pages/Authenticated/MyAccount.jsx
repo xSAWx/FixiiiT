@@ -27,7 +27,7 @@ function MyAccount() {
         title="My Account"
       />
       <section className="lg:w-11/12 w-10/12 max-w-7xl mx-auto my-20 gap-12 grid md:grid-cols-[2fr_5fr] font-semibold">
-        <article className="w-full h-96 border grid   border-black/20 p-6 rounded-lg">
+        <article className="w-full h-80 border grid   border-black/20 p-6 rounded-lg">
           <Tab to="orders"  title="Orders" />
           <Tab to="addresses"  title="Addresses" />
           <Tab

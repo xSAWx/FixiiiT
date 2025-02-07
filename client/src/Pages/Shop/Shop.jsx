@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import BreadCrumbs from "../../Components/common/BreadCrumbs";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { useGetCategories } from "../../Hooks/useCategory";
@@ -7,6 +7,7 @@ import { ReviewsSection, TitleS } from "../AboutUs";
 import { Link } from "react-router-dom";
 
 function Shop() {
+  const [viewList, setviewList] = useState(false);
   const { categories, loading, err } = useGetCategories();
   console.log(categories);
 
@@ -29,7 +30,7 @@ function Shop() {
           <aside className="grid w-full h-full my-24 place-content-center">
             <div className="loader w-16 h-16 !border-8" />
           </aside>
-        ) : (
+        ) : !viewList ? (
           <Swiper
             spaceBetween={10}
             modules={[Autoplay]}
@@ -65,7 +66,22 @@ function Shop() {
               ))
             )}
           </Swiper>
+        ) : (
+          <aside className="flex justify-center md:gap-10 gap-6  flex-wrap">
+            {categories?.map((cat) => (
+              <>
+                <CardCategory {...cat} />
+              </>
+            ))}
+          </aside>
         )}
+
+        <h1
+          onClick={() => setviewList(!viewList)}
+          className="mx-auto cursor-pointer hover:text-orange-700 font-bold tracking-wide text-center text-tertiary mt-9 text-2xl"
+        >
+          {viewList ? "View Slice" : "View All"}
+        </h1>
       </article>
 
       <ReviewsSection />

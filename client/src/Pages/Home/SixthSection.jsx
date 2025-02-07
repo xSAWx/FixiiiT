@@ -50,7 +50,7 @@ function SixthSection() {
             </h1>
 
             <div className="lg:block flex">
-              <Button className="uppercase mx-auto !bg-gradient-to-r from-transparent to-transparent !p-6 border-2 border-white hover:border-purple-950 !py-4">
+              <Button to="/shop" className="uppercase mx-auto !bg-gradient-to-r from-transparent to-transparent !p-6 border-2 border-white hover:border-purple-950 !py-4">
                 Get A Proffitional Repair Now{" "}
               </Button>
             </div>

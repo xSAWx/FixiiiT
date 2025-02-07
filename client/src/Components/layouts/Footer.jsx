@@ -45,14 +45,11 @@ function Footer() {
             <div className="grid grid-cols-4 gap-2">
               <a
                 target="_blank"
-                href="https://www.facebook.com"
+                href="https://www.facebook.com/fix.iiit/"
                 className="h-9 cursor-pointer w-9 hover:text-white hover:bg-tertiary rounded-full duration-300 text-xl text-tertiary grid place-content-center bg-[#4A4269]"
               >
                 <FaFacebookF />
               </a>
-              <span className="h-9 cursor-pointer w-9 hover:text-white hover:bg-tertiary rounded-full duration-300 text-xl text-tertiary grid place-content-center bg-[#4A4269]">
-                <FaXTwitter className="translate-x-px" />
-              </span>
 
               <a
                 target="_blank"
@@ -61,9 +58,6 @@ function Footer() {
               >
                 <FaInstagram />
               </a>
-              <span className="h-9 cursor-pointer w-9 hover:text-white hover:bg-tertiary rounded-full duration-300 text-xl text-tertiary grid place-content-center bg-[#4A4269]">
-                <FaLinkedin />
-              </span>
             </div>
           </aside>
         </article>

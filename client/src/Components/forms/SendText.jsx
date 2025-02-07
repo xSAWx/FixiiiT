@@ -6,6 +6,7 @@ import TextArea from "../common/TextArea";
 import Checkbox from "../common/Checkbox";
 import Button from "../common/Button";
 import { Link } from "react-router-dom";
+import { useContact } from "../../Hooks/useOrder";
 
 function SendText() {
   const [credentials, setcredentials] = useState({
@@ -32,7 +33,11 @@ function SendText() {
     });
   }, [credentials.deviceType]);
 
- 
+  const { contact, loading } = useContact();
+
+  const CONTACT = async () => {
+    await contact(credentials);
+  };
 
   return (
     <form className="grid gap-6 ">
@@ -142,11 +147,17 @@ function SendText() {
         text={
           <h1 className=" text-sm">
             I agree to the{" "}
-            <Link to="/terms-conditions" className="text-gray-700 hover:text-tertiary">
+            <Link
+              to="/terms-conditions"
+              className="text-gray-700 hover:text-tertiary"
+            >
               terms and conditions
             </Link>{" "}
             and{" "}
-            <Link to="/privacy-policy" className="text-gray-700 hover:text-tertiary">
+            <Link
+              to="/privacy-policy"
+              className="text-gray-700 hover:text-tertiary"
+            >
               privacy policy
             </Link>
             .
@@ -154,7 +165,9 @@ function SendText() {
         }
       />
 
-      <Button className="w-48">BOOK NOW</Button>
+      <Button onClick={CONTACT} className="w-48">
+        BOOK NOW
+      </Button>
     </form>
   );
 }

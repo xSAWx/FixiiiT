@@ -52,7 +52,7 @@ function Header() {
           </h1>
           <a
             target="_blank"
-            href="https://www.facebook.com"
+            href="https://www.facebook.com/fix.iiit/"
             className="h-9 cursor-pointer w-9 hover:text-white hover:bg-tertiary rounded-full duration-300 text-xl text-tertiary grid place-content-center bg-white"
           >
             <FaFacebookF />
