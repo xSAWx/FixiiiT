@@ -11,7 +11,9 @@ import orderRoutes from "./routes/order.routes.js";
 import dashboardRoutes from "./routes/dashboard.routes.js";
 
 const app = express();
-app.use(cors());
+
+app.options("*", cors()); // Enable preflight for all routes
+
 const __dirname = path.resolve();
 
 dotenv.config();
