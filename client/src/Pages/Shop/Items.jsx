@@ -22,7 +22,13 @@ function Items() {
     serialNumber: "",
     node: "",
     item: items[0]?._id,
+    model: "",
+    password: "",
+    manufacture: "",
   });
+
+  console.log(credentials);
+  
 
   const [mdl, setmdl] = useState(false);
 
@@ -90,7 +96,12 @@ function Items() {
                       className="relative z-20"
                     />
                   </div>
-                  <h1 className="">{opt.name} </h1>
+                  <div className="flex gap-6">
+                    <h1 className="">{opt.name} </h1>
+                    <h2 className="text-black/60 text-sm mt-auto">
+                      {opt?.price && `( ${opt?.price} DA )`}
+                    </h2>
+                  </div>
                 </div>
               }
               className={`text-xl text-black/90 tracking-wide p-4 border border-black/20 rounded-lg ${
@@ -103,8 +114,35 @@ function Items() {
               </div>
             </Accordion>
           ))}
-
-          <div className="grid gap-8 md:grid-cols-[2fr_1fr]">
+          <div className="md:grid grid-cols-2 gap-8">
+            <Input
+              title="Device Modal"
+              placeholder="Enter Your Deviace Model"
+              name="model"
+              set={setcredentials}
+            />
+            <Input
+              title="Item Manufactur"
+              placeholder="Enter Device Manufactur"
+              name="manufacture"
+              set={setcredentials}
+            />
+          </div>
+          <div className="md:grid grid-cols-2 gap-8">
+            <Input
+              title="Item Seriel Number"
+              placeholder="Enter Device Serial Number"
+              name="serialNumber"
+              set={setcredentials}
+            />
+            <Input
+              title="Password"
+              placeholder="Enter Device Password"
+              name="password"
+              set={setcredentials}
+            />
+          </div>
+          <div className="grid gap-8 md:grid-cols-[1fr_1fr]">
             <TextArea
               rows={7}
               title="OTHER NOTES (optional)"
@@ -115,7 +153,7 @@ function Items() {
             ></TextArea>
             <div className="">
               <h1 className="text-black/90 font-semibold tracking-wider text-[17px] mb-2 ml-1">
-                Add Image (optional)
+                Add Image
               </h1>
               <div className="relative h-60 grid place-content-center overflow-hidden text-6xl text-black/60  border border-black/50 cursor-pointer hover:bg-black/10 rounded-lg">
                 {credentials.img ? (
@@ -139,12 +177,9 @@ function Items() {
             </div>
           </div>
 
-          <Input
-            title="Item Seriel Number"
-            name="serialNumber"
-            set={setcredentials}
-          />
-          <button className="Button !px-6 ">Place An Order</button>
+          <button  className="Button !px-6 ">
+            Place An Order
+          </button>
         </aside>
       )}
       <Modal className="bg-white p-8 rounded-lg" onClose={setmdl} open={mdl}>

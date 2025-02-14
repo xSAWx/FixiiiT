@@ -1,18 +1,18 @@
 import nodemailer from "nodemailer";
 
-export const Mailer = ({ email, text }) => {
+export const Mailer = ({ email, text, subject }) => {
   const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-      user: "xsm9512368740@gmail.com",
-      pass: "gutjfedmajlelogv",
+      user: "fixiiit04@gmail.com",
+      pass: process.env.APPPASS,
     },
   });
 
   const mailOptions = {
-    from: "xsm9512368740@gmail.com",
+    from: "fixiiit04@gmail.com",
     to: email,
-    subject: "Sending Email using Node.js",
+    subject: subject || "Fix-iiit Send Email",
     html: text,
   };
 

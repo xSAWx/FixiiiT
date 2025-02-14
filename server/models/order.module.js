@@ -11,6 +11,9 @@ const orderSchema = mongoose.Schema(
     item: { type: mongoose.Schema.Types.ObjectId, ref: "Item", required: true },
     image: { type: String },
     serialNumber: { type: String },
+    manufacture: { type: String },
+    model: { type: String },
+    password: { type: String },
     totalPrice: {
       type: Number,
     },

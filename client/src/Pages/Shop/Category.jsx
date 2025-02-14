@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { useGetCategory } from "../../Hooks/useCategory";
+import { useCategoryInfo, useGetCategory } from "../../Hooks/useCategory";
 import BreadCrumbs from "../../Components/common/BreadCrumbs";
 import { MdStar } from "react-icons/md";
 import ReactQuill from "react-quill"; // Import React Quill
@@ -10,7 +10,7 @@ import Items from "./Items";
 function Category() {
   const { _id } = useParams();
   const { loading, err, category } = useGetCategory(_id);
-
+  const { info, loading: Iloading } = useCategoryInfo(_id);
   useEffect(() => {
     document.title = category?.name || "...loading";
   }, [category]);
@@ -54,15 +54,35 @@ function Category() {
 
               {/* BUYERS  */}
               <h2>Buyers :</h2>
-              <h3>0</h3>
+              <h3>
+                {Iloading ? (
+                  <div className="loader w-4 h-4 !border-[4px]" />
+                ) : (
+                  info?.orders || "N/A"
+                )}
+              </h3>
 
               {/* ORDERS  */}
               <h2>Orders on proccessing :</h2>
-              <h3>0</h3>
+              <h3>
+                {Iloading ? (
+                  <div className="loader w-4 h-4 !border-[4px]" />
+                ) : (
+                  info?.pending || "N/A"
+                )}
+              </h3>
 
               {/* PRICE  */}
-              <h2 className="line-clamp-1">Price Start From :</h2>
-              <h3>5 DA</h3>
+              <h2 className="line-clamp-1">Price Start From : </h2>
+              <h3>
+                {Iloading ? (
+                  <div className="loader w-4 h-4 !border-[4px]" />
+                ) : info?.price ? (
+                  `${info?.price} DA`
+                ) : (
+                  "N/A"
+                )}
+              </h3>
             </div>
           </aside>
         </article>

@@ -41,7 +41,6 @@ export const useCreateOrder = (setmdl) => {
   const navigate = useNavigate();
 
   const { image, upload, loading: Iload } = useUploadImg();
-  console.log(image);
 
   const create = async (credenitals) => {
     if (!auth) {
@@ -64,6 +63,8 @@ export const useCreateOrder = (setmdl) => {
       toast.error(error.response.data);
       seterr(true);
       console.log(err);
+    } finally {
+      setloading(false);
     }
   };
 
@@ -83,7 +84,6 @@ const checkAdress = (a) => {
     !a.email ||
     !a.username
   ) {
-    console.log(a);
     return true;
   }
 
@@ -264,8 +264,6 @@ export const useCreateCoil = () => {
       );
 
       toast.success("Coil Created Successfuly");
-
-      console.log(resp.data);
     } catch (error) {
       seterr(true);
     } finally {

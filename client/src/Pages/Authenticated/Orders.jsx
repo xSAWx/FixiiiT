@@ -8,6 +8,7 @@ import Modal from "../../Components/common/Modal";
 import { PiFilePdfFill } from "react-icons/pi";
 import OrderInvoic from "./OrderInvoic";
 import html2pdf from "html2pdf.js";
+import { Link } from "react-router-dom";
 
 function Orders() {
   const { orders, loading, err, getOrders } = useGetMyOrders();
@@ -42,7 +43,7 @@ function Orders() {
       <div className="!w-16 !h-16 loader !border-8 " />
     </section>
   ) : (
-    <section className="grid w-full gap-6">
+    <section className="grid w-full h-full gap-6">
       {orders.length ? (
         <>
           <h1 className="title !text-4xl self-start">Orders</h1>
@@ -126,7 +127,14 @@ function Orders() {
           </aside>
         </>
       ) : (
-        <></>
+        <div className="w-full h-full flex-1 grid place-content-center">
+          <h1 className="text-xl text-black/80 font-bold tracking-wide mb-16">
+            No Orders Yet,{" "}
+            <Link className="text-tertiary hover:text-orange-500" to="/shop">
+              Order Now
+            </Link>
+          </h1>
+        </div>
       )}
 
       <Modal onClose={setmdl} open={mdl} closabel={false}>

@@ -1,5 +1,8 @@
 import Category from "../models/category.module.js";
 import axios from "axios";
+import Order from "../models/order.module.js";
+import Item from "../models/item.module.js";
+import Option from "../models/options.module.js";
 
 //////////!   CREATE CATEGORY   !//////////
 
@@ -71,5 +74,32 @@ export const deleteCategory = async (req, res) => {
       .json({ message: "category deleted", id: req.params._id });
   } catch (error) {
     res.status(402).json(error);
+  }
+};
+
+//////////!   CATEGORY INFOS  !//////////
+
+export const categoryInfo = async ({ params }, res) => {
+  try {
+    const items = await Item.find({ category: params._id }).select("_id");
+
+    const orders = await Order.countDocuments({
+      item: { $in: items.map((i) => i._id) },
+    });
+    const pending = await Order.countDocuments({
+      item: { $in: items.map((i) => i._id) },
+      status: { $in: ["processing", "pending"] },
+    });
+
+    const options = await Option.find({
+      item: { $in: items.map((i) => i._id) },
+    })
+      .select("price")
+      .sort({ price: 1 })
+      .limit(1);
+
+    res.json({ pending, orders, price: options[0]?.price || "N/A" });
+  } catch (error) {
+    res.status(401).json(error);
   }
 };

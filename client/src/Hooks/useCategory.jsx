@@ -151,3 +151,28 @@ export const useDeleteCategory = () => {
 
   return { loading, err, Delete };
 };
+
+////////!    INFO CATEGORY    !////////
+
+export const useCategoryInfo = (_id) => {
+  const [loading, setloading] = useState(false);
+  const [err, seterr] = useState(false);
+  const [info, setinfo] = useState();
+  const getInfo = async () => {
+    try {
+      setloading(true);
+      const resp = await axios.get(`/api/category/info/${_id}`);
+      setinfo(resp.data);
+    } catch (error) {
+      seterr(true);
+    } finally {
+      setloading(false);
+    }
+  };
+
+  useEffect(() => {
+    getInfo();
+  }, []);
+
+  return { loading, err, getInfo, info };
+};

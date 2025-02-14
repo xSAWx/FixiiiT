@@ -147,10 +147,10 @@ export const contact = async ({ body }, res) => {
     console.log();
 
     Mailer({
-      email: "soso9512368740@gmail.com",
+      email: "fixiiit04@gmail.com",
       text: contactHTML({
         logoURL: "https://i.ibb.co/6RRD03j5/qsdqsd.png",
-        supportEmail: "contact@fix-iiit.com",
+        supportEmail: "fixiiit04@gmail.com",
         username: body?.username,
         OTP: Object.keys(body).map(
           (key, i) => `<p>${key}: ${Object.values(body)[i]}</p>`
