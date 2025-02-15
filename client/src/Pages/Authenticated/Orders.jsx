@@ -20,7 +20,7 @@ function Orders() {
   const [suremdl, setsuremdl] = useState(false);
 
   const handleDelete = async () => {
-    await Delete(order._id);
+    await Delete(order?._id);
     getOrders();
     setsuremdl(false);
   };
@@ -43,10 +43,10 @@ function Orders() {
       <div className="!w-16 !h-16 loader !border-8 " />
     </section>
   ) : (
-    <section className="grid w-full h-full gap-6">
+    <section className="w-full h-full gap-6">
       {orders.length ? (
         <>
-          <h1 className="title !text-4xl self-start">Orders</h1>
+          <h1 className="title !text-4xl self-start mb-4">Orders</h1>
 
           <aside className="grid grid-cols-[1fr_1.6fr_2fr_1.6fr_1.6fr_2fr] overflow-auto max-h-[600px]  my-auto border border-black/20 p-0.5 gap-0.5">
             {["Order", "Item", "Date", "Status", "Total", "Action"].map((e) => (
@@ -60,7 +60,7 @@ function Orders() {
                 {/* ORDER  */}
                 <div
                   onClick={() => {
-                    setorder({ _id: order._id, i });
+                    setorder({ _id: order?._id, i });
                     setmdl(true);
                   }}
                   className="p-2 px-4 cursor-pointer grid place-content-center text-black/60 font-medium border line-clamp-1 text-base border-black/20"
@@ -72,12 +72,12 @@ function Orders() {
 
                 {/* ITEM  */}
                 <div className="p-2 px-4 grid items-center text-black/60 font- border line-clamp-1 text-base border-black/20">
-                  {order.item.name}
+                  {order?.item?.name}
                 </div>
 
                 {/* DATE  */}
                 <div className="p-2 px-4 grid items-center text-black/60 min-w-36 border line-clamp-1 text-base border-black/20">
-                  {moment(order.createdAt).fromNow()}
+                  {moment(order?.createdAt).fromNow()}
                 </div>
 
                 {/* STATUS  */}
@@ -89,34 +89,34 @@ function Orders() {
                     }}
                     className="px-2 py-1 rounded-lg text-center"
                   >
-                    {order.status}
+                    {order?.status}
                   </h1>
                 </div>
 
                 {/* PRICE  */}
                 <div className="p-2 px-4 items-center flex text-black/60 font- border line-clamp-1 text-base border-black/20">
-                  {order.totalPrice ? `${order.totalPrice} DA` : "N/A"}
+                  {order?.totalPrice ? `${order?.totalPrice} DA` : "N/A"}
                 </div>
 
                 {/* ACTION  */}
                 <div className="flex p-2 border border-black/20 items-center justify-between">
                   <BsEyeFill
                     onClick={() => {
-                      setorder({ _id: order._id, i });
+                      setorder({ _id: order?._id, i });
                       setmdl(true);
                     }}
                     className="text-3xl text-black/70 mx-1 cursor-pointer  duration-300 hover:scale-105"
                   />
                   <PiFilePdfFill
                     onClick={() => {
-                      setorder({ _id: order._id, i });
+                      setorder({ _id: order?._id, i });
                       handleDownload();
                     }}
                     className="text-3xl text-black/70 mx-1 cursor-pointer  duration-300 hover:scale-105"
                   />
                   <MdDelete
                     onClick={() => {
-                      setorder({ _id: order._id, i });
+                      setorder({ _id: order?._id, i });
                       setsuremdl(true);
                     }}
                     className="text-4xl text-red-600 mx-1 cursor-pointer   hover:rotate-12 duration-300 hover:scale-110"

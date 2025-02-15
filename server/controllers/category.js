@@ -84,10 +84,10 @@ export const categoryInfo = async ({ params }, res) => {
   try {
     const items = await Item.find({ category: params._id }).select("_id");
 
-    const orders = await Order.countDocuments({
+    const orders = await order?.countDocuments({
       item: { $in: items.map((i) => i._id) },
     });
-    const pending = await Order.countDocuments({
+    const pending = await order?.countDocuments({
       item: { $in: items.map((i) => i._id) },
       status: { $in: ["processing", "pending"] },
     });

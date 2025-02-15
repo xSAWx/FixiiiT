@@ -10,99 +10,126 @@ function TOS() {
         title="Terms & Conditions"
       />
       <article className="py-20 grid gap-4 px-14 max-w-7xl text-black/60 font-medium mx-auto">
+        <Title>Terms & Conditions for [Fixiiit.store]</Title>
         <h1 className="font-light mb-2 text-black">
           Last updated: October 2023
         </h1>
-        <Title>Terms & conditions</Title>
+        <h1 className="font-light mb-2 text-black">
+          Terms & Conditions for [Fixiiit.store]
+        </h1>
+        <Title>1. Acceptance of Terms</Title>
         <p>
-          Turpis gravida turpis mauris magna in libero ac dis consequat.
-          Imperdiet ac semper quisque volutpat consectetur cursus non pretium
-          pharetra. Nisl duis blandit dui imperdiet nec id integer. Elit varius
-          cras arcu tempor integer in.
+          By submitting a device for repair, booking a service, or using our
+          website, you agree to comply with these T&Cs.
         </p>
         <p>
-          Quam nunc arcu nunc a lobortis convallis magnis dolor. Integer
-          malesuada vel mi eu elementum. Etiam eget urna quis dui amet facilisis
-          fringilla sed. Massa vitae accumsan viverra in morbi nec volutpat
-          aenean tortor. At nec sagittis eget placerat. Mi accumsan massa vitae
-          etiam nisi suspendisse condimentum elementum. Arcu varius id ipsum
-          arcu et diam non rutrum. Auctor elit malesuada non aenean posuere
-          mattis iaculis mauris nibh.
+          We reserve the right to update these terms at any time. Continued use
+          after changes constitutes acceptance.
         </p>
-        <Title>Intellectual property and acceptable use</Title>
+        <Title>2. Services Offered</Title>
         <p>
-          Turpis gravida turpis mauris magna in libero ac dis consequat.
-          Imperdiet ac semper quisque volutpat consectetur cursus non pretium
-          pharetra. Nisl duis blandit dui imperdiet nec id integer. Elit varius
-          cras arcu tempor integer in. Quam nunc arcu nunc a lobortis convallis
-          magnis dolor. Integer malesuada vel mi eu elementum. Etiam eget urna
-          quis dui amet facilisis fringilla sed. Massa vitae accumsan viverra in
-          morbi nec volutpat aenean tortor. At nec sagittis eget placerat. Mi
-          accumsan massa vitae etiam nisi suspendisse condimentum elementum.
-          Arcu varius id ipsum arcu et diam non rutrum. Auctor elit malesuada
-          non aenean posuere mattis iaculis mauris nibh.
+          Repairs: We diagnose and repair phones, tablets, laptops, PCs, and
+          related devices.
         </p>
-        <Title>Limitation of liability</Title>
         <p>
-          Turpis gravida turpis mauris magna in libero ac dis consequat.
-          Imperdiet ac semper quisque volutpat consectetur cursus non pretium
-          pharetra. Nisl duis blandit dui imperdiet nec id integer. Elit varius
-          cras arcu tempor integer in.
+          Diagnostics: A non-refundable diagnostic fee of [1500 DA amount] may
+          apply if repairs are declined.
+        </p>
+        <p>
+          Parts: We use [OEM/third-party/refurbished] parts unless otherwise
+          agreed.
+        </p>
+        <p>
+          Estimates: Quotes are valid for [X days]. Final costs may vary if
+          additional issues are found.
+        </p>
+        <Title>3. Customer Responsibilities</Title>
+        <p>
+          Backup Data: You are responsible for backing up data before repairs.
+          We are not liable for data loss.
         </p>
 
         <p>
-          Quam nunc arcu nunc a lobortis convallis magnis dolor. Integer
-          malesuada vel mi eu elementum. Etiam eget urna quis dui amet facilisis
-          fringilla sed. Massa vitae accumsan viverra in morbi nec volutpat
-          aenean tortor. At nec sagittis eget placerat. Mi accumsan massa vitae
-          etiam nisi suspendisse condimentum elementum. Arcu varius id ipsum
-          arcu et diam non rutrum. Auctor elit malesuada non aenean posuere
-          mattis iaculis mauris nibh.
-        </p>
-        <ul className="list-decimal pl-6 grid gap-4 marker:text-tertiary marker:text-lg my-4">
-          <li className="text-black ">
-            Imperdiet ac semper quisque volutpat consectetur cursus non pretium
-            pharetra.
-          </li>
-          <li className="text-black">
-            Nisl duis blandit dui imperdiet nec id integer.
-          </li>
-          <li className="text-black">
-            Quam nunc arcu nunc a lobortis convallis magnis dolor.
-          </li>
-          <li className="text-black">
-            Massa vitae accumsan viverra in morbi nec volutpat aenean tortor.
-          </li>
-        </ul>
-        <Title>Registration</Title>
-        <p>
-          Turpis gravida turpis mauris magna in libero ac dis consequat.
-          Imperdiet ac semper quisque volutpat consectetur cursus non pretium
-          pharetra. Nisl duis blandit dui imperdiet nec id integer. Elit varius
-          cras arcu tempor integer in. Quam nunc arcu nunc a lobortis convallis
-          magnis dolor. Integer malesuada vel mi eu elementum. Etiam eget urna
-          quis dui amet facilisis fringilla sed. Massa vitae accumsan viverra in
-          morbi nec volutpat aenean tortor. At nec sagittis eget placerat. Mi
-          accumsan massa vitae etiam nisi suspendisse condimentum elementum.
-          Arcu varius id ipsum arcu et diam non rutrum. Auctor elit malesuada
-          non aenean posuere mattis iaculis mauris nibh.
-        </p>
-        <Title>Password and security</Title>
-        <p>
-          Turpis gravida turpis mauris magna in libero ac dis consequat.
-          Imperdiet ac semper quisque volutpat consectetur cursus non pretium
-          pharetra. Nisl duis blandit dui imperdiet nec id integer. Elit varius
-          cras arcu tempor integer in.
+          Device Condition: Disclose existing damage (e.g., water exposure,
+          cracks) before service.
         </p>
         <p>
-          Quam nunc arcu nunc a lobortis convallis magnis dolor. Integer
-          malesuada vel mi eu elementum. Etiam eget urna quis dui amet facilisis
-          fringilla sed. Massa vitae accumsan viverra in morbi nec volutpat
-          aenean tortor. At nec sagittis eget placerat. Mi accumsan massa vitae
-          etiam nisi suspendisse condimentum elementum. Arcu varius id ipsum
-          arcu et diam non rutrum. Auctor elit malesuada non aenean posuere
-          mattis iaculis mauris nibh.
+          Pickup: Unclaimed devices after [3 days] may incur storage fees or be
+          considered abandoned.
         </p>
+
+        <Title>4. Payment & Fees</Title>
+        <p>
+          Payment: Due at pickup unless otherwise agreed. We accept [cash,
+          credit/debit cards, PayPal].
+        </p>
+        <p>
+          Deposits: Non-refundable deposits may be required for high-cost parts
+          or special orders.
+        </p>
+
+        <Title>5. Warranties</Title>
+        <p>
+          Repair Warranty: Repairs are guaranteed for [X days/months] unless
+          otherwise stated.
+        </p>
+        <p>Exclusions: Warranty voids if:</p>
+        <p>The device is tampered with post-repair.</p>
+        <p>
+          Damage results from misuse, accidents, or unauthorized modifications.
+        </p>
+        <p>Non-original parts are used without consent.</p>
+        <p>
+          Claims: Warranty claims require proof of repair (invoice/receipt).
+        </p>
+
+        <Title>6. Limitation of Liability</Title>
+        <p>We are not liable for:</p>
+        <p>Data loss during repairs.</p>
+        <p>Pre-existing or undiagnosed issues.</p>
+        <p>Damage caused by shipping (if applicable).</p>
+        <p>Incidental/consequential damages (e.g., lost profits).</p>
+        <p>Total liability is limited to the repair cost paid.</p>
+
+        <Title>7. Cancellations & Refunds</Title>
+        <p>
+          Cancellations: Notify us at least [X hours/days] before your
+          appointment to avoid fees.
+        </p>
+        <p>
+          Refunds: Refunds for declined repairs are issued minus diagnostic
+          fees. No refunds after parts are ordered.
+        </p>
+
+        <Title>8. Intellectual Property</Title>
+        <p>
+          Website content (logos, text, images) is owned by [Fixiiit.store] and
+          protected by copyright laws.
+        </p>
+
+        <Title>9. Dispute Resolution</Title>
+        <p>
+          Disputes will be resolved through FixiiiT/Ain Beida in [Oum el Bouaghi
+          / Algeria ].
+        </p>
+        <p>
+          Governing Law: These terms are governed by the laws of [Your
+          Country/State].
+        </p>
+
+        <Title>10. Shipping (If Applicable)</Title>
+        <p>
+          Risk: Customers assume all shipping risks. We recommend insurance.
+        </p>
+        <p>Costs: Shipping fees are non-refundable.</p>
+
+        <Title>11. Right to Refuse Service</Title>
+
+        <p>We may refuse service for:</p>
+
+        <p>Devices with illegal modifications (e.g., jailbroken phones).</p>
+        <p>Safety risks (e.g., swollen batteries, severe liquid damage).</p>
+        <p>Abusive or threatening behavior.</p>
       </article>
     </section>
   );
