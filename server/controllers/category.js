@@ -69,6 +69,7 @@ export const deleteCategory = async (req, res) => {
 
   try {
     await Category.findByIdAndDelete(req.params._id);
+    await Item.deleteMany({ category: req.params._id });
     return res
       .status(202)
       .json({ message: "category deleted", id: req.params._id });

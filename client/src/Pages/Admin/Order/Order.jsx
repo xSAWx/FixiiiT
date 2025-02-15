@@ -28,8 +28,8 @@ import Checkbox from "../../../Components/common/Checkbox";
 function Order({ o, getAll, setSelect, select }) {
   const { copyToClipboard, isCopied } = useClipboard();
   const [credentials, setcredentials] = useState({
-    status: o.status,
-    totalPrice: o.totalPrice || 0,
+    status: o?.status,
+    totalPrice: o?.totalPrice || 0,
   });
   const [mdl, setmdl] = useState(false);
   const [Zrmdl, setZrmdl] = useState(false);
@@ -38,13 +38,13 @@ function Order({ o, getAll, setSelect, select }) {
 
   // DELETE
   const DeleteHandler = async () => {
-    await Delete(o._id);
+    await Delete(o?._id);
     await getAll();
   };
 
   // UPDATE
   const handleUpdate = async () => {
-    await Update(o._id, credentials);
+    await Update(o?._id, credentials);
     await getAll();
   };
 
@@ -54,12 +54,12 @@ function Order({ o, getAll, setSelect, select }) {
         <TH>
           <div className="grid place-content-center">
             <Checkbox
-              check={select.find((e) => e === o._id)}
+              check={select.find((e) => e === o?._id)}
               onChange={() => {
                 setSelect((s) =>
-                  s.find((e) => e === o._id)
-                    ? s.filter((e) => e !== o._id)
-                    : [...s, o._id]
+                  s.find((e) => e === o?._id)
+                    ? s.filter((e) => e !== o?._id)
+                    : [...s, o?._id]
                 );
               }}
             />
@@ -70,16 +70,16 @@ function Order({ o, getAll, setSelect, select }) {
         <TH>
           <button
             className="grid hover:scale-110 duration-200 relative text-2xl mx-auto rounded-md hover:bg-black/20 text-black/80 w-10 h-10 justify-center cursor-pointer"
-            onClick={() => copyToClipboard(o._id)}
+            onClick={() => copyToClipboard(o?._id)}
           >
             <MdContentPaste
               className={`absolute left-1/2 top-1/2 -translate-y-1/2  -translate-x-1/2 scale-0  duration-200 ${
-                isCopied !== o._id && "scale-100 delay-200"
+                isCopied !== o?._id && "scale-100 delay-200"
               }`}
             />
             <MdCheck
               className={`absolute left-1/2 top-1/2 -translate-y-1/2  -translate-x-1/2 scale-0  duration-200 ${
-                isCopied === o._id && "scale-100 delay-200"
+                isCopied === o?._id && "scale-100 delay-200"
               }`}
             />
           </button>
@@ -89,7 +89,7 @@ function Order({ o, getAll, setSelect, select }) {
         <TH className="justify-center">
           <img
             onClick={() => setmdl(true)}
-            src={o.image}
+            src={o?.image}
             className="max-h-12 cursor-pointer max-w-full"
           />
         </TH>
@@ -123,14 +123,14 @@ function Order({ o, getAll, setSelect, select }) {
 
         {/* DATE  */}
         <TH className="break-normal">
-          {new Date(o.createdAt).toISOString().split("T")[0]}
+          {new Date(o?.createdAt).toISOString().split("T")[0]}
         </TH>
 
         {/* CATEGORY  */}
-        <TH>{o.item.category.name}</TH>
+        <TH>{o?.item?.category?.name}</TH>
 
         {/* ITEM  */}
-        <TH>{o.item.name}</TH>
+        <TH>{o?.item?.name}</TH>
 
         {/* TOTAL PRICE  */}
         <TH>
@@ -172,7 +172,7 @@ function Order({ o, getAll, setSelect, select }) {
                 <button
                   onClick={handleUpdate}
                   disabled={
-                    credentials.status === o.status &&
+                    credentials.status === o?.status &&
                     credentials.totalPrice === o?.totalPrice
                   }
                   className="pl-4 py-2 hover:bg-black/10 items-center flex gap-3 w-full text-left rounded-md disabled:opacity-50 cursor-pointer"
@@ -188,7 +188,7 @@ function Order({ o, getAll, setSelect, select }) {
 
                 <button
                   onClick={() => setZrmdl(true)}
-                  //   onDoubleClick={() => DeleteHandler(o._id)}
+                  //   onDoubleClick={() => DeleteHandler(o?._id)}
                   className=" pl-4 py-2 hover:bg-black/10 items-center flex gap-3 w-full text-left rounded-md  disabled:opacity-50 cursor-pointer "
                 >
                   <MdLocalShipping className="text-2xl" /> Send Package
@@ -229,7 +229,7 @@ export const OrderDetails = ({ o }) => {
     <>
       <button
         onClick={() => setmdl(true)}
-        //   onDoubleClick={() => DeleteHandler(o._id)}
+        //   onDoubleClick={() => DeleteHandler(o?._id)}
         className=" pl-4 py-2 hover:bg-black/10 items-center flex gap-3 w-full text-left rounded-md  disabled:opacity-50 cursor-pointer "
       >
         <MdVisibility className="text-2xl" /> Order Details
@@ -242,7 +242,7 @@ export const OrderDetails = ({ o }) => {
 };
 
 const MDL = ({ o, set }) => {
-  const { order, loading } = useGetOrder(o._id);
+  const { order, loading } = useGetOrder(o?._id);
   const { address } = addressSlice();
 
   return (
@@ -251,7 +251,7 @@ const MDL = ({ o, set }) => {
       <header className="w-full grid sticky top-0 bg-white grid-cols-5 p-4 pb-2 max-h-16 items-center ">
         <span></span>
         <h1 className="title md:!text-2xl text-lg col-span-3 text-center">
-          {o.item.name}
+          {o?.item.name}
         </h1>
         <MdClose
           onClick={() => set(false)}
@@ -261,10 +261,10 @@ const MDL = ({ o, set }) => {
 
       {/* IMAGE  */}
       <div>
-        {o.image && (
+        {o?.image && (
           <>
             <img
-              src={o.image}
+              src={o?.image}
               className="max-h-72 w-10/12 mx-auto object-cover mb-4 shadow-lg shadow-black/40 rounded-md"
             />
           </>
@@ -274,10 +274,10 @@ const MDL = ({ o, set }) => {
         {/* ORDER DETAILS  */}
         <aside className="grid mx-auto w-10/12 mt-4  font-semibold ">
           <h1 className="text-tertiary font-bold">Order Details</h1> <h2></h2>
-          <Data data={o._id}>Order Id :</Data>
+          <Data data={o?._id}>Order Id :</Data>
           <Data data={order?.item?.category?.name}>Category :</Data>
-          <Data data={o.item.name}>Item :</Data>
-          <Data data={`${o.totalPrice} DA`}>PRICE :</Data>
+          <Data data={o?.item.name}>Item :</Data>
+          <Data data={`${o?.totalPrice} DA`}>PRICE :</Data>
           {o?.options?.length ? (
             o?.options?.map((oo, i) => (
               <Data key={oo} data={oo}>
@@ -287,7 +287,7 @@ const MDL = ({ o, set }) => {
           ) : (
             <></>
           )}
-          <Data data={<p style={{ color: color(o.status) }}>{o.status}</p>}>
+          <Data data={<p style={{ color: color(o?.status) }}>{o?.status}</p>}>
             Status :
           </Data>
           <Data data={<p>{order?.node}</p>}>Note :</Data>

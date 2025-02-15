@@ -106,11 +106,11 @@ function Users() {
             <>
               {[...Array(1)].map(() => (
                 <TR className=" ">
-                  <TH className="py-1">{u.username}</TH>
-                  <TH>{u.email}</TH>
-                  <TH>{new Date(u.createdAt).toISOString().split("T")[0]}</TH>
-                  <TH>{u.phoneNumber}</TH>
-                  <TH>{u.state}</TH>
+                  <TH className="py-1">{u?.username}</TH>
+                  <TH>{u?.email}</TH>
+                  <TH>{new Date(u?.createdAt).toISOString().split("T")[0]}</TH>
+                  <TH>{u?.phoneNumber}</TH>
+                  <TH>{u?.state}</TH>
                   <TH>
                     <div className="flex gap-2 justify-center items-center min-w-full">
                       <Dropdown
@@ -135,8 +135,8 @@ function Users() {
 
                           <div className="w-full h-px my-1.5 bg-black/20" />
                           <button
-                            disabled={u.isAdmin}
-                            onClick={() => DeleteHandler(u._id)}
+                            disabled={u?.isAdmin}
+                            onClick={() => DeleteHandler(u?._id)}
                             className="pl-4 py-2 hover:bg-black/10 items-center flex gap-3 w-full text-left rounded-md text-red-600 disabled:opacity-50 cursor-pointer hover:text-red-700"
                           >
                             {false ? (
@@ -153,11 +153,11 @@ function Users() {
                     <ZrSend
                       open={mdl}
                       setopen={setmdl}
-                      o={{ user: { _id: u._id } }}
+                      o={{ user: { _id: u?._id } }}
                     />
                     {/* <button
-                      disabled={u.isAdmin}
-                      onDoubleClick={() => DeleteHandler(u._id)}
+                      disabled={u?.isAdmin}
+                      onDoubleClick={() => DeleteHandler(u?._id)}
                       className="py-1 rounded-lg text-sm disabled:opacity-60 disabled:cursor-not-allowed hover:text-red-600 hover:bg-white border-red-600 border w-full bg-red-600 text-white"
                     >
                       Remove

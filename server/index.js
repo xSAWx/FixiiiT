@@ -12,7 +12,6 @@ import dashboardRoutes from "./routes/dashboard.routes.js";
 
 const app = express();
 
-
 const __dirname = path.resolve();
 
 dotenv.config();
