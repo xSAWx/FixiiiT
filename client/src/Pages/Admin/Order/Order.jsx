@@ -12,7 +12,7 @@ import {
   MdVisibility,
 } from "react-icons/md";
 import { useClipboard } from "../../../Utils/utils";
-import { TH } from "../Users";
+import { TH } from "../User/Users";
 import { TR } from "./Orders";
 import {
   useDeleteOrderById,

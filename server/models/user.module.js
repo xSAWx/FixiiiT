@@ -21,6 +21,7 @@ const userSchema = mongoose.Schema(
     state: { type: String },
     city: { type: String },
     postalCode: { type: String },
+    role: { type: String, default: "normal" },
   },
   { timestamps: true }
 );

@@ -30,7 +30,7 @@ import ORders from "./Pages/Admin/Order/Orders";
 import ChangePassword from "./Components/forms/ChangePassword";
 import Admin from "./Pages/Admin/Admin";
 import Dashboard from "./Pages/Admin/Dashboard";
-import Users from "./Pages/Admin/Users";
+import Users from "./Pages/Admin/User/Users";
 import Categories from "./Pages/Admin/Categories/Categories";
 import AddCategory from "./Pages/Admin/Categories/AddCategory";
 import EditCategory from "./Pages/Admin/Categories/EditCategory";

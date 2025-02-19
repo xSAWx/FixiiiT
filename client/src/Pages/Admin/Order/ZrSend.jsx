@@ -18,7 +18,9 @@ function ZrSend({ open, setopen, o }) {
 }
 
 const MDL = ({ o, setopen }) => {
-  const { user, loading } = useGetOneUser(o?.Tracking ? "" : o?.user?._id);
+  const { user, loading, getOne } = useGetOneUser(
+    o?.Tracking ? "" : o?.user?._id
+  );
   const { tracking, loading: Tloading } = useGetTracking(o?.Tracking);
   const { create, loading: Cloading } = useCreateCoil();
 
@@ -35,6 +37,10 @@ const MDL = ({ o, setopen }) => {
     TypeLivraison: "0",
     IDWilaya: "1",
   });
+
+  useEffect(() => {
+    getOne();
+  }, [o]);
 
   useEffect(() => {
     if (user)
@@ -72,7 +78,7 @@ const MDL = ({ o, setopen }) => {
   return (
     <form
       onSubmit={handleSubmit}
-      className=" md:w-[600px] w-screen  bg-white text-lg rounded-xl pb-5"
+      className="md:w-[600px] w-screen  bg-white text-lg rounded-xl pb-5"
     >
       <header className="w-full border-b border-black/20 sticky top-0 rounded-xl z-20 bg-white grid grid-cols-8 items-center py-5">
         <div className=""></div>

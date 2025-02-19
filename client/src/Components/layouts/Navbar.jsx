@@ -109,10 +109,7 @@ const Li = ({ to, children }) => {
     <Link
       to={to}
       className={`hover:text-tertiary duration-200 ${
-        pathname === to ||
-        (pathname.includes(to)
-          ? "text-tertiary text font-extrabold scale-105"
-          : "")
+        pathname === to ? "text-tertiary text font-extrabold scale-105" : ""
       }`}
     >
       {children}
@@ -191,7 +188,7 @@ const Navs = () => (
     <Li to={"/"}>HOME</Li>
 
     {/* OWNER  SERVICE  */}
-    <Dropdown
+    {/* <Dropdown
       chevron="-translate-y-0.5"
       direction={{ x: "left", y: "bottom" }}
       className={""}
@@ -202,10 +199,12 @@ const Navs = () => (
       }
     >
       <aside className="w-60  bg-white  shadow-xl shadow-black/30 rounded-md translate-y-6 p-4 grid gap-2">
-        <Li to="/shop">I Need Repair</Li>
+        
         <Li to="/myaccount/">My Account</Li>
       </aside>
-    </Dropdown>
+    </Dropdown> */}
+
+    <Li to="/shop">I Need Repair</Li>
     <Li to="/mailin">MAIL-IN</Li>
     {/* PAGES  */}
     {/* <Dropdown
