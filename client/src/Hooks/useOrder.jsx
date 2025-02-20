@@ -270,9 +270,7 @@ export const useCreateCoil = () => {
       setloading(true);
 
       const resp = await axios.post(
-        `http://localhost:1337/api/order/coil/${
-          _id || "67901da92d8f14643a385852"
-        }`,
+        `/api/order/coil/${_id || "67901da92d8f14643a385852"}`,
         credenitals
       );
 
