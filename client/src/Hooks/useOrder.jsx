@@ -55,7 +55,10 @@ export const useCreateOrder = (setmdl) => {
 
     try {
       const image = await upload(credenitals.img);
-      const resp = await axios.post("/api/order", { ...credenitals, image });
+      const resp = await axios.post("/api/order", {
+        ...credenitals,
+        image,
+      });
 
       navigate("/myaccount/orders");
       toast.success("Order Create Successfuly");
@@ -88,6 +91,16 @@ const checkAdress = (a) => {
   }
 
   return false;
+};
+
+const generateRandomString = (length) => {
+  const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ9512368740";
+  let result = "";
+  for (let i = 0; i < length; i++) {
+    const randomIndex = Math.floor(Math.random() * characters.length);
+    result += characters.charAt(randomIndex);
+  }
+  return result;
 };
 
 //////////!   DELETE MY ORDER   !/////////
@@ -266,6 +279,7 @@ export const useCreateCoil = () => {
       toast.success("Coil Created Successfuly");
     } catch (error) {
       seterr(true);
+      toast.error("Somthing Went Wrong");
     } finally {
       setloading(false);
     }

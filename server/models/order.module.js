@@ -25,7 +25,7 @@ const orderSchema = mongoose.Schema(
     options: [{ type: mongoose.Schema.Types.ObjectId, ref: "Option" }],
     node: { type: String },
     coupon: { type: String },
-    TRK: { type: String, default: generateRandomString(9) },
+    TRK: { type: String, default: () => generateRandomString(9), unique: true },
     Tracking: { type: String },
   },
   { timestamps: true }

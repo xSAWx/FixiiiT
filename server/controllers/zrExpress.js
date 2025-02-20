@@ -7,7 +7,6 @@ import { contactHTML, SendPassword } from "../utils/html.js";
 //////!  CREATE COIL  !//////
 
 export const addCoil = async ({ body, params }, res) => {
-  console.log(body);
 
   try {
     const resp = await axios.post(
@@ -23,8 +22,6 @@ export const addCoil = async ({ body, params }, res) => {
       }
     );
 
-    console.log(resp.data);
-
     if (params._id) {
       var order = await Order.findByIdAndUpdate(
         params._id,
@@ -35,6 +32,7 @@ export const addCoil = async ({ body, params }, res) => {
         { new: true }
       );
     }
+    res.header("Access-Control-Allow-Origin", "*");
 
     res.status(202).json(order || resp.data.Colis[0]);
   } catch (error) {

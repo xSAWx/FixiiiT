@@ -32,7 +32,7 @@ router
   .get("/:_id", userAuth, getOrder)
   .delete("/my/:_id", userAuth, deleteOrder)
   .delete("/:_id", userAuth, adminAuth, deleteOrder)
-  .post("/coil/:_id",cors(), addCoil)
-  .post("/coils",cors(), sendCoils);
+  .post("/coil/:_id", addCoil)
+  .post("/coils", cors(), sendCoils);
 
 export default router;

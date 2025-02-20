@@ -15,7 +15,11 @@ const app = express();
 const __dirname = path.resolve();
 
 dotenv.config();
-app.use(cors());
+app.use(
+  cors({
+    origin: "*",
+  })
+);
 app.options("*", cors()); // Enable preflight for all routes
 app.use(express.json());
 app.use(cookieParser());
