@@ -258,6 +258,7 @@ export const getAllAccounts = async (req, res) => {
         current: Number(req.query?.page) || 1,
         total: Math.ceil(totalCount / req.query?.limit) || 1,
       },
+      total: totalCount,
     });
   } catch (error) {
     res.status(406).json({ error });

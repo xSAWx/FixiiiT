@@ -16,6 +16,7 @@ const orderSchema = mongoose.Schema(
     password: { type: String },
     totalPrice: {
       type: Number,
+      default: 0,
     },
     status: {
       type: String,

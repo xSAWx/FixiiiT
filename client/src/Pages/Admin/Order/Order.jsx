@@ -24,6 +24,7 @@ import { addressSlice } from "../../../Store/user";
 import Dropdown from "../../../Components/common/Dropdown";
 import ZrSend from "./ZrSend";
 import Checkbox from "../../../Components/common/Checkbox";
+import { useGetOneUser } from "../../../Hooks/useSign";
 
 function Order({ o, getAll, setSelect, select }) {
   const { copyToClipboard, isCopied } = useClipboard();
@@ -243,7 +244,8 @@ export const OrderDetails = ({ o }) => {
 
 const MDL = ({ o, set }) => {
   const { order, loading } = useGetOrder(o?._id);
-  const { address } = addressSlice();
+  const { user } = useGetOneUser(o?.user?._id);
+  console.log({ o });
 
   return (
     <article className="max-h-[90dvh] max-w-[95vw] w-[650px]  overflow-auto scroll-thin rounded-lg min-h-96 bg-white  border-fif">
@@ -298,10 +300,11 @@ const MDL = ({ o, set }) => {
         {/* BILLING DETAILS  */}
         <aside className="grid mx-auto w-10/12 mt-4  font-semibold ">
           <h1 className="text-tertiary font-bold">Billing Details</h1> <h2></h2>
-          {order?.user &&
-            Object.keys(address).map((e, i) => (
-              <Data data={Object.values(address)[i]}>{e} : </Data>
-            ))}
+          {user &&
+            Object.keys(user).map((e, i) => {
+              if (e !== "isAdmin" && e !== "isVerified" && e !== "password")
+                return <Data data={Object.values(user)[i]}>{e} : </Data>;
+            })}
         </aside>
       </div>
       <div className="flex w-full justify-center">

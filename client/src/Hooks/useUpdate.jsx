@@ -70,6 +70,20 @@ export const useUpdateAddress = (setmdl) => {
       });
 
       if (setmdl) setmdl(false);
+      if (resp) {
+        setAddress({
+          firstName: resp.data?.firstName,
+          lastName: resp.data?.lastName,
+          state: resp.data?.state,
+          city: resp.data?.city,
+          phoneNumber: resp.data?.phoneNumber,
+          streetAddress1: resp.data?.streetAddress,
+          postalCode: resp.data?.postalCode,
+          streetAddress1: resp.data?.streetAddress1,
+          streetAddress2: resp.data?.streetAddress2,
+        });
+        window.location.reload();
+      }
 
       seterr({ success: true });
     } catch (error) {

@@ -195,6 +195,7 @@ export const useLogout = () => {
       localStorage.clear();
       await axios.get("/api/auth/logout");
       toast.error("logged out successfuly");
+      window.location.reload();
     } catch (error) {
       if (error.response.status === 401) seterr("Not Authorized");
 
@@ -207,7 +208,8 @@ export const useLogout = () => {
   const noProfile = async () => {
     setloading(true);
     try {
-      await axios.get("/api/auth/profile");
+      const resp = await axios.get("/api/auth/profile");
+      
     } catch (error) {
       if (error.response.data.error === "UnAuthorized - No Token Provided")
         await logout();
@@ -375,11 +377,10 @@ export const useUpdateUser = (_id) => {
     try {
       setloading(true);
       const resp = await axios.put(`/api/auth/update/${_id}`, credentials);
-      toast.success("Profile Updated Successfuly")
+      toast.success("Profile Updated Successfuly");
     } catch (error) {
-      toast.error("Somthing Went Wrong")
+      toast.error("Somthing Went Wrong");
       seterr(true);
-
     } finally {
       setloading(false);
     }

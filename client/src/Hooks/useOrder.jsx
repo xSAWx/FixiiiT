@@ -47,6 +47,9 @@ export const useCreateOrder = (setmdl) => {
       navigate("/myaccount");
       return;
     }
+
+    console.log(a);
+    
     if (checkAdress(a)) {
       setmdl(true);
       return;

@@ -154,6 +154,7 @@ export const lastWeekOrders = async (req, res) => {
         $gte: lastWeekStart,
       },
     })
+      .limit(6)
       .select("-options -node -image -__v")
       .populate([
         { path: "user", select: "username" },
@@ -166,4 +167,3 @@ export const lastWeekOrders = async (req, res) => {
     res.status(402).json(error);
   }
 };
-

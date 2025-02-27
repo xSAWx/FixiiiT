@@ -147,7 +147,7 @@ const SideNav = ({ open, setopen }) => {
           {/* LIST  */}
 
           <article className="p-6 text-black grid gap-4">
-            <Li to="/qsd">HOME</Li>
+            <Li to="/">HOME</Li>
 
             {/* OWNER SERVICE  */}
             <Accordion className="text-qua" title="OUR SERVICES">

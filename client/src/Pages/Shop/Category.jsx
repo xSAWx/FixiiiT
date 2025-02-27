@@ -41,7 +41,7 @@ function Category() {
             <h1 className="text-fif text-3xl font-bold mb-6">
               {category?.name} Services
             </h1>
-            
+
             <div className="grid gap-y-4 grid-cols-[2fr_2fr] items-center ">
               {/* REVIEWS  */}
               <h2>Reviews :</h2>
