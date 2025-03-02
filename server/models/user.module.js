@@ -22,6 +22,7 @@ const userSchema = mongoose.Schema(
     city: { type: String },
     postalCode: { type: String },
     role: { type: String, default: "normal" },
+    image: { type: String },
   },
   { timestamps: true }
 );

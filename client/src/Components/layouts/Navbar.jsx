@@ -15,14 +15,16 @@ import Portal from "./Portal";
 import Accordion from "../common/Accordion";
 import { useShowNav } from "../../Utils/utils";
 import Button from "../common/Button";
-import { authSlice } from "../../Store/user";
+import { addressSlice, authSlice } from "../../Store/user";
 import { useGetAddress } from "../../Hooks/useUpdate";
 
 function Navbar() {
   const { pathname: p } = useLocation();
   const [open, setopen] = useState(false);
   const { admin } = useGetAddress();
-
+  const { setAddress,address } = addressSlice();
+  console.log({address});
+  
   const { auth } = authSlice();
   return (
     <>

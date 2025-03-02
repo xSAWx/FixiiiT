@@ -95,7 +95,12 @@ export const itemsTable = async (req, res) => {
             $reduce: {
               input: "$orders",
               initialValue: 0,
-              in: { $add: ["$$value", "$$this.totalPrice"] }, // Sum totalPrice
+              in: {
+                $add: [
+                  "$$value",
+                  { $ifNull: ["$$this.totalPrice", 0] }, // Treat missing as 0
+                ],
+              }, // Sum totalPrice
             },
           },
           "category.name": 1,
@@ -200,7 +205,6 @@ export const usersDetails = async (req, res) => {
         $facet: {
           // Last 3 users (sorted by creation date)
           last: [
-            
             { $sort: { createdAt: -1 } }, // Sort by newest first
             { $limit: 3 },
             { $project: { username: 1, _id: 1 } },

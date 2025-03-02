@@ -137,39 +137,44 @@ export const useGetAddress = () => {
   const { setAddress } = addressSlice();
   const [admin, setadmin] = useState(false);
   const { setAdmin, setVerified } = authSlice();
+  const [address, setaddress] = useState();
+
+  const getAddress = async () => {
+    try {
+      setloading(true);
+      const { data } = await axios.get("/api/auth/profile");
+      if (data) {
+        setAddress((state) => ({
+          ...state,
+          firstName: data?.firstName || "",
+          lastName: data?.lastName || "",
+          state: data?.state || "",
+          city: data?.city || "",
+          phoneNumber: data?.phoneNumber || "",
+          streetAddress1: data?.streetAddress || "",
+          postalCode: data?.postalCode || "",
+          streetAddress1: data?.streetAddress1 || "",
+          streetAddress2: data?.streetAddress2 || "",
+          email: data?.email || "",
+          username: data?.username || "",
+        }));
+        setadmin(data.isAdmin);
+        setAdmin(data.isAdmin);
+        setVerified(data.isVerified);
+      }
+    } catch (error) {
+      seterr("Something Went Wrong");
+      console.log(error);
+    } finally {
+      setloading(false);
+    }
+  };
 
   useEffect(() => {
     (async () => {
-      setloading(true);
-      try {
-        const { data } = await axios.get("/api/auth/profile");
-        if (data) {
-          setAddress((state) => ({
-            ...state,
-            firstName: data?.firstName || "",
-            lastName: data?.lastName || "",
-            state: data?.state || "",
-            city: data?.city || "",
-            phoneNumber: data?.phoneNumber || "",
-            streetAddress1: data?.streetAddress || "",
-            postalCode: data?.postalCode || "",
-            streetAddress1: data?.streetAddress1 || "",
-            streetAddress2: data?.streetAddress2 || "",
-            email: data?.email || "",
-            username: data?.username || "",
-          }));
-          setadmin(data.isAdmin);
-          setAdmin(data.isAdmin);
-          setVerified(data.isVerified);
-        }
-      } catch (error) {
-        seterr("Something Went Wrong");
-        console.log(error);
-      } finally {
-        setloading(false);
-      }
+      await getAddress();
     })();
   }, []);
 
-  return { loading, err, admin };
+  return { loading, err, admin, getAddress };
 };

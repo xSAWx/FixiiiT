@@ -3,6 +3,7 @@ import axios from "axios";
 import { authSlice } from "../Store/user";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { useGetAddress } from "./useUpdate";
 
 //////!   LOGIN   !//////
 
@@ -10,6 +11,7 @@ export const useLogin = () => {
   const [loading, setloading] = useState(false);
   const [err, setErr] = useState({ email: "", password: "" });
   const { setAuth } = authSlice();
+  const { getAddress } = useGetAddress();
 
   const login = async ({ email, password }) => {
     if (
@@ -37,6 +39,7 @@ export const useLogin = () => {
       const resp = await axios.post("/api/auth/", { email, password });
       setErr({ email: "", password: "" });
       setAuth(resp.data._id);
+      await getAddress();
     } catch (error) {
       if (error.response.status === 402 || error.response.status === 403)
         setErr({
@@ -63,6 +66,7 @@ export const useSignup = () => {
     confirmPassword: "",
   });
   const { setAuth } = authSlice();
+  const { getAddress } = useGetAddress();
 
   const signup = async (props) => {
     if (handleSignup({ ...props, setErr })) return;
@@ -71,6 +75,7 @@ export const useSignup = () => {
       const resp = await axios.post("/api/auth/signup", props);
       setErr({ email: "", password: "", username: "", confirmPassword: "" });
       setAuth(resp.data._id);
+      await getAddress();
       navigate("/");
     } catch (error) {
       if (error.response.status === 402)
@@ -209,7 +214,6 @@ export const useLogout = () => {
     setloading(true);
     try {
       const resp = await axios.get("/api/auth/profile");
-      
     } catch (error) {
       if (error.response.data.error === "UnAuthorized - No Token Provided")
         await logout();

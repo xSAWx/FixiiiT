@@ -40,7 +40,7 @@ export const useCreateOrder = (setmdl) => {
   const { auth } = authSlice();
   const navigate = useNavigate();
 
-  const { image, upload, loading: Iload } = useUploadImg();
+  const { upload, loading: Iload } = useUploadImg();
 
   const create = async (credenitals) => {
     if (!auth) {
@@ -48,9 +48,8 @@ export const useCreateOrder = (setmdl) => {
       return;
     }
 
-    console.log(a);
-    
     if (checkAdress(a)) {
+      console.log(a);
       setmdl(true);
       return;
     }
@@ -64,7 +63,7 @@ export const useCreateOrder = (setmdl) => {
       });
 
       navigate("/myaccount/orders");
-      toast.success("Order Create Successfuly");
+      toast.success("Order Created Successfuly");
     } catch (error) {
       toast.error(error.response.data);
       seterr(true);
@@ -79,12 +78,12 @@ export const useCreateOrder = (setmdl) => {
 
 const checkAdress = (a) => {
   if (
-    a.firstName.length < 2 ||
-    !a.phoneNumber.match(/^(0(?:[5|6|7|9])\d{8})$/) ||
-    a.lastName.length < 2 ||
-    a.streetAddress1.length < 6 ||
-    a.city.length < 5 ||
-    !a.postalCode.match(/^\d+$/) ||
+    !a.firstName.length ||
+    !a.phoneNumber ||
+    !a.lastName.length ||
+    !a.streetAddress1.length ||
+    !a.city.length ||
+    !a.postalCode ||
     !a.state ||
     !a.country ||
     !a.email ||
